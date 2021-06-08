@@ -1,0 +1,136 @@
+/* General */
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+ }
+ 
+ ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }
+
+* {
+    font-family: sans-serif, arial, helvetica;
+    margin: 0px;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    color: white;
+    background-color: rgb(33, 31, 34);
+}
+
+main{
+    width: 100%;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.footer{
+    margin-top: 1rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgb(48, 46, 51);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+}
+
+/* Navbar */
+.background-custom-primary{
+    background-color: rgb(48, 46, 51) !important;
+}
+
+.btn-custom-primary{
+    border-radius: 2px;
+    background-color: rgb(92, 92, 90);
+    color: white;
+
+    transition: all .2s ease;
+} 
+
+.btn-custom-primary:hover{
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(92, 92, 90);
+    font-style: italic;
+}
+
+.focus-none{
+    transition: all .2s ease;
+}
+
+.focus-none:focus{
+    border: 0px;
+}
+
+/* HomeScreen */
+.box{
+    display: flex;
+    flex: auto;
+}
+
+.flex-container {
+    display: flex;  
+    flex-wrap: row;
+    flex-flow: wrap row;  
+    justify-content: flex-start;
+    
+    
+    padding: 0px;
+    margin: 0px;    
+}
+
+.flex-item {
+    background: rgb(92, 92, 90);
+    width: 400px;
+    height: 250px;
+    margin-left: 30px !important;
+    margin-bottom: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+/* Movies */
+.img-movie{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    transition: all .2s ease;
+}
+
+.img-movie:hover{
+    height: 101%;
+    width: 101%;
+
+    cursor: pointer;
+
+    -webkit-box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
+box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
+}
+
+.box-categories{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.badge:hover{
+    cursor: pointer;
+}
