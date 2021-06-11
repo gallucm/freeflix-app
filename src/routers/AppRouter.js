@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 
 import { AdminScreen } from '../components/admin/AdminScreen';
-import { RegisterScreen } from '../components/admin/RegisterScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { HomeScreen } from '../components/streaming/HomeScreen';
 import { MovieSelected } from '../components/streaming/MovieSelected';
 
