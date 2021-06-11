@@ -5,6 +5,7 @@ import { HomeButton } from '../ui/HomeButton';
 import { VideoPlayer } from './VideoPlayer';
 
 export const MovieSelected = () => {
+    
     return (
         <>
             <Navbar />

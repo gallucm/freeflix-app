@@ -22,6 +22,7 @@ export const Movies = () => {
                 <div className="flex-item">
                     <img src={movie1} alt="movie" className="img-movie" onClick={handleClickMovie}/>
                 </div>
+                
             </div>
         </>
     )

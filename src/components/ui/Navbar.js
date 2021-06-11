@@ -3,7 +3,7 @@ import React from 'react';
 export const Navbar = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark background-custom-primary">
+            <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
                     <span className="navbar-brand">User</span>  
                     <input type="text" className="form-control w-25 shadow-none focus-none" placeholder="Search something..."/>  
