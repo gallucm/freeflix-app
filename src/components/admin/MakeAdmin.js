@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const UploadScreen = () => {
+export const MakeAdmin = () => {
     return (
         <div>
-            <h1>Upload Screen</h1>
+            <h3>Make admin</h3>
         </div>
     )
 }
