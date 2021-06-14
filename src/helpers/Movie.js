@@ -1,19 +1,40 @@
-import { storage } from "../firebase/firebase-config";
+import { storage, database } from "../firebase/firebase-config";
 
-export const getMovieMocked = async () => {
-    // gs://freeflix-app-cmg.appspot.com
-    const url = 'gs://freeflix-app-cmg.appspot.com/movie-split-[003848]-[004744]-202106102013171946.mkv';
-    const gsReference = storage.refFromURL(url);
+const name = new Date().getTime();
 
-    gsReference.getDownloadURL()
-                .then((url) => {
-                    console.log('URL OBTENIDA: ' + url);
-                })
-                .catch((err) => {
-                    console.log('error', err);
-                });
+export const uploadImageMovie = async (image) => {
+
+    const storageRef = storage.ref();
+    const uploadImage = await storageRef.child('images/' + name + '.jpg').put(image);
+
+    const imageUrl = await uploadImage.ref.getDownloadURL();
+
+    if (imageUrl){
+        console.log('imagen subida');
+        return imageUrl;
+    }
+
+    return '';    
+}
+
+export const uploadVideoMovie = async (video) => {
+
+    const storageRef = storage.ref();
+    const uploadMovie = await storageRef.child('movies/' + name + '.jpg').put(video);
+
+    const movieUrl = await uploadMovie.ref.getDownloadURL();
+
+    if (movieUrl){
+        console.log('movie subida');
+        return movieUrl;
+    }
+
+    return '';    
 }
 
 export const uploadMovie = async (movie) => {
-    console.log(movie);
+    const movieAdded = await database.collection('movies').add(movie);
+
+    if (movieAdded)
+        return movieAdded;
 }
