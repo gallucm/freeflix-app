@@ -13,3 +13,7 @@ export const getMovieMocked = async () => {
                     console.log('error', err);
                 });
 }
+
+export const uploadMovie = async (movie) => {
+    console.log(movie);
+}
