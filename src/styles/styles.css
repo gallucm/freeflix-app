@@ -160,9 +160,9 @@ main{
     height: 6em;
     background-color: transparent !important;
 
-    box-shadow: 2px 4px 5px 0px  #E50914;
+    /* box-shadow: 2px 4px 5px 0px  #E50914;
     -webkit-box-shadow: 2px 4px 5px 0px  #E50914;
-    -moz-box-shadow: 2px 4px 5px 0px  #E50914;
+    -moz-box-shadow: 2px 4px 5px 0px  #E50914; */
 }
 
 .background-custom-primary{
@@ -251,7 +251,8 @@ box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
 
 /* Admin */
 
-.admin-button{
+.admin-button,
+.upload-button{
     background: #E50914;
     color: white;    
     margin-top: 10px;
@@ -270,7 +271,7 @@ box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
 
 .upload-content {
     width: 650px;
-    height: 600px;
+    height: auto ;
 
     border-radius: 5px;
 
@@ -289,16 +290,45 @@ box-shadow: 10px 10px 33px 0px rgba(0,0,0,1);
 
 .upload-input-title,
 .upload-input-year,
-.upload-input-sinopsis{
+.upload-input-sinopsis,
+.upload-select-gender{
     width: 50%;
     height: 40px;
     margin: auto;
     margin-top: 20px;
-
     text-align: center;
 }
 
+.upload-select-gender{
+    text-align-last:center;
+}
+
 .upload-input-sinopsis{
-    height: 200px !important;
+    height: 150px !important;
     resize: none !important;
+}
+
+.upload-image > input,
+.upload-video > input
+{
+    display: none;
+}
+
+.upload-image img,
+.upload-video img
+{
+    width: 80px;
+    cursor: pointer;
+}
+
+.upload-image-icon,
+.upload-video-icon{
+    color: #E50914;
+    cursor: pointer;
+}
+
+.upload-button{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
