@@ -10,7 +10,6 @@ export const uploadImageMovie = async (image) => {
     const imageUrl = await uploadImage.ref.getDownloadURL();
 
     if (imageUrl){
-        console.log('imagen subida');
         return imageUrl;
     }
 
@@ -25,7 +24,6 @@ export const uploadVideoMovie = async (video) => {
     const movieUrl = await uploadMovie.ref.getDownloadURL();
 
     if (movieUrl){
-        console.log('movie subida');
         return movieUrl;
     }
 
@@ -35,6 +33,7 @@ export const uploadVideoMovie = async (video) => {
 export const uploadMovie = async (movie) => {
     const movieAdded = await database.collection('movies').add(movie);
 
-    if (movieAdded)
+    if (movieAdded){
         return movieAdded;
+    }
 }
