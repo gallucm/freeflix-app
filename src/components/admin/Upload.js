@@ -16,9 +16,9 @@ export const Upload = () => {
     const [video, setVideo] = useState(null);
     const [videoSelected, setVideoSelected] = useState(false);
 
-    const [formValues, handleInputChange] = useForm({
+    const [formValues, handleInputChange, reset] = useForm({
         title: '',
-        year: 1900,
+        year: '',
         gender: '',
         synopsis: ''
     });
@@ -43,6 +43,7 @@ export const Upload = () => {
 
         setImageSelected(false);
         setVideoSelected(false);
+        reset();
     }
 
     return (
