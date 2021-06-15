@@ -76,6 +76,7 @@ const effectLoading = () => {
         + '<div class="spinner-grow text-dark me-4" role="status"> <span class="sr-only">Loading...</span> </div>'
         + '<div class="spinner-grow text-dark" role="status"> <span class="sr-only">Loading...</span> </div>',
         showConfirmButton: false,
+        allowOutsideClick: false
     });
 };
 

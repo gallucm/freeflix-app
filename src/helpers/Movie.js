@@ -1,11 +1,13 @@
 import { storage, database } from "../firebase/firebase-config";
 
-const name = new Date().getTime();
+const nameRandom = new Date().getTime();
 
 export const uploadImageMovie = async (image) => {
 
-    const storageRef = storage.ref();
-    const uploadImage = await storageRef.child('images/' + name + '.jpg').put(image);
+    const fileName = image.name.split('.');
+    const ext = fileName[1];
+
+    const uploadImage = await storage.ref().child('images/' + nameRandom + '.' + ext).put(image);
 
     const imageUrl = await uploadImage.ref.getDownloadURL();
 
@@ -18,8 +20,10 @@ export const uploadImageMovie = async (image) => {
 
 export const uploadVideoMovie = async (video) => {
 
-    const storageRef = storage.ref();
-    const uploadMovie = await storageRef.child('movies/' + name + '.jpg').put(video);
+    const fileName = video.name.split('.');
+    const ext = fileName[1];
+
+    const uploadMovie = await storage.ref().child('movies/' + nameRandom + '.' + ext).put(video);
 
     const movieUrl = await uploadMovie.ref.getDownloadURL();
 
