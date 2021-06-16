@@ -48,8 +48,8 @@ export const startGetting = () => {
         const movies = await getMovies();
 
         if (movies){
-            dispatch(movieFinishLoading());
             dispatch(movieStartGetting(movies));
+            dispatch(movieFinishLoading());
             dispatch(startUnsetMovieSelected());
             dispatch(unsetMovieNotFound());
         }

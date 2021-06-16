@@ -20,21 +20,23 @@ export const MovieSelected = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        if (movieSelected){
-            if (movieSelected.id !== id)
-                dispatch(setMovieNotFound());            
-        } else {
+        if (!movieSelected){
             const movieStorage = localStorage.getItem('movieSelected');
 
-            if (movieStorage)
-                dispatch(startSetMovieSelected(JSON.parse(movieStorage)));
-            else 
-                dispatch(startGetMovieById(id));  
+            if (movieStorage){
+                const movieJSON = JSON.parse(movieStorage);
+                if (movieJSON.id !== id)
+                    dispatch(setMovieNotFound()); 
+                else
+                    dispatch(startSetMovieSelected(movieJSON));
+            } else {
+                dispatch(startGetMovieById(id));                       
+            }
         }
     }, [dispatch, movieSelected, id]);
 
     if (movieNotFound)
-        return <Redirect to='/' />
+        return <Redirect to='/' />        
     
     return (
         <>
