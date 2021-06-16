@@ -1,14 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { Navbar } from '../ui/Navbar';
 import { Loading } from '../ui/Loading';
 import { HomeButton } from '../ui/HomeButton';
+
 import { VideoPlayer } from './VideoPlayer';
 
-export const MovieSelected = () => {
+import { startGetMovieById, startSetMovieSelected, setMovieNotFound } from '../../actions/Movie';
 
-    const { movieSelected } = useSelector(state => state.movies);
+export const MovieSelected = () => {
+    
+    const dispatch = useDispatch();
+
+    const { movieSelected, movieNotFound } = useSelector(state => state.movies);
+    
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (movieSelected){
+            if (movieSelected.id !== id)
+                dispatch(setMovieNotFound());            
+        } else {
+            const movieStorage = localStorage.getItem('movieSelected');
+
+            if (movieStorage)
+                dispatch(startSetMovieSelected(JSON.parse(movieStorage)));
+            else 
+                dispatch(startGetMovieById(id));  
+        }
+    }, [dispatch, movieSelected, id]);
+
+    if (movieNotFound)
+        return <Redirect to='/' />
     
     return (
         <>

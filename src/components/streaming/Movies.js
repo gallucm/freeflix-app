@@ -15,12 +15,7 @@ export const Movies = () => {
     useEffect(() => {
         dispatch(startGetting());
     }, [dispatch]);
-
-    // const history = useHistory();
-    // const handleClickMovie = useCallback(() => history.push('/m/1234'), [history]);
-
-    // const movie = 'https://s3-eu-west-1.amazonaws.com/abandomedia/indie/poster/db_posters_29937.jpg';
-
+    
     return (
         <>
             {(loading) && <Loading />}

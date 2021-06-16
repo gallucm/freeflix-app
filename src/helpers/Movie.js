@@ -58,3 +58,9 @@ export const getMovies = async () => {
 
     return movies;
 }
+
+export const getMovieById = async (id) => {
+    const movie = await database.collection('movies').doc(id).get();
+
+    return movie.data();
+}

@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-import { getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { getMovieById, getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 import { types } from '../types/types';
 
 
@@ -50,7 +50,36 @@ export const startGetting = () => {
         if (movies){
             dispatch(movieFinishLoading());
             dispatch(movieStartGetting(movies));
+            dispatch(startUnsetMovieSelected());
+            dispatch(unsetMovieNotFound());
         }
+    }
+}
+
+export const startSetMovieSelected = (movie) => {
+    return (dispatch) => {
+        dispatch(setMovieSelected(movie));
+        localStorage.setItem('movieSelected', JSON.stringify(movie));
+    }
+}
+
+export const startGetMovieById = (id) => {
+    return async (dispatch) => {
+        const movie = await getMovieById(id);
+
+        if (movie){
+            dispatch(startSetMovieSelected(movie));
+        }
+        else{
+            dispatch(setMovieNotFound());
+        }
+    }
+}
+
+const startUnsetMovieSelected = () => {
+    return (dispatch) => {
+        dispatch(unsetMovieSelected());
+        localStorage.removeItem('movieSelected');
     }
 }
 
@@ -91,13 +120,21 @@ const reset = () => ({
     type: types.uploadReset
 });
 
-export const setMovieSelected = (payload) => ({
+const setMovieSelected = (movie) => ({
     type: types.movieSetSelected,
-    payload
+    payload: movie
 });
 
-export const unsetMovieSelected = () => ({
+const unsetMovieSelected = () => ({
     type: types.movieUnsetSelected
+});
+
+export const setMovieNotFound = () => ({
+    type: types.movieNotFound
+});
+
+const unsetMovieNotFound = () => ({
+    type: types.movieUnsetNotFound
 });
 
 

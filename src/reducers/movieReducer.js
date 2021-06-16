@@ -3,7 +3,8 @@ import { types } from '../types/types';
 const initialState = {
     loading: false,    
     movies: [],
-    movieSelected: null
+    movieSelected: null,
+    movieNotFound: false
 }
 export const movieReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -35,6 +36,18 @@ export const movieReducer = (state = initialState, action) => {
             return {
                 ...state,
                 movieSelected: null
+            }
+        
+        case types.movieNotFound:
+            return {
+                ...state,
+                movieNotFound: true
+            }
+        
+        case types.movieUnsetNotFound:
+            return {
+                ...state,
+                movieNotFound: false
             }
 
         default:

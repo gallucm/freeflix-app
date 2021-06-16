@@ -15,5 +15,7 @@ export const types = {
     movieFinishLoading: '[movie] finish loading',
     movieStartGetting: '[movie] start getting',
     movieSetSelected: '[movie] set selected',
-    movieUnsetSelected: '[movie] unset selected'
+    movieUnsetSelected: '[movie] unset selected',
+    movieNotFound: '[movie] not found',
+    movieUnsetNotFound: '[movie] unset not found'
 }

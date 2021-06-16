@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { setMovieSelected } from '../../actions/Movie';
+import { startSetMovieSelected } from '../../actions/Movie';
 
 export const MovieGrid = ({movie}) => {
 
@@ -10,7 +10,7 @@ export const MovieGrid = ({movie}) => {
     const history = useHistory();
 
     const handleSelected = () => {
-        dispatch(setMovieSelected(movie));
+        dispatch(startSetMovieSelected(movie));
         history.push('/m/' + movie.id);
     }
 
