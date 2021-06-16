@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-import { uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 import { types } from '../types/types';
 
 
@@ -41,6 +41,32 @@ export const startUpload = (movie, image, video) => {
     }
 }
 
+export const startGetting = () => {
+    return async (dispatch) => {
+        dispatch(movieStartLoading());
+
+        const movies = await getMovies();
+
+        if (movies){
+            dispatch(movieFinishLoading());
+            dispatch(movieStartGetting(movies));
+        }
+    }
+}
+
+const movieStartGetting = (payload) => ({
+    type: types.movieStartGetting,
+    payload
+});
+
+const movieStartLoading = () => ({
+    type: types.movieStartLoading
+});
+
+const movieFinishLoading = () => ({
+    type: types.movieFinishLoading
+})
+
 const startLoading = () => ({
     type: types.uploadStartLoading
 });
@@ -63,7 +89,16 @@ const completed = () => ({
 
 const reset = () => ({
     type: types.uploadReset
-})
+});
+
+export const setMovieSelected = (payload) => ({
+    type: types.movieSetSelected,
+    payload
+});
+
+export const unsetMovieSelected = () => ({
+    type: types.movieUnsetSelected
+});
 
 
 const effectLoading = () => {

@@ -41,3 +41,20 @@ export const uploadMovie = async (movie) => {
         return movieAdded;
     }
 }
+
+export const getMovies = async () => {
+    const docsRef = await database.collection('movies').get();
+
+    const movies = [];
+    
+    docsRef.forEach(doc => {
+        const movie = {
+            id: doc.id,            
+            ...doc.data()
+        }
+
+        movies.push(movie);
+    });
+
+    return movies;
+}
