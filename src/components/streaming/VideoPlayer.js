@@ -7,12 +7,12 @@ export const VideoPlayer = () => {
     const { movieSelected } = useSelector(state => state.movies);
 
     return (
-        <div className="d-flex justify-content-center mt-2">
+        <div className="react-player">
             <ReactPlayer
                 url={movieSelected.video}
                 controls
-                height={'80%'}
-                width={'80%'}
+                height={'100%'}
+                width={'100%'}
                 // subtitles={}
                 // config={{ file: {
                 //     tracks: [

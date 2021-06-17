@@ -15,7 +15,8 @@ export const MovieGrid = ({movie}) => {
     }
 
     return (
-        <div className="flex-item">
+        <div className="movie-grid text-center">
+            <h2>{movie.title}</h2>
             <img src={movie.image} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected}/>
         </div>
     )

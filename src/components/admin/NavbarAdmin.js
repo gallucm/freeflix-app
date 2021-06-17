@@ -8,15 +8,15 @@ export const NavbarAdmin = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                    <Logo style={{margin: '0px !important'}} />
+                    <Logo />
                     <form className="d-flex">
                         <Link to="/" >
-                            <button className="btn shadow-none admin-button">
+                            <button className="btn shadow-none btn-freeflix me-2">
                                 <i className="fas fa-home"></i>
                             </button>
                         </Link>
                         <Link to="/login" >
-                            <button className="btn shadow-none admin-button">
+                            <button className="btn shadow-none btn-freeflix">
                                 <i className="fas fa-sign-out-alt"></i>
                             </button>
                         </Link>

@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 import { Navbar } from '../ui/Navbar';
 import { Loading } from '../ui/Loading';
-import { HomeButton } from '../ui/HomeButton';
 
 import { VideoPlayer } from './VideoPlayer';
 
@@ -45,10 +44,17 @@ export const MovieSelected = () => {
 
             {(movieSelected) && 
                 <div className="container text-center">
-                    <h1>{movieSelected.title}</h1>
-                    <span>{movieSelected.synopsis}</span>
+                    <div className="movie-title">
+                        <h1>{movieSelected.title}</h1>
+                    </div>
+                    <div className="movie-year-gender">
+                        <span>{movieSelected.year} - </span>
+                        <span>{movieSelected.gender}</span>
+                    </div>
+                    <div className="movie-synopsis">
+                        <span>{movieSelected.synopsis}</span>
+                    </div>
                     <VideoPlayer/>
-                    <HomeButton/>                
                 </div>            
             }
         </>

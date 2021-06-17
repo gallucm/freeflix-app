@@ -57,10 +57,11 @@ export const Upload = () => {
                                         <input type="text" className="form-control shadow-none upload-input-title" name="title" value={title} onChange={handleInputChange} placeholder="Título" maxLength="30" autoComplete="off" required />
                                         <input type="number" className="form-control shadow-none upload-input-year" name="year" value={year} onChange={handleInputChange} placeholder="Año" autoComplete="off" required/>
                                         <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
-                                            <option defaultValue>Horror</option>
-                                            <option value="Action">Action</option>
-                                            <option value="SCI-FI">SCI-FI</option>
-                                            <option value="Other">Other</option>
+                                            <option defaultValue>Acción</option>
+                                            <option value="Comedia">Comedia</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Ciencia Ficción">Ciencia Ficción</option>
+                                            <option value="Terror">Terror</option>
                                         </select>
                                         <textarea className="form-control upload-input-sinopsis" name="synopsis" value={synopsis} onChange={handleInputChange} placeholder="Sinópsis" maxLength="500" required/>
 

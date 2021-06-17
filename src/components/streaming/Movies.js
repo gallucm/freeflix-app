@@ -21,7 +21,7 @@ export const Movies = () => {
             {(loading) && <Loading />}
 
             {(!loading) &&
-                <div className="flex-container mt-4">
+                <div className="movies-container mt-4">
                     {
                         movies.map(movie => (
                             <MovieGrid key={movie.id} movie={movie}/>
