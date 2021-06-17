@@ -17,5 +17,14 @@ export const types = {
     movieSetSelected: '[movie] set selected',
     movieUnsetSelected: '[movie] unset selected',
     movieNotFound: '[movie] not found',
-    movieUnsetNotFound: '[movie] unset not found'
+    movieUnsetNotFound: '[movie] unset not found',
+
+    authLogin: '[Auth] loading',
+    authLogout: '[Auth] logout',
+
+    uiStartLoading: '[UI] start Loading',
+    uiFinishLoading: '[UI] finish Loading',
+    
+    uiSetError: '[UI] set error',
+    uiRemoveError: '[UI] error'
 }

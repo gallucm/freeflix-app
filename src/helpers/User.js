@@ -9,5 +9,9 @@ export const createUser = async (user) => {
     }
 
     const { id } = await database.collection('users').add(userWithHash);
-    console.log(id);
+    
+    if (id)
+        return true;
+    else
+        return false;
 }
