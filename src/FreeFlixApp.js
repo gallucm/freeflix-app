@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux';
 
-import { Footer } from './components/ui/Footer'
+// import { Footer } from './components/ui/Footer'
 import { AppRouter } from './routers/AppRouter'
 import { store } from './store/store';
 
@@ -10,7 +10,7 @@ export const FreeFlixApp = () => {
         <div>
             <Provider store={store}>
                 <AppRouter/>      
-                <Footer/>   
+                {/* <Footer/>    */}
             </Provider>   
         </div>
     )

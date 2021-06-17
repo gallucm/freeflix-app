@@ -44,7 +44,7 @@ export const MovieSelected = () => {
             {(movieSelected == null) && <Loading/>}
 
             {(movieSelected) && 
-                <div className="container text-center mt-2">
+                <div className="container text-center">
                     <h1>{movieSelected.title}</h1>
                     <span>{movieSelected.synopsis}</span>
                     <VideoPlayer/>

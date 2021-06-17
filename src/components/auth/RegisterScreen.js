@@ -11,7 +11,14 @@ export const RegisterScreen = () => {
     
     return (
         <div>
-            <Logo/>
+            <nav className="navbar navbar-expand-lg navbar-dark">
+                <div className="container-fluid">            
+                    <span className="navbar-brand">
+                        <Logo/>
+                    </span>
+                </div>
+            </nav>
+            
             <div className="col-lg-12">
                 <div className="jumbotron jumbotron-fluid text-center mt-5">
                     <div className="container">
