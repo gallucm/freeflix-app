@@ -43,7 +43,7 @@ export const MovieSelected = () => {
             {(movieSelected == null) && <Loading/>}
 
             {(movieSelected) && 
-                <div className="container text-center">
+                <div className="container text-center animate__animated animate__fadeIn">
                     <div className="movie-title">
                         <h1>{movieSelected.title}</h1>
                     </div>

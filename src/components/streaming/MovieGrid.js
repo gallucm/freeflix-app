@@ -13,7 +13,7 @@ export const MovieGrid = ({movie}) => {
         dispatch(startSetMovieSelected(movie));
         history.push('/m/' + movie.id);
     }
-
+    
     return (
         <div className="movie-grid text-center animate__animated animate__zoomIn">
             <h2>{movie.title}</h2>
