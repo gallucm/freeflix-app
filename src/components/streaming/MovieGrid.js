@@ -15,7 +15,7 @@ export const MovieGrid = ({movie}) => {
     }
 
     return (
-        <div className="movie-grid text-center">
+        <div className="movie-grid text-center animate__animated animate__zoomIn">
             <h2>{movie.title}</h2>
             <img src={movie.image} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected}/>
         </div>

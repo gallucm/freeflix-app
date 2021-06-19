@@ -47,12 +47,12 @@ export const RegisterScreen = () => {
                     </span>
                 </div>
             </nav>
-
+            
             <div className="col-lg-12">
                 <div className="jumbotron jumbotron-fluid text-center mt-5">
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="content-login">
+                            <div className="content-login animate__animated animate__pulse">
                                 <h3 className="label-login">Registrarse</h3>
                                 <form onSubmit={handleRegister}>
                                     <div className="form-group input-login">

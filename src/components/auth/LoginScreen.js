@@ -40,11 +40,12 @@ export const LoginScreen = () => {
                 </div>
             </nav>
 
-            <div className="col-lg-12">
+            <div className="col-lg-12 ">
                 <div className="jumbotron jumbotron-fluid text-center mt-5">
-                    <div className="container">
+                    <div className="container ">
                         <div className="row justify-content-center">
-                            <div className="content-login">
+                            <div className="content-login animate__animated animate__pulse">
+
                                 <form onSubmit={handleLogin}>
                                     <h3 className="label-login">Iniciar sesión</h3>
                                     <div className="form-group input-login">
@@ -53,7 +54,7 @@ export const LoginScreen = () => {
 
                                         {
                                             (error) &&
-                                            <div className="alert alert-dismissible alert-warning fade show alert-freeflix" role="alert">
+                                            <div className="alert alert-dismissible alert-danger fade show alert-freeflix" role="alert">
                                                 {error}
                                                 <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={handleResetError}></button>
                                             </div>
