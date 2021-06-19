@@ -125,6 +125,10 @@ const setMovieSelected = (movie) => ({
     payload: movie
 });
 
+export const removeMovies = () => ({
+    type: types.movieRemove
+})
+
 const unsetMovieSelected = () => ({
     type: types.movieUnsetSelected
 });

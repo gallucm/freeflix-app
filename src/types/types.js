@@ -14,6 +14,7 @@ export const types = {
     movieStartLoading: '[movie] start loading',
     movieFinishLoading: '[movie] finish loading',
     movieStartGetting: '[movie] start getting',
+    movieRemove: '[movie] remove',
     movieSetSelected: '[movie] set selected',
     movieUnsetSelected: '[movie] unset selected',
     movieNotFound: '[movie] not found',
@@ -27,5 +28,5 @@ export const types = {
     uiFinishLoading: '[UI] finish Loading',
     
     uiSetError: '[UI] set error',
-    uiRemoveError: '[UI] error'
+    uiRemoveError: '[UI] remove error'
 }

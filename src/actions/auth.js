@@ -1,11 +1,12 @@
 import Swal from 'sweetalert2';
 
 // import { types } from "../types/types";
-import { finishLoading, startLoading } from './ui';
+import { finishLoading, setError, startLoading } from './ui';
 
 import { createUser, isEmailTaken, searchByEmail } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
+import { removeMovies } from './Movie';
 
 export const registerUser = (user) => {
     return async (dispatch) => {
@@ -36,25 +37,27 @@ export const registerUser = (user) => {
 
 export const loginUser = (email, password) => {
     return async (dispatch) => {
-        loadingLoginUser();
+        dispatch(startLoading());
+
         const user = await searchByEmail(email);
 
         if (!user){
-            modalUserNotFound();
+            dispatch(setError('Usuario o contraseña incorrecta.'));
+            dispatch(finishLoading());
             return;
         }
 
         const passwordCorrect = comparePassword(password, user.password);
 
         if (!passwordCorrect){
-            modalPasswordIncorrect();
+            dispatch(setError('Usuario o contraseña incorrecta.'));
+            dispatch(finishLoading());
             return;
         }
 
         dispatch(login(user.userName, user.id));
+        dispatch(finishLoading());        
         setSesionStorage(user.userName, user.id);
-
-        Swal.close();
     }
 }
 
@@ -90,6 +93,7 @@ export const startLogout = () => {
     return async (dispatch) => {
         localStorage.clear();
         dispatch(logout());
+        dispatch(removeMovies());
     }
 }
 
@@ -106,16 +110,6 @@ const loadingCreatingUser = () => {
         icon: 'info',
         title: 'Por favor espere',
         html: 'Creando usuario...',
-        showConfirmButton: false,
-        allowOutsideClick: false
-    });
-}
-
-const loadingLoginUser = () => {
-    Swal.fire({
-        icon: 'info',
-        title: 'Por favor espere',
-        html: 'Iniciando sesión...',
         showConfirmButton: false,
         allowOutsideClick: false
     });
@@ -146,24 +140,6 @@ const errorUserExists = () => {
         html: 'El email ingresado ya se encuentra en uso.'
     });
 }
-
-const modalUserNotFound = () => {
-    Swal.fire({
-        icon: 'warning',
-        title: 'Advertencia',
-        html: 'No existe usuario registrado con esas credenciales.'
-    });
-}
-
-const modalPasswordIncorrect = () => {
-    Swal.fire({
-        icon: 'warning',
-        title: 'Advertencia',
-        html: 'La contraseña ingresada no es correcta. Verifiquela y vuelta intentarlo.'
-    });
-}
-
-
 
 export const errorDiferentPasswords = () => {
     Swal.fire({

@@ -20,7 +20,7 @@ export const Movies = () => {
         <>
             {(loading) && <Loading />}
 
-            {(!loading) &&
+            {(!loading && movies) &&
                 <div className="movies-container mt-4">
                     {
                         movies.map(movie => (
