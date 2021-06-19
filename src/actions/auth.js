@@ -1,8 +1,4 @@
-import Swal from 'sweetalert2';
-
-// import { types } from "../types/types";
 import { finishLoading, setError, startLoading } from './ui';
-
 import { createUser, isEmailTaken, searchByEmail } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
@@ -10,28 +6,34 @@ import { removeMovies } from './Movie';
 
 export const registerUser = (user) => {
     return async (dispatch) => {
-        loadingCreatingUser();
-
         dispatch(startLoading());
+
+        const passwordsAreDiferent = (user.password !== user.password2) ? true : false;
+
+        if (passwordsAreDiferent){
+            dispatch(setError('Las contraseñas ingredadas no coinciden.'));
+            dispatch(finishLoading());
+            return;
+        }       
         
         const emailExists = await isEmailTaken(user.email);
 
         if (emailExists){
-            errorUserExists();
+            dispatch(setError('El email ingresado ya está en uso.'));
             dispatch(finishLoading());
-            return false;
+            return;
         }
 
-        const isCreated = await createUser(user);
-        
-        if (isCreated){
-            const created = await userHasBeenCreated();
-            dispatch(finishLoading());
-            return created;
-        } else {
-            errorCreatingUser();
-            dispatch(finishLoading());
-        }
+        const { password2, ...userNew } = user;
+
+        const isCreated = await createUser(userNew);
+
+        if (isCreated)
+            dispatch(userCreated());
+        else 
+            dispatch(setError('Ha ocurrido un error al crear el usuario.'));
+
+        dispatch(finishLoading());
     }
 }
 
@@ -103,48 +105,12 @@ const logout = () => ({
 
 const checkingFinish = () => ({
     type: types.authCheckingFinish
-})
+});
 
-const loadingCreatingUser = () => {
-    Swal.fire({
-        icon: 'info',
-        title: 'Por favor espere',
-        html: 'Creando usuario...',
-        showConfirmButton: false,
-        allowOutsideClick: false
-    });
-}
+const userCreated = () => ({
+    type: types.authSetUserCreated
+});
 
-const userHasBeenCreated = async () => {
-    const data = await Swal.fire({
-        icon: 'success',
-        title: 'Confirmación',
-        html: 'Usuario creado correctamente. Ya puede iniciar sesión.'
-    });
-
-    return data.isConfirmed;
-};
-
-const errorCreatingUser = async () => {
-    Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        html: 'Ha ocurrido un error al crear el usuario.'
-    });
-}
-
-const errorUserExists = () => {
-    Swal.fire({
-        icon: 'warning',
-        title: 'Advertencia',
-        html: 'El email ingresado ya se encuentra en uso.'
-    });
-}
-
-export const errorDiferentPasswords = () => {
-    Swal.fire({
-        icon: 'warning',
-        title: 'Advertencia',
-        html: 'Las contraseñas ingresadas no coinciden. Por favor, ingreselas nuevamente'
-    });
-}
+export const removeUserCreated = () => ({
+    type: types.authRemoveUserCreated
+});

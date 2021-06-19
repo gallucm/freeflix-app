@@ -23,6 +23,8 @@ export const types = {
     authLogin: '[Auth] login',
     authLogout: '[Auth] logout',
     authCheckingFinish: '[Auth] finish login',
+    authSetUserCreated: '[Auth] set user created',
+    authRemoveUserCreated: '[Auth] remove user created',
 
     uiStartLoading: '[UI] start Loading',
     uiFinishLoading: '[UI] finish Loading',
