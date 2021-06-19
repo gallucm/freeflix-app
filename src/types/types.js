@@ -19,8 +19,9 @@ export const types = {
     movieNotFound: '[movie] not found',
     movieUnsetNotFound: '[movie] unset not found',
 
-    authLogin: '[Auth] loading',
+    authLogin: '[Auth] login',
     authLogout: '[Auth] logout',
+    authCheckingFinish: '[Auth] finish login',
 
     uiStartLoading: '[UI] start Loading',
     uiFinishLoading: '[UI] finish Loading',

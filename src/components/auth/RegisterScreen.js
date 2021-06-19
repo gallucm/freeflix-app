@@ -9,14 +9,14 @@ export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [formValues, handleInputChange] = useForm({
-        user: '',
+    const [formValues, handleInputChange, reset] = useForm({
+        userName: '',
         email: '',
         password: '',
         password2: ''
     });
 
-    const { user, email, password, password2 } = formValues;
+    const { userName, email, password, password2 } = formValues;
     
     const checkPassword = (p1, p2) => {
         if (p1 === p2)
@@ -34,7 +34,11 @@ export const RegisterScreen = () => {
         
         if (areSame){
             const { password2, ...user } = formValues;
-            dispatch(registerUser(user));
+            
+            dispatch(registerUser(user)).then((result) =>{
+                if (result)
+                    reset();      
+            });
         }
     }    
     
@@ -56,7 +60,7 @@ export const RegisterScreen = () => {
                                 <h3 className="label-login">Registrarse</h3>
                                 <form onSubmit={handleRegister}>
                                     <div className="form-group input-login">
-                                        <input type="text" className="form-control shadow-none input-email text-center" name="user" value={user} onChange={handleInputChange} placeholder="Usuario" autoComplete="off" minLength="6" required/>                                     
+                                        <input type="text" className="form-control shadow-none input-email text-center" name="userName" value={userName} onChange={handleInputChange} placeholder="Usuario" autoComplete="off" minLength="6" required/>                                     
                                         <input type="email" className="form-control shadow-none input-email text-center" name="email" value={email} onChange={handleInputChange} placeholder="Email" autoComplete="off" required/>
                                         <input type="password" className="form-control shadow-none input-password text-center" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required  />
                                         <input type="password" className="form-control shadow-none input-password text-center" name="password2" value={password2} onChange={handleInputChange} placeholder="Confirme contraseña" minLength="6" required />

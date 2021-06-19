@@ -13,6 +13,11 @@ export const VideoPlayer = () => {
                 controls
                 height={'100%'}
                 width={'100%'}
+                config={{
+                    attributes: {
+                        controlsList: 'nodownload'
+                    }
+                }}
                 // subtitles={}
                 // config={{ file: {
                 //     tracks: [
