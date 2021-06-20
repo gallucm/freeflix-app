@@ -1,6 +1,8 @@
 export const types = {
     adminUpload: '[admin] upload',
+    adminMovies: '[admin] movies',
     adminGenerate: '[admin] generate',
+    adminCodes: '[admin] codes',
     adminMake: '[admin] make',
 
     uploadSubmit: '[upload] submit',

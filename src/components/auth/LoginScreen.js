@@ -46,7 +46,7 @@ export const LoginScreen = () => {
                         <div className="row justify-content-center">
                             <div className="content-login animate__animated animate__pulse">
 
-                                <form onSubmit={handleLogin}>
+                                <form onSubmit={handleLogin} id="login-form">
                                     <h3 className="label-login">Iniciar sesión</h3>
                                     <div className="form-group input-login">
                                         <input type="email" className="form-control shadow-none input-email text-center" name="user" value={user} onChange={handleInputChange} placeholder="Email" autoComplete="off" required />

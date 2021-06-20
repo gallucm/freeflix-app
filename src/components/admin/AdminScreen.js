@@ -7,6 +7,8 @@ import { MakeAdmin } from './MakeAdmin';
 import { types } from '../../types/types';
 
 import { NavbarAdmin } from './NavbarAdmin';
+import { Movies } from './Movies';
+import { Codes } from './Codes';
 
 
 export const AdminScreen = () => {
@@ -19,17 +21,23 @@ export const AdminScreen = () => {
 
     return (
         <>
-            <NavbarAdmin/>
+            <NavbarAdmin />
             <div className="container">
                 <div className="d-flex justify-content-center">
-                    <button className="btn shadow-none admin-button" id="[admin] upload" onClick={handleOptionChange}>Subir Archivos</button>
-                    <button className="btn shadow-none admin-button" id="[admin] generate" onClick={handleOptionChange}>Generar código</button>
-                    <button className="btn shadow-none admin-button" id="[admin] make" onClick={handleOptionChange}>Asociar Admin</button>
+                    <button className="btn shadow-none admin-button" id={types.adminUpload} onClick={handleOptionChange}>Nueva pelicula</button>
+                    <button className="btn shadow-none admin-button" id={types.adminMovies} onClick={handleOptionChange}>Peliculas</button>
+                    <button className="btn shadow-none admin-button" id={types.adminGenerate} onClick={handleOptionChange}>Generar código de invitación</button>
+                    <button className="btn shadow-none admin-button" id={types.adminCodes} onClick={handleOptionChange}>Códigos</button>
+                    <button className="btn shadow-none admin-button" id={types.adminMake} onClick={handleOptionChange}>Asociar Admin</button>
                 </div>
                 <div>
                     {(option === types.adminUpload) && <Upload />}
 
+                    {(option === types.adminMovies) && <Movies />}
+
                     {(option === types.adminGenerate) && <GenerateCode />}
+
+                    {(option === types.adminCodes) && <Codes />}
 
                     {(option === types.adminMake) && <MakeAdmin />}
                 </div>
