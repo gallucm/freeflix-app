@@ -8,6 +8,8 @@ export const registerUser = (user) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
+        // TODO: Verificar el codigo de acceso VIP
+
         const passwordsAreDiferent = (user.password !== user.password2) ? true : false;
 
         if (passwordsAreDiferent){
@@ -57,9 +59,9 @@ export const loginUser = (email, password) => {
             return;
         }
 
-        dispatch(login(user.userName, user.id));
+        dispatch(login(user.userName, user.id, user.role));
         dispatch(finishLoading());        
-        setSesionStorage(user.userName, user.id);
+        setSesionStorage(user.userName, user.id, user.role);
     }
 }
 
@@ -68,25 +70,28 @@ export const startChecking = () => {
 
         const id = localStorage.getItem('user-id');
         const name = localStorage.getItem('userName');
+        const role = localStorage.getItem('rs');
 
         if (id && name)
-            dispatch(login(name, id));  
+            dispatch(login(name, id, role));  
             
         dispatch(checkingFinish());    
     }
 }
 
-const setSesionStorage = (userName, id) => {
+const setSesionStorage = (userName, id, role) => {
     localStorage.setItem('userName', userName);
     localStorage.setItem('user-id', id);
+    localStorage.setItem('rs', role);
 }
 
-const login = (userName, id) => {
+const login = (userName, id, role) => {
     return {
         type: types.authLogin,
         payload: {
             userName,
-            id
+            id,
+            role
         }
     }
 }

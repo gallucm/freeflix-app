@@ -1,11 +1,13 @@
 import { database } from "../firebase/firebase-config";
+import { types } from "../types/types";
 import { hashPassword } from "./bcrypt";
 
 export const createUser = async (user) => {
 
     const userWithHash = {
         ...user,
-        password: hashPassword(user.password)
+        password: hashPassword(user.password),
+        role: types.roleUser
     }
 
     const { id } = await database.collection('users').add(userWithHash);
