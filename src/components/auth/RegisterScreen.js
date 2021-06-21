@@ -44,7 +44,7 @@ export const RegisterScreen = () => {
                                     <input type="email" className="form-control shadow-none register-input-email text-center" name="email" value={email} onChange={handleInputChange} placeholder="Email" autoComplete="off" required />
                                     <input type="password" className="form-control shadow-none register-input-password text-center" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required />
                                     <input type="password" className="form-control shadow-none register-input-password text-center" name="password2" value={password2} onChange={handleInputChange} placeholder="Confirme contraseña" minLength="6" required />
-                                    <input type="text" className="form-control shadow-none register-input-user text-center" name="code" placeholder="Código de acceso" autoComplete="off" maxLength="6" required />
+                                    {/* <input type="text" className="form-control shadow-none register-input-user text-center" name="code" placeholder="Código de acceso" autoComplete="off" maxLength="6" required /> */}
 
                                     {(error) && <AlertError />}
 

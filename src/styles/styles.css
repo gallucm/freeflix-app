@@ -91,7 +91,6 @@ main{
     font-weight: 600;
 }
 
-
 /* LoginScreen */
 
 .login-content,
@@ -135,6 +134,19 @@ main{
     height: 50px;
     margin: auto;
     margin-bottom: 20px;
+}
+
+.codes-input-code{
+    background: rgb(189, 189, 189) !important;
+    color: black;
+    width: 300px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+
+    font-size: 25px;
+
+    text-align: center;
 }
 
 
