@@ -428,3 +428,11 @@ main{
 .bg-freeflix:hover{
     color: wheat;
 }
+
+/* Code List */
+.codes-list{
+    margin-top: 40px;
+    text-align: center;
+    height: 85%;
+    overflow-y: auto;
+}

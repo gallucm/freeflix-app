@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import { authReducer } from '../reducers/authReducer';
+import { codeReducer } from '../reducers/codeReducer';
 import { movieReducer } from '../reducers/movieReducer';
 import { uiReducer } from '../reducers/uiReducer';
 import { uploadReducer } from '../reducers/uploadReducer';
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     upload: uploadReducer,
     movies: movieReducer,
     ui: uiReducer,
-    auth: authReducer
+    auth: authReducer,
+    code: codeReducer
 });
 
 export const store = createStore(

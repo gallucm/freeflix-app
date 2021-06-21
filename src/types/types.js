@@ -35,5 +35,9 @@ export const types = {
     uiRemoveError: '[UI] remove error',
 
     roleAdmin: 'd04c3ff2-9f30-451b-a7d9-e310b0cf10e8',
-    roleUser: '81a599ea-0480-460c-92bb-911fc4ff3631'
+    roleUser: '81a599ea-0480-460c-92bb-911fc4ff3631',
+
+    codeCreated: '[Code] created',
+    codeRemoveCreated: '[Code] remove created',
+    codeSetList: '[Code] set list'
 }

@@ -10,7 +10,8 @@ export const randomeCode = () => {
 export const saveCode = async (code) => {
 
     const codeObject = {
-        code
+        code,
+        used: false
     }
 
     const codeSaved = await database.collection('codes').add(codeObject);
@@ -24,10 +25,11 @@ export const saveCode = async (code) => {
 export const getCodes = async () => {
     const docsRef = await database.collection('codes').get();
 
+
     const codes = [];
     
     docsRef.forEach(doc => {
-        codes.push(...doc.data());
+        codes.push(doc.data());
     });
 
     return codes;

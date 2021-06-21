@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { randomeCode, saveCode } from '../../helpers/Code';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { startGenerateCode } from '../../actions/Code';
+import { randomeCode } from '../../helpers/Code';
+import { AlertCodeGenerated } from '../ui/AlertCodeCreated';
+import { LoadingRed } from '../ui/LoadingRed';
 
 export const GenerateCode = () => {
 
+    const { loading } = useSelector(state => state.ui);
+    const { codeGenerated } = useSelector(state => state.code);
+
     const [code, setCode] = useState('');
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (codeGenerated && !loading)
+            setCode('');
+    }, [codeGenerated, loading])
 
     const handleGenerate = () => {
         setCode(randomeCode());
     }
 
-    const handleSave = async (e) => {
+    const handleSave = (e) => {
         e.preventDefault();
-
-        const isSaved = await saveCode(code);
-
-        if (isSaved)
-            setCode('');
-    } 
+        dispatch(startGenerateCode(code));
+    }
 
     return (
         <>
@@ -28,7 +39,12 @@ export const GenerateCode = () => {
                             <form onSubmit={handleSave}>
                                 <h3 className="mt-4">Generar Código</h3>
                                 <div className="form-group codes-input">
-                                    <input type="text" className="form-control shadow-none codes-input-code" name="code" value={code} disabled/>
+                                    <input type="text" className="form-control shadow-none codes-input-code" name="code" value={code} disabled />
+
+                                    <AlertCodeGenerated />
+
+                                    {(loading) && <LoadingRed />}
+
                                     <button type="button" className="btn shadow-none btn-wide-freeflix" onClick={handleGenerate}>
                                         <i className="fas fa-random me-2"></i>
                                         Generar
