@@ -34,8 +34,19 @@ export const getCodes = async () => {
     return codes;
 }
 
-export const isCodeUsed = async (code) => {
-    const query = await database.collection('codes').where("code", "==", code).get();
+export const isCodeValid = async (code) => {
+    const queryResult = await database.collection('codes').where("code", "==", Number(code)).get();
 
-    return (query.size > 0) ? true : false;
+    if (queryResult.docs[0] && !queryResult.docs[0].data().used)
+        return true;
+    
+    return false;
+}
+
+export const setCodeUsed = async (code) => {
+    const queryResult = await database.collection('codes').where("code", "==", Number(code)).get();
+
+    const codeId = queryResult.docs[0].id;
+
+    await database.collection('codes').doc(codeId).update({used: true});
 }

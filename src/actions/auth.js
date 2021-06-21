@@ -3,12 +3,11 @@ import { createUser, isEmailTaken, searchByEmail } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
 import { removeMovies } from './Movie';
+import { isCodeValid } from '../helpers/Code';
 
 export const registerUser = (user) => {
     return async (dispatch) => {
         dispatch(startLoading());
-
-        // TODO: Verificar el codigo de acceso VIP
 
         const passwordsAreDiferent = (user.password !== user.password2) ? true : false;
 
@@ -16,7 +15,15 @@ export const registerUser = (user) => {
             dispatch(setError('Las contraseñas ingredadas no coinciden.'));
             dispatch(finishLoading());
             return;
-        }       
+        }      
+        
+        const codeValid = await isCodeValid(user.code);
+
+        if (!codeValid){
+            dispatch(setError('El código ingresado no es válido.'));
+            dispatch(finishLoading());
+            return;
+        }
         
         const emailExists = await isEmailTaken(user.email);
 
@@ -26,9 +33,9 @@ export const registerUser = (user) => {
             return;
         }
 
-        const { password2, ...userNew } = user;
+        const { password2, code, ...userNew } = user;
 
-        const isCreated = await createUser(userNew);
+        const isCreated = await createUser(userNew, user.code);
 
         if (isCreated)
             dispatch(userCreated());

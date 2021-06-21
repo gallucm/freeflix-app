@@ -433,6 +433,7 @@ main{
 .codes-list{
     margin-top: 40px;
     text-align: center;
-    height: 85%;
+    height: auto;
+    max-height: 85%;
     overflow-y: auto;
 }

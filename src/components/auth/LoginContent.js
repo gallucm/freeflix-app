@@ -33,7 +33,7 @@ export const LoginContent = () => {
                         <form onSubmit={handleLogin}>
                             <h3 className="login-label">Iniciar sesión</h3>
                             <div className="form-group login-input">
-                                <input type="email" className="form-control shadow-none login-input-email text-center" name="user" value={user} onChange={handleInputChange} placeholder="Email" autoComplete="off" required />
+                                <input type="email" className="form-control shadow-none login-input-email text-center" name="user" value={user} onChange={handleInputChange} placeholder="Email" required />
                                 <input type="password" className="form-control shadow-none login-input-password text-center" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required />
 
                                 {(error) && <AlertError/>}

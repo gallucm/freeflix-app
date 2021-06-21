@@ -1,8 +1,9 @@
 import { database } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { hashPassword } from "./bcrypt";
+import { setCodeUsed } from "./Code";
 
-export const createUser = async (user) => {
+export const createUser = async (user, code) => {
 
     const userWithHash = {
         ...user,
@@ -12,10 +13,12 @@ export const createUser = async (user) => {
 
     const { id } = await database.collection('users').add(userWithHash);
 
-    if (!id)
-        return;
+    if (id){
+        await setCodeUsed(code);
+        return true;
+    }
     
-    return true;
+    return false;
 }
 
 export const isEmailTaken = async (email) => {
