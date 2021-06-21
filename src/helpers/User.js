@@ -12,10 +12,10 @@ export const createUser = async (user) => {
 
     const { id } = await database.collection('users').add(userWithHash);
 
-    if (id)
-        return true;
-    else
-        return false;
+    if (!id)
+        return;
+    
+    return true;
 }
 
 export const isEmailTaken = async (email) => {

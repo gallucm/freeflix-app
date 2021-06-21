@@ -16,15 +16,14 @@ export const saveCode = async (code) => {
 
     const codeSaved = await database.collection('codes').add(codeObject);
 
-    if (codeSaved)
-        return true;
+    if (!codeSaved)
+        return;
 
-    return;
+    return true;
 }
 
 export const getCodes = async () => {
     const docsRef = await database.collection('codes').get();
-
 
     const codes = [];
     
@@ -33,4 +32,10 @@ export const getCodes = async () => {
     });
 
     return codes;
+}
+
+export const isCodeUsed = async (code) => {
+    const query = await database.collection('codes').where("code", "==", code).get();
+
+    return (query.size > 0) ? true : false;
 }
