@@ -23,7 +23,7 @@ export const saveCode = async (code) => {
 }
 
 export const getCodes = async () => {
-    const docsRef = await database.collection('codes').get();
+    const docsRef = await database.collection('codes').orderBy('used').get();
 
     const codes = [];
     

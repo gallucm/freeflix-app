@@ -1,52 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpload } from '../../actions/Movie';
 
 import { useForm } from '../../hooks/useForm';
+import { Alert } from '../ui/Alert';
+import { LoadingRed } from '../ui/LoadingRed';
 
 export const Upload = () => {
 
     const dispatch = useDispatch();
 
-    const { loading, completed } = useSelector(state => state.upload);
-
+    
+    const { completed } = useSelector(state => state.upload);
+    const { loading, message } = useSelector(state => state.ui);
+    
     const [image, setImage] = useState(null);
     const [imageSelected, setImageSelected] = useState(false);
-
+    
     const [video, setVideo] = useState(null);
     const [videoSelected, setVideoSelected] = useState(false);
-
+    
     const [formValues, handleInputChange, reset] = useForm({
         title: '',
         year: '',
         gender: '',
         synopsis: ''
     });
+    
+    useEffect(() => {
+        if (completed){
+            reset();
+            setImageSelected(false);
+            setVideoSelected(false);
+        }
+    }, [completed, reset]);
 
     const { title, year, gender, synopsis } = formValues;
-
+    
     const handleImageChange = () => {
         const image = document.getElementById('file-image').files[0];
         setImageSelected(true);
         setImage(image);
     }
-
+    
     const handleVideoChange = () => {
         const video = document.getElementById('file-video').files[0];
         setVideoSelected(true);
         setVideo(video);
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         const movie = JSON.stringify(formValues);
         dispatch(startUpload(movie, image, video));
-
-        setImageSelected(false);
-        setVideoSelected(false);
-        reset();
     }
-
+    
     return (
         <>
             <div className="text-center mt-5">
@@ -102,8 +111,11 @@ export const Upload = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    {
-                                        (!loading && !completed) &&
+                                    { (loading) && <LoadingRed/> }
+
+                                    <Alert/>
+                                    
+                                    { (!loading && !completed && !message) &&
                                         <button type="submit" className="btn shadow-none upload-button">Subir</button>
                                     }
                                 </div>

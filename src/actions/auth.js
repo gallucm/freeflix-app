@@ -9,10 +9,10 @@ export const registerUser = (user) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const passwordsAreDiferent = (user.password !== user.password2) ? true : false;
+        const samePasswords = (user.password === user.password2);
 
-        if (passwordsAreDiferent){
-            dispatch(setError('Las contraseñas ingredadas no coinciden.'));
+        if (!samePasswords){
+            dispatch(setError('Las contraseñas ingresadas no coinciden.'));
             dispatch(finishLoading());
             return;
         }      

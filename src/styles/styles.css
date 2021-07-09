@@ -347,7 +347,8 @@ main{
 
 .section-content{
     width: 650px;
-    height: 570px;
+    height: auto;
+    min-height: 570px;
 
     border-radius: 5px;
 

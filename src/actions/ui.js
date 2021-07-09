@@ -16,3 +16,12 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
     type: types.uiFinishLoading
 });
+
+export const setMessage = (msg) => ({
+    type: types.uiSetMessage,
+    payload: msg
+});
+
+export const resetMessage = () => ({
+    type: types.uiResetMessage
+});

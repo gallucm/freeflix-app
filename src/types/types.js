@@ -6,8 +6,6 @@ export const types = {
     adminMake: '[admin] make',
 
     uploadSubmit: '[upload] submit',
-    uploadStartLoading: '[upload] start loading',
-    uploadFinishLoading: '[upload] finish loading',
     uploadImageCompleted: '[upload] image completed',
     uploadVideocompleted: '[upload] video completed',
     uploadCompleted: '[upload] completed',
@@ -30,6 +28,9 @@ export const types = {
 
     uiStartLoading: '[UI] start Loading',
     uiFinishLoading: '[UI] finish Loading',
+
+    uiSetMessage: '[UI] set message',
+    uiResetMessage: '[UI] reset message',
     
     uiSetError: '[UI] set error',
     uiRemoveError: '[UI] remove error',

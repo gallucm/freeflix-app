@@ -23,6 +23,6 @@ export const AdminRoute = ({
 }
 
 AdminRoute.prototypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     component: PropTypes.func.isRequired
 }

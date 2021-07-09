@@ -1,26 +1,13 @@
 import { types } from '../types/types';
 
 const initialState = {
-    loading: false,
     imageLoaded: false,
     videoLoaded: false,
     completed: false
 }
 
 export const uploadReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case types.uploadStartLoading: 
-            return {
-                ...state,
-                loading: true
-            }
-
-        case types.uploadFinishLoading:
-            return {
-                ...state,
-                loading: false
-            }
-        
+    switch (action.type) {        
         case types.uploadImageCompleted:
             return {
                 ...state,

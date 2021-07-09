@@ -2,7 +2,8 @@ import { types } from '../types/types';
 
 const initialState = {
     loading: false,
-    error: null
+    error: null,
+    message: null
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -24,11 +25,24 @@ export const uiReducer = (state = initialState, action) => {
                 ...state,
                 loading: true
             }
+            
 
         case types.uiFinishLoading:
             return {
                 ...state,
                 loading: false
+            }
+
+        case types.uiSetMessage:
+            return {
+                ...state,
+                message: action.payload
+            }
+
+        case types.uiResetMessage:
+            return {
+                ...state,
+                message: null
             }
     
         default:

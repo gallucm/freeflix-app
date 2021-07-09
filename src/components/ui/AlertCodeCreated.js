@@ -16,13 +16,13 @@ export const AlertCodeGenerated = () => {
 
     return (
         <>
-         {
-             (!loading && codeGenerated) &&
-             <div className="alert alert-dismissible alert-success fade show alert-freeflix mt-4" role="alert">
-                 Código generado correctamente. Ya puede ser utilizado.
-                 <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={handleResetCodeGenerated}></button>
-             </div>
-         }   
+            {
+                (!loading && codeGenerated) &&
+                <div className="alert alert-dismissible alert-success fade show alert-freeflix mt-4" role="alert">
+                    Código generado correctamente. Ya puede ser utilizado.
+                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={handleResetCodeGenerated}></button>
+                </div>
+            }
         </>
     )
 }
