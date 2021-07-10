@@ -9,6 +9,7 @@ export const types = {
     uploadImageCompleted: '[upload] image completed',
     uploadVideocompleted: '[upload] video completed',
     uploadCompleted: '[upload] completed',
+    uploadRemoveCompleted: '[upload] remove completed',
     uploadReset: '[upload] reset',
 
     movieStartLoading: '[movie] start loading',

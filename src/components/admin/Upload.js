@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startUpload } from '../../actions/Movie';
+import { removeUploadCompleted, startUpload } from '../../actions/Movie';
 
 import { useForm } from '../../hooks/useForm';
 import { Alert } from '../ui/Alert';
@@ -12,7 +12,7 @@ export const Upload = () => {
 
     
     const { completed } = useSelector(state => state.upload);
-    const { loading, message } = useSelector(state => state.ui);
+    const { loading } = useSelector(state => state.ui);
     
     const [image, setImage] = useState(null);
     const [imageSelected, setImageSelected] = useState(false);
@@ -32,8 +32,9 @@ export const Upload = () => {
             reset();
             setImageSelected(false);
             setVideoSelected(false);
+            dispatch(removeUploadCompleted());
         }
-    }, [completed, reset]);
+    }, [completed, reset, dispatch]);
 
     const { title, year, gender, synopsis } = formValues;
     
@@ -115,7 +116,7 @@ export const Upload = () => {
 
                                     <Alert/>
                                     
-                                    { (!loading && !completed && !message) &&
+                                    { (!loading && !completed) &&
                                         <button type="submit" className="btn shadow-none upload-button">Subir</button>
                                     }
                                 </div>

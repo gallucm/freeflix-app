@@ -25,6 +25,12 @@ export const uploadReducer = (state = initialState, action) => {
                 ...state,
                 completed: true
             }
+
+        case types.uploadRemoveCompleted:
+            return {
+                ...state,
+                completed: false
+            }
         
         case types.uploadReset:
             return initialState;

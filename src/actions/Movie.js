@@ -1,7 +1,7 @@
-import { getMovieById, getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { deleteMovieById, getMovieById, getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 
 import { types } from '../types/types';
-import { setMessage } from './ui';
+import { setError, setMessage } from './ui';
 
 
 export const startUpload = (movie, image, video) => {
@@ -49,6 +49,21 @@ export const startGetting = () => {
             dispatch(unsetMovieNotFound());
         }
     }
+}
+
+export const startDeleteMovie = (id) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const isDeleted = await deleteMovieById(id);
+
+        dispatch(finishLoading());
+
+        if (isDeleted)
+            dispatch(setMessage('Pelicula eliminada correctamente.'));
+        else
+            dispatch(setError('Ha ocurrido un error al eliminar la pelicula.'));
+    }  
 }
 
 export const startSetMovieSelected = (movie) => {
@@ -110,6 +125,10 @@ const videoCompleted = () => ({
 const uploadCompleted = () => ({
     type: types.uploadCompleted
 });
+
+export const removeUploadCompleted = () => ({
+    type: types.uploadRemoveCompleted
+})
 
 const setMovieSelected = (movie) => ({
     type: types.movieSetSelected,

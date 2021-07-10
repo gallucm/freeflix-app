@@ -64,3 +64,13 @@ export const getMovieById = async (id) => {
 
     return movie.data();
 }
+
+export const deleteMovieById = async (id) => {
+    console.log('entre a eliminar');
+    console.log('id es: ' + id);
+
+
+    const deleted = await database.collection('movies').doc(id).delete();
+
+    return deleted;
+}
