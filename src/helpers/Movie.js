@@ -66,11 +66,14 @@ export const getMovieById = async (id) => {
 }
 
 export const deleteMovieById = async (id) => {
-    console.log('entre a eliminar');
-    console.log('id es: ' + id);
+    let isDeleted;
 
+    try{
+        await database.collection('movies').doc(id).delete();
+        isDeleted = true;
+    } catch (e){
+        throw new Error("Error: ", e);
+    }
 
-    const deleted = await database.collection('movies').doc(id).delete();
-
-    return deleted;
+    return isDeleted;
 }

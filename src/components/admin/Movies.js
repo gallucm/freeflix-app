@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startDeleteMovie, startGetting } from '../../actions/Movie';
+import { Alert } from '../ui/Alert';
 import { Loading } from '../ui/Loading';
 
 export const Movies = () => {
@@ -39,6 +40,8 @@ export const Movies = () => {
                                     }
                                 </div>
                             }
+
+                            <Alert/>
                         </div>
                     </div>
                 </div>

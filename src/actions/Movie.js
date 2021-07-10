@@ -59,10 +59,15 @@ export const startDeleteMovie = (id) => {
 
         dispatch(finishLoading());
 
-        if (isDeleted)
-            dispatch(setMessage('Pelicula eliminada correctamente.'));
-        else
+        if (isDeleted){
+            dispatch(removeMovies());
+            dispatch(startGetting());
+            return;
+        }
+        else{
             dispatch(setError('Ha ocurrido un error al eliminar la pelicula.'));
+            return;
+        }
     }  
 }
 
@@ -79,6 +84,7 @@ export const startGetMovieById = (id) => {
 
         if (movie){
             dispatch(startSetMovieSelected(movie));
+            return;
         }
         else{
             dispatch(setMovieNotFound());
