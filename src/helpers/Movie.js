@@ -1,53 +1,50 @@
 import { storage, database } from "../firebase/firebase-config";
 
-const nameRandom = new Date().getTime();
+const fileName = new Date().getTime();
 
 export const uploadImageMovie = async (image) => {
+    const name = image.name.split('.');
+    const extension = name[1];
 
-    const fileName = image.name.split('.');
-    const ext = fileName[1];
+    const upload = await storage.ref().child('images/' + fileName + '.' + extension).put(image);
 
-    const uploadImage = await storage.ref().child('images/' + nameRandom + '.' + ext).put(image);
+    const urlDownload = await upload.ref.getDownloadURL();
 
-    const imageUrl = await uploadImage.ref.getDownloadURL();
-
-    if (imageUrl){
-        return imageUrl;
-    }
-
+    if (urlDownload)
+        return urlDownload;
+    
     return '';    
 }
 
 export const uploadVideoMovie = async (video) => {
+    const name = video.name.split('.');
+    const extension = name[1];
 
-    const fileName = video.name.split('.');
-    const ext = fileName[1];
+    const upload = await storage.ref().child('movies/' + fileName + '.' + extension).put(video);
 
-    const uploadMovie = await storage.ref().child('movies/' + nameRandom + '.' + ext).put(video);
+    const urlDownload = await upload.ref.getDownloadURL();
 
-    const movieUrl = await uploadMovie.ref.getDownloadURL();
-
-    if (movieUrl){
-        return movieUrl;
-    }
+    if (urlDownload)
+        return urlDownload;
 
     return '';    
 }
 
 export const uploadMovie = async (movie) => {
-    const movieAdded = await database.collection('movies').add(movie);
+    const isUploaded = await database.collection('movies').add(movie);
 
-    if (movieAdded){
-        return movieAdded;
-    }
+    if (isUploaded)
+        return true;
+    
+    return false;
 }
 
 export const getMovies = async () => {
-    const docsRef = await database.collection('movies').get();
+    const ref = await database.collection('movies').get();
 
     const movies = [];
     
-    docsRef.forEach(doc => {
+    ref.forEach(doc => {
         const movie = {
             id: doc.id,            
             ...doc.data()
@@ -62,18 +59,17 @@ export const getMovies = async () => {
 export const getMovieById = async (id) => {
     const movie = await database.collection('movies').doc(id).get();
 
-    return movie.data();
+    if (movie.exists)
+        return movie.data();
+
+    return null;
 }
 
 export const deleteMovieById = async (id) => {
-    let isDeleted;
-
     try{
         await database.collection('movies').doc(id).delete();
-        isDeleted = true;
+        return true;
     } catch (e){
-        throw new Error("Error: ", e);
+        return false;
     }
-
-    return isDeleted;
 }

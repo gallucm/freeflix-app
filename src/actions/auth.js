@@ -12,24 +12,24 @@ export const registerUser = (user) => {
         const samePasswords = (user.password === user.password2);
 
         if (!samePasswords){
-            dispatch(setError('Las contraseñas ingresadas no coinciden.'));
             dispatch(finishLoading());
+            dispatch(setError('Las contraseñas ingresadas no coinciden.'));
             return;
         }      
         
         const codeValid = await isCodeValid(user.code);
 
         if (!codeValid){
-            dispatch(setError('El código ingresado no es válido.'));
             dispatch(finishLoading());
+            dispatch(setError('El código ingresado no es válido.'));
             return;
         }
         
         const emailExists = await isEmailTaken(user.email);
 
         if (emailExists){
-            dispatch(setError('El email ingresado ya está en uso.'));
             dispatch(finishLoading());
+            dispatch(setError('El email ingresado ya está en uso.'));
             return;
         }
 
@@ -53,22 +53,22 @@ export const loginUser = (email, password) => {
         const user = await searchByEmail(email);
 
         if (!user){
-            dispatch(setError('Usuario o contraseña incorrecta.'));
             dispatch(finishLoading());
+            dispatch(setError('Usuario o contraseña incorrecta.'));
             return;
         }
 
         const passwordCorrect = comparePassword(password, user.password);
 
         if (!passwordCorrect){
-            dispatch(setError('Usuario o contraseña incorrecta.'));
             dispatch(finishLoading());
+            dispatch(setError('Usuario o contraseña incorrecta.'));
             return;
         }
 
         dispatch(login(user.userName, user.id, user.role));
-        dispatch(finishLoading());        
         setSesionStorage(user.userName, user.id, user.role);
+        dispatch(finishLoading());        
     }
 }
 

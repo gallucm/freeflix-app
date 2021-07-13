@@ -30,7 +30,7 @@ export const startUpload = (movie, image, video) => {
 
         if (movieAdded){
             dispatch(finishLoading());
-            dispatch(setMessage('Pelicula subida correctamente.'));
+            dispatch(setMessage('Pelicula cargada correctamente.'));
             dispatch(uploadCompleted());
         }
     }

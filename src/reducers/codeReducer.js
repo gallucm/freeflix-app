@@ -24,6 +24,12 @@ export const codeReducer = (state = initialState, action) => {
                 ...state,
                 codes: action.payload
             }
+
+        case types.codeRemove:
+            return {
+                ...state,
+                codes: []
+            }
     
         default:
             return state;

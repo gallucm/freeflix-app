@@ -24,7 +24,7 @@ export const createUser = async (user, code) => {
 export const isEmailTaken = async (email) => {
     const query = await database.collection('users').where("email", "==", email).get();
 
-    return (query.size > 0) ? true : false;
+    return (query.size > 0);
 }
 
 export const searchByEmail = async (email) => {

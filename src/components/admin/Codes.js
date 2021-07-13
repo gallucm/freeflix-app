@@ -34,7 +34,7 @@ export const Codes = () => {
                                 <div className="codes-list">
                                     {
                                         codes.map(code => (
-                                            <CodeGrid code={code} />
+                                            <CodeGrid code={code} key={code.id}/>
                                         ))
                                     }
                                 </div>

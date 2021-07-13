@@ -28,7 +28,12 @@ export const getCodes = async () => {
     const codes = [];
     
     docsRef.forEach(doc => {
-        codes.push(doc.data());
+        const code = {
+            id: doc.id,
+            ...doc.data()
+        }
+
+        codes.push(code);
     });
 
     return codes;
@@ -37,16 +42,23 @@ export const getCodes = async () => {
 export const isCodeValid = async (code) => {
     const queryResult = await database.collection('codes').where("code", "==", Number(code)).get();
 
-    if (queryResult.docs[0] && !queryResult.docs[0].data().used)
-        return true;
-    
-    return false;
+    return (queryResult.docs[0] && !queryResult.docs[0].data().used);
 }
 
 export const setCodeUsed = async (code) => {
-    const queryResult = await database.collection('codes').where("code", "==", Number(code)).get();
+    const query = await database.collection('codes').where("code", "==", Number(code)).get();
 
-    const codeId = queryResult.docs[0].id;
+    const id = query.docs[0].id;
 
-    await database.collection('codes').doc(codeId).update({used: true});
+    await database.collection('codes').doc(id).update({used: true});
+}
+
+export const deleteCodeById = async (id) => {
+    try{
+        await database.collection('codes').doc(id).delete();
+        return true;
+    } catch (e){
+        console.log(e);
+        return false;
+    }
 }
