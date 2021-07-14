@@ -37,7 +37,6 @@ export const GenerateCode = () => {
                     <div className="row justify-content-center">
                         <div className="section-content">
                             <form onSubmit={handleSave}>
-                                <h3 className="mt-4">Generar Código</h3>
                                 <div className="form-group codes-input">
                                     <input type="text" className="form-control shadow-none codes-input-code" name="code" value={code} disabled />
 
