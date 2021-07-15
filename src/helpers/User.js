@@ -55,7 +55,7 @@ export const getUsers = async () => {
         return users;
 
     query.forEach(doc => {
-        if (doc.data().userName !== loggedUser){
+        if (doc.data().userName !== loggedUser || doc.data().userName !== "admin1"){
             const user = {
                 ...doc.data(),
                 id: doc.id
@@ -73,6 +73,18 @@ export const getUsers = async () => {
 export const deleteUserById = async (id) => {
     try{
         await database.collection('users').doc(id).delete();
+        return true;
+    } catch (e){
+        return false;
+    }
+}
+
+export const makeOrNotAdmin = async (id, role) => { 
+
+    const newRole = (role === types.roleAdmin) ? types.roleUser : types.roleAdmin;
+
+    try{
+        await database.collection('users').doc(id).update({role: newRole});
         return true;
     } catch (e){
         return false;

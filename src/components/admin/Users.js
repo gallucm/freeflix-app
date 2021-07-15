@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, deleteUser } from "../../actions/User";
+import { types } from "../../types/types";
 import { Loading } from "../ui/Loading";
 
 export const Users = () => {
@@ -16,6 +17,10 @@ export const Users = () => {
 
     const handleDeleteUser = (id) => {
         dispatch(deleteUser(id));
+    }
+
+    const handleMakeAdmin = (id, role) => {
+        console.log(id);
     }
 
     return (
@@ -37,6 +42,14 @@ export const Users = () => {
                                                 <div className="col-1">
                                                     <button type="button" className="btn btn-freeflix shadow-none" onClick={() => {handleDeleteUser(user.id)}} title="Eliminar">
                                                         <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
+                                                    </button>
+                                                </div>
+                                                <div className="col-1">
+                                                    <button type="button" className="btn btn-freeflix shadow-none" 
+                                                            onClick={() => {handleMakeAdmin(user.id, user.role)}} 
+                                                            title={(user.role !== types.roleAdmin) ? 'Dar permisos de administrador' : 'Quitar permisos de administrador'}
+                                                    >
+                                                        <i class={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{fontSize: '15px'}}></i>
                                                     </button>
                                                 </div>
                                             </div>
