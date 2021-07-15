@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Upload } from './Upload';
 import { GenerateCode } from './GenerateCode';
-import { MakeAdmin } from './MakeAdmin';
+import { Users } from './Users';
 import { types } from '../../types/types';
 
 import { NavbarAdmin } from './NavbarAdmin';
@@ -28,7 +28,7 @@ export const AdminScreen = () => {
                     <button className="btn shadow-none admin-button" id={types.adminMovies} onClick={handleOptionChange}>Peliculas</button>
                     <button className="btn shadow-none admin-button" id={types.adminGenerate} onClick={handleOptionChange}>Generar código de invitación</button>
                     <button className="btn shadow-none admin-button" id={types.adminCodes} onClick={handleOptionChange}>Códigos</button>
-                    <button className="btn shadow-none admin-button" id={types.adminMake} onClick={handleOptionChange}>Asociar Admin</button>
+                    <button className="btn shadow-none admin-button" id={types.adminUsers} onClick={handleOptionChange}>Usuarios</button>
                 </div>
                 <div>
                     {(option === types.adminUpload) && <Upload />}
@@ -39,7 +39,7 @@ export const AdminScreen = () => {
 
                     {(option === types.adminCodes) && <Codes />}
 
-                    {(option === types.adminMake) && <MakeAdmin />}
+                    {(option === types.adminUsers) && <Users />}
                 </div>
             </div>
         </>

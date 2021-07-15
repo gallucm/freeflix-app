@@ -27,13 +27,6 @@ export const Movies = () => {
                             {(loading) && <Loading />}
 
                             {
-                                (movies.length === 0 && !loading) && 
-                                <div className="mt-4"> 
-                                    <h4>Actualmente no hay ninguna pelicula cargada</h4>
-                                </div>
-                            }
-
-                            {
                                 (!loading && movies) &&
                                 <div className="mt-4">
                                     {
@@ -46,6 +39,13 @@ export const Movies = () => {
                                             </div>
                                         ))
                                     }
+                                </div>
+                            }
+
+                            {
+                                (movies.length === 0 && !loading) && 
+                                <div className="mt-4"> 
+                                    <h4>Actualmente no hay ninguna pelicula cargada</h4>
                                 </div>
                             }
 

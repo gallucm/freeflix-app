@@ -3,7 +3,7 @@ export const types = {
     adminMovies: '[admin] movies',
     adminGenerate: '[admin] generate',
     adminCodes: '[admin] codes',
-    adminMake: '[admin] make',
+    adminUsers: '[admin] users',
 
     uploadSubmit: '[upload] submit',
     uploadImageCompleted: '[upload] image completed',
@@ -42,5 +42,8 @@ export const types = {
     codeCreated: '[Code] created',
     codeRemoveCreated: '[Code] remove created',
     codeSetList: '[Code] set list',
-    codeRemove: '[Code] remove'
+    codeRemove: '[Code] remove',
+
+    userSet: '[User] set',
+    userRemove: '[User] remove'
 }

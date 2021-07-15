@@ -1,0 +1,60 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers, deleteUser } from "../../actions/User";
+import { Loading } from "../ui/Loading";
+
+export const Users = () => {
+
+    const { loading } = useSelector(state => state.ui);
+    const { users }  = useSelector(state => state.user);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]);
+
+    const handleDeleteUser = (id) => {
+        dispatch(deleteUser(id));
+    }
+
+    return (
+        <>
+            <div className="text-center mt-5">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="section-content">
+                            {(loading) && <Loading />}
+
+                            {(!loading && users.length > 0) && 
+                                <div className="mt-4">
+                                    {
+                                        users.map(user => (                                            
+                                            <div key={user.id} className="row row-cols-auto justify-content-center mt-2">
+                                                <div className="col-2">
+                                                    <span style={{fontSize: '25px'}}>{user.userName}</span>
+                                                </div>
+                                                <div className="col-1">
+                                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => {handleDeleteUser(user.id)}} title="Eliminar">
+                                                        <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            }
+
+                            {
+                                (users.length === 0 && !loading) && 
+                                <div className="mt-4"> 
+                                    <h4>Actualmente no hay usuarios para mostrar</h4>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}

@@ -13,11 +13,11 @@ export const createUser = async (user, code) => {
 
     const { id } = await database.collection('users').add(userWithHash);
 
-    if (id){
+    if (id) {
         await setCodeUsed(code);
         return true;
     }
-    
+
     return false;
 }
 
@@ -32,7 +32,7 @@ export const searchByEmail = async (email) => {
 
     if (snapshot.empty)
         return null;
-    
+
     const data = snapshot.docs[0].data();
     const id = snapshot.docs[0].id;
 
@@ -42,4 +42,39 @@ export const searchByEmail = async (email) => {
     }
 
     return user;
+}
+
+export const getUsers = async () => {
+    const loggedUser = localStorage.getItem('userName');
+
+    const users = [];
+
+    const query = await database.collection('users').get();
+
+    if (query.empty)
+        return users;
+
+    query.forEach(doc => {
+        if (doc.data().userName !== loggedUser){
+            const user = {
+                ...doc.data(),
+                id: doc.id
+            }
+
+            const {password, ...userWithoutPass} = user;
+            
+            users.push(userWithoutPass);
+        }
+    });
+
+    return users;
+}
+
+export const deleteUserById = async (id) => {
+    try{
+        await database.collection('users').doc(id).delete();
+        return true;
+    } catch (e){
+        return false;
+    }
 }

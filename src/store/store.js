@@ -6,6 +6,7 @@ import { codeReducer } from '../reducers/codeReducer';
 import { movieReducer } from '../reducers/movieReducer';
 import { uiReducer } from '../reducers/uiReducer';
 import { uploadReducer } from '../reducers/uploadReducer';
+import { userReducer } from '../reducers/userReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     movies: movieReducer,
     ui: uiReducer,
     auth: authReducer,
-    code: codeReducer
+    code: codeReducer,
+    user: userReducer
 });
 
 export const store = createStore(
