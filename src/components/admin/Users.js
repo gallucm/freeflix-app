@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, deleteUser } from "../../actions/User";
+import { getAllUsers, deleteUser, makeAdmin } from "../../actions/User";
 import { types } from "../../types/types";
 import { Loading } from "../ui/Loading";
 
@@ -20,7 +20,7 @@ export const Users = () => {
     }
 
     const handleMakeAdmin = (id, role) => {
-        console.log(id);
+        dispatch(makeAdmin(id, role));
     }
 
     return (
@@ -36,13 +36,8 @@ export const Users = () => {
                                     {
                                         users.map(user => (                                            
                                             <div key={user.id} className="row row-cols-auto justify-content-center mt-2">
-                                                <div className="col-2">
+                                                <div className="col-2 text-justify">
                                                     <span style={{fontSize: '25px'}}>{user.userName}</span>
-                                                </div>
-                                                <div className="col-1">
-                                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => {handleDeleteUser(user.id)}} title="Eliminar">
-                                                        <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
-                                                    </button>
                                                 </div>
                                                 <div className="col-1">
                                                     <button type="button" className="btn btn-freeflix shadow-none" 
@@ -50,6 +45,11 @@ export const Users = () => {
                                                             title={(user.role !== types.roleAdmin) ? 'Dar permisos de administrador' : 'Quitar permisos de administrador'}
                                                     >
                                                         <i class={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{fontSize: '15px'}}></i>
+                                                    </button>
+                                                </div>
+                                                <div className="col-1">
+                                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => {handleDeleteUser(user.id)}} title="Eliminar">
+                                                        <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
                                                     </button>
                                                 </div>
                                             </div>

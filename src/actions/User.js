@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { finishLoading, setError, startLoading } from "./ui";
 
-import { deleteUserById, getUsers } from '../helpers/User';
+import { deleteUserById, getUsers, makeOrNotAdmin } from '../helpers/User';
 
 export const getAllUsers = () => {
     return async (dispatch) => {
@@ -33,6 +33,22 @@ export const deleteUser = (id) => {
         } else {
            dispatch(setError('Error al eliminar el usuario.'));
         }        
+    }
+}
+
+export const makeAdmin = (id, role) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const updated = await makeOrNotAdmin(id, role);
+
+        dispatch(finishLoading());
+
+        if (updated) {
+            dispatch(getAllUsers());
+        } else {
+            dispatch(setError('Error al modificar el rol.'));
+        }
     }
 }
         
