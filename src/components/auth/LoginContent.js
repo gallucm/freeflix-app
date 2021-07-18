@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import { AlertError } from '../ui/AlertError';
-import { LoadingRed } from '../ui/LoadingRed';
+import { Loading } from '../ui/Loading';
 import { NotAccountLink } from '../ui/NotAccountLink';
 
 export const LoginContent = () => {
@@ -36,11 +36,16 @@ export const LoginContent = () => {
                                 <input type="email" className="form-control shadow-none login-input-email text-center" name="user" value={user} onChange={handleInputChange} placeholder="Email" required />
                                 <input type="password" className="form-control shadow-none login-input-password text-center" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required />
 
-                                {(error) && <AlertError/>}
+                                {(error) && <AlertError />}
 
-                                {(loading) && <LoadingRed/>}
-
-                                <button type="submit" className="btn shadow-none btn-wide-freeflix">Ingresar</button>
+                                <button type="submit" className="btn shadow-none btn-wide-freeflix">
+                                    {(!loading) && <span>Ingresar</span>}
+                                    {(loading) && <Loading/>
+                                        // <div className="spinner-border" role="status">
+                                        //     <span className="visually-hidden">Loading...</span>
+                                        // </div>
+                                    }
+                                </button>
                             </div>
                             <NotAccountLink />
                         </form>

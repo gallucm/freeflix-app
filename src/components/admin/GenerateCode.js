@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startGenerateCode } from '../../actions/Code';
 import { randomeCode } from '../../helpers/Code';
 import { AlertCodeGenerated } from '../ui/AlertCodeCreated';
-import { LoadingRed } from '../ui/LoadingRed';
+import { Loading } from '../ui/Loading';
 
 export const GenerateCode = () => {
 
@@ -42,16 +42,20 @@ export const GenerateCode = () => {
 
                                     <AlertCodeGenerated />
 
-                                    {(loading) && <LoadingRed />}
-
                                     <button type="button" className="btn shadow-none btn-wide-freeflix" onClick={handleGenerate}>
                                         <i className="fas fa-random me-2"></i>
                                         Generar
                                     </button>
                                 </div>
                                 <button type="submit" className="btn shadow-none btn-wide-freeflix" disabled={!code}>
-                                    <i className="fas fa-save me-2"></i>
-                                    Guardar
+                                    {loading && <Loading />}
+
+                                    {!loading &&
+                                        <div>
+                                            <i className="fas fa-save me-2"></i>
+                                            Guardar
+                                        </div>
+                                    }
                                 </button>
                             </form>
                         </div>

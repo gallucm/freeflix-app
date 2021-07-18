@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, deleteUser, makeAdmin } from "../../actions/User";
 import { types } from "../../types/types";
-import { Loading } from "../ui/Loading";
+import { LoadingRed } from "../ui/LoadingRed";
 
 export const Users = () => {
 
@@ -29,7 +29,7 @@ export const Users = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="section-content">
-                            {(loading) && <Loading />}
+                            {(loading) && <LoadingRed />}
 
                             {(!loading && users.length > 0) && 
                                 <div className="mt-4">
@@ -59,7 +59,7 @@ export const Users = () => {
                             }
 
                             {
-                                (users.length === 0 && !loading) && 
+                                (!loading && users.length === 0) && 
                                 <div className="mt-4"> 
                                     <h4>Actualmente no hay usuarios para mostrar</h4>
                                 </div>

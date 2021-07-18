@@ -2,12 +2,10 @@ import React from 'react';
 
 export const LoadingRed = () => {
     return (
-        <>
-            <div className="d-flex justify-content-center mt-3">
-                <div className="spinner-border text-danger" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
+        <div className="loading">
+            <div className="spinner-border spinner-big" role="status">
+                <span className="sr-only">Loading...</span>
             </div>
-        </>
+        </div>
     )
 }

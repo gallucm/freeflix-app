@@ -5,7 +5,7 @@ import { registerUser } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import { AlertError } from '../ui/AlertError';
 import { AlertUserCreated } from '../ui/AlertUserCreated';
-import { LoadingRed } from '../ui/LoadingRed';
+import { Loading } from '../ui/Loading';
 import { LoginLink } from '../ui/LoginLink';
 import { LogoNavbarAlone } from '../ui/LogoNavbarAlone';
 
@@ -41,19 +41,20 @@ export const RegisterScreen = () => {
                             <h3 className="register-label">Registrarse</h3>
                             <form onSubmit={handleRegister}>
                                 <div className="form-group register-input">
-                                    <input type="text" className="form-control shadow-none register-input-user text-center" name="userName" value={userName} onChange={handleInputChange} placeholder="Usuario" autoComplete="off" minLength="6" required />
-                                    <input type="email" className="form-control shadow-none register-input-email text-center" name="email" value={email} onChange={handleInputChange} placeholder="Email" autoComplete="off" required />
-                                    <input type="password" className="form-control shadow-none register-input-password text-center" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required />
-                                    <input type="password" className="form-control shadow-none register-input-password text-center" name="password2" value={password2} onChange={handleInputChange} placeholder="Confirme contraseña" minLength="6" required />
-                                    <input type="text" className="form-control shadow-none register-input-user text-center" name="code" value={code} onChange={handleInputChange} placeholder="Código de acceso" autoComplete="off" required />
+                                    <input type="text" className="form-control shadow-none register-input-user" name="userName" value={userName} onChange={handleInputChange} placeholder="Usuario" autoComplete="off" minLength="6" required />
+                                    <input type="email" className="form-control shadow-none register-input-email" name="email" value={email} onChange={handleInputChange} placeholder="Email" autoComplete="off" required />
+                                    <input type="password" className="form-control shadow-none register-input-password" name="password" value={password} onChange={handleInputChange} placeholder="Contraseña" minLength="6" required />
+                                    <input type="password" className="form-control shadow-none register-input-password" name="password2" value={password2} onChange={handleInputChange} placeholder="Confirme contraseña" minLength="6" required />
+                                    <input type="text" className="form-control shadow-none register-input-user" name="code" value={code} onChange={handleInputChange} placeholder="Código de acceso" autoComplete="off" required />
 
                                     {(error) && <AlertError />}
 
-                                    {(loading) && <LoadingRed />}
-
                                     <AlertUserCreated />
 
-                                    <button className="btn shadow-none btn-wide-freeflix" type="submit">Registrarse</button>
+                                    <button className="btn shadow-none btn-wide-freeflix" type="submit">
+                                        { (!loading) && <span>Registrarse</span>}
+                                        { loading && <Loading /> }
+                                    </button>
                                 </div>
                             </form>
                             <LoginLink />

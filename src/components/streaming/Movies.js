@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Loading } from '../ui/Loading';
 import { MovieGrid } from './MovieGrid';
 
 import { startGetting } from '../../actions/Movie';
+import { LoadingRed } from '../ui/LoadingRed';
 
 export const Movies = () => {
 
@@ -18,7 +18,8 @@ export const Movies = () => {
     
     return (
         <>
-            {(loading) && <Loading />}
+            {(loading) && 
+                <LoadingRed />}
 
             {(!loading && movies) &&
                 <div className="movies-container mt-4">

@@ -5,11 +5,12 @@ import { CategoryFilters } from './CategoryFilters';
 import { Movies } from './Movies';
 
 export const HomeScreen = () => {
+
     return (
         <>
-            <Navbar />
+            <Navbar />                
             <div className="container mt-4 mb-4">
-                <CategoryFilters/>
+                <CategoryFilters/>      
                 <Movies/>
             </div>
         </>

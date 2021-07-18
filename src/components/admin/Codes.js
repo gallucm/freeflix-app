@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { startGetCodes } from '../../actions/Code';
-import { Loading } from '../ui/Loading';
+import { LoadingRed } from '../ui/LoadingRed';
 import { CodeGrid } from './CodeGrid';
 
 export const Codes = () => {
@@ -22,7 +22,7 @@ export const Codes = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="section-content">
-                            {(loading) && <Loading />}
+                            {loading && <LoadingRed />}
 
                             {(codes) &&
                                 <div className="codes-list">

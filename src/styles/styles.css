@@ -77,11 +77,13 @@ main{
 }
 
 .btn-wide-freeflix{
-    margin-top: 30px;
+    /* margin-top: 30px; */
     width: 300px !important;
     height: 50px !important;
     background: #E50914;
     color: white;    
+
+    margin-bottom: 20px;
     
     transition: all 2.s ease;
 }
@@ -134,6 +136,7 @@ main{
     height: 50px;
     margin: auto;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .codes-input-code{
@@ -143,6 +146,7 @@ main{
     height: 50px;
     margin: auto;
     margin-top: 40px;
+    margin-bottom: 20px;
 
     font-size: 25px;
 
@@ -186,6 +190,7 @@ main{
 .alert-freeflix{
     width: 300px;
     margin: auto;
+    margin-bottom: 20px;
     font-size: 15px;
 }
 
@@ -411,10 +416,20 @@ main{
 }
 
 /* Loading */
-.loading{
-    display: flex;
-    align-items: center;
+.loading,
+.loading-big{
+    margin: auto;
+    display: flex !important;
+    align-items: center !important;
 }
+
+.spinner-big{
+    color: #E50914;
+    margin: auto !important;
+    margin-top: 10% !important;
+}
+
+.spinner-big {width: 200px; height: 200px;}
 
 .spinner{
     margin: auto !important;
