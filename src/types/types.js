@@ -20,6 +20,8 @@ export const types = {
     movieUnsetSelected: '[movie] unset selected',
     movieNotFound: '[movie] not found',
     movieUnsetNotFound: '[movie] unset not found',
+    movieSetGender: '[movie] set gender',
+    movieUnsetGender: '[movie] unset gender',
 
     authLogin: '[Auth] login',
     authLogout: '[Auth] logout',

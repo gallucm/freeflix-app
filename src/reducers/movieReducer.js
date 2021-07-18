@@ -4,7 +4,8 @@ const initialState = {
     loading: false,    
     movies: [],
     movieSelected: null,
-    movieNotFound: false
+    movieNotFound: false,
+    genderSelected: null
 }
 export const movieReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -54,6 +55,18 @@ export const movieReducer = (state = initialState, action) => {
             return {
                 ...state,
                 movieNotFound: false
+            }
+
+        case types.movieSetGender:
+            return {
+                ...state,
+                genderSelected: action.payload
+            }
+
+        case types.movieUnsetGender:
+            return {
+                ...state,
+                genderSelected: null
             }
 
         default:

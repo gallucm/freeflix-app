@@ -1,4 +1,4 @@
-import { deleteMovieById, getMovieById, getMovies, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 
 import { types } from '../types/types';
 import { setError, setMessage } from './ui';
@@ -71,6 +71,33 @@ export const startDeleteMovie = (id) => {
     }  
 }
 
+export const startGetMoviesByGender = (gender) => {
+    return async (dispatch) => {
+        dispatch(movieStartLoading());
+
+        const movies = await getMoviesByGender(gender);
+        
+        dispatch(movieFinishLoading());
+
+        if (movies){
+            dispatch(movieStartGetting(movies));
+            dispatch(setGender(gender));
+        } else {
+            dispatch(setError('Ha ocurrido un error al obtener las peliculas.'));
+        }
+    }
+}
+
+export const startUnsetGenderFilter = () => {
+    return async (dispatch) => {
+        dispatch(movieStartLoading());
+
+        dispatch(unsetGender());
+
+        dispatch(startGetting());
+    }
+}
+
 export const startSetMovieSelected = (movie) => {
     return (dispatch) => {
         dispatch(setMovieSelected(movie));
@@ -130,6 +157,15 @@ const videoCompleted = () => ({
 
 const uploadCompleted = () => ({
     type: types.uploadCompleted
+});
+
+const setGender = (payload) => ({
+    type: types.movieSetGender,
+    payload
+});
+
+const unsetGender = () => ({
+    type: types.movieUnsetGender
 });
 
 export const removeUploadCompleted = () => ({

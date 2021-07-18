@@ -56,6 +56,23 @@ export const getMovies = async () => {
     return movies;
 }
 
+export const getMoviesByGender = async (gender) => {
+    const ref = await database.collection('movies').where("gender", "==", gender).get();
+
+    const movies = [];
+
+    ref.forEach(doc => {
+        const movie = {
+            id: doc.id,            
+            ...doc.data()
+        }
+
+        movies.push(movie);
+    });
+
+    return movies;
+}
+
 export const getMovieById = async (id) => {
     const movie = await database.collection('movies').doc(id).get();
 
