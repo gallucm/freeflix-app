@@ -2,13 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startGetMoviesByGender, startUnsetGenderFilter } from '../../actions/Movie';
 
+import { genders } from '../../helpers/genders';
+
 export const CategoryFilters = () => {
 
     const { genderSelected } = useSelector(state => state.movies);
 
     const dispatch = useDispatch();
 
-    const handleGetMovies = (e) => {
+    const handleGetMoviesByGender = (e) => {
         e.preventDefault();
 
         const gender = e.target.innerHTML;
@@ -21,15 +23,12 @@ export const CategoryFilters = () => {
         dispatch(startUnsetGenderFilter());
     }
 
-
     return (
         <>
             <div className="text-center box-categories">
-                <span className="badge bg-freeflix m-2" onClick={handleGetMovies}>Acción</span>
-                <span className="badge bg-freeflix m-2" onClick={handleGetMovies}>Comedia</span>
-                <span className="badge bg-freeflix m-2" onClick={handleGetMovies}>Drama</span>
-                <span className="badge bg-freeflix m-2" onClick={handleGetMovies}>SCI-FI</span>
-                <span className="badge bg-freeflix m-2" onClick={handleGetMovies}>Terror</span>
+                { genders.map( gender => (
+                  <span className="badge bg-freeflix m-2" onClick={handleGetMoviesByGender}>{gender}</span>  
+                ))}
 
                 {genderSelected &&
                     <div class="alert alert-danger alert-dismissible fade show mt-2 alert-freeflix" role="alert">
