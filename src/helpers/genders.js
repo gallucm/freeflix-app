@@ -1,5 +1,5 @@
 export const genders = [
-    "Acción",
+    "Accion",
     "Comedia",
     "Drama",
     "SCI-FI",

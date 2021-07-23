@@ -1,4 +1,4 @@
-import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 
 import { types } from '../types/types';
 import { setError, setMessage } from './ui';
@@ -43,7 +43,7 @@ export const startGetting = () => {
         const movies = await getMovies();
 
         if (movies){
-            dispatch(movieStartGetting(movies));
+            dispatch(setMovies(movies));
             dispatch(movieFinishLoading());
             dispatch(startUnsetMovieSelected());
             dispatch(unsetMovieNotFound());
@@ -80,8 +80,26 @@ export const startGetMoviesByGender = (gender) => {
         dispatch(movieFinishLoading());
 
         if (movies){
-            dispatch(movieStartGetting(movies));
+            dispatch(setMovies(movies));
             dispatch(setGender(gender));
+        } else {
+            dispatch(setError('Ha ocurrido un error al obtener las peliculas.'));
+        }
+    }
+}
+
+export const startGetMoviesByTitle = (title) => {
+    return async (dispatch) => {
+        dispatch(setSearchValue(title));
+
+        dispatch(movieStartLoading());
+
+        const movies = await getMoviesByTitle(title);
+
+        dispatch(movieFinishLoading());
+
+        if (movies){
+            dispatch(setMovies(movies));
         } else {
             dispatch(setError('Ha ocurrido un error al obtener las peliculas.'));
         }
@@ -110,12 +128,20 @@ export const startGetMovieById = (id) => {
         const movie = await getMovieById(id);
 
         if (movie){
-            dispatch(startSetMovieSelected(movie));
+            dispatch(setMovies(movie));
             return;
         }
         else{
             dispatch(setMovieNotFound());
         }
+    }
+}
+
+export const startUnsetSearchValue = () => {
+    return (dispatch) => {
+        dispatch(unsetSearchValue());
+
+        dispatch(startGetting());
     }
 }
 
@@ -126,8 +152,17 @@ const startUnsetMovieSelected = () => {
     }
 }
 
-const movieStartGetting = (payload) => ({
-    type: types.movieStartGetting,
+const setSearchValue = (payload) => ({
+    type: types.movieSetSearchValue,
+    payload
+});
+
+const unsetSearchValue = () => ({
+    type: types.movieUnsetSearchValue
+});
+
+const setMovies = (payload) => ({
+    type: types.moviesSet,
     payload
 });
 
@@ -178,7 +213,7 @@ const setMovieSelected = (movie) => ({
 });
 
 export const removeMovies = () => ({
-    type: types.movieRemove
+    type: types.moviesRemove
 })
 
 const unsetMovieSelected = () => ({

@@ -6,7 +6,7 @@ import { genders } from '../../helpers/genders';
 
 export const CategoryFilters = () => {
 
-    const { genderSelected } = useSelector(state => state.movies);
+    const { genderSelected, searchValue } = useSelector(state => state.movies);
 
     const dispatch = useDispatch();
 
@@ -26,14 +26,27 @@ export const CategoryFilters = () => {
     return (
         <>
             <div className="text-center box-categories">
-                { genders.map( gender => (
-                  <span className="badge bg-freeflix m-2" onClick={handleGetMoviesByGender}>{gender}</span>  
+
+                {!searchValue && genders.map(gender => (
+                    <span key={gender} className="badge bg-freeflix m-2" onClick={handleGetMoviesByGender}>{gender}</span>
                 ))}
 
+                {(searchValue) &&
+                    <div>
+                        <span>
+                            Título buscado: <strong>{searchValue}</strong>
+                        </span>
+                    </div>
+                }
+
                 {genderSelected &&
-                    <div class="alert alert-danger alert-dismissible fade show mt-2 alert-freeflix" role="alert">
-                        Filtro aplicado: <strong>{genderSelected}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={handleUnsetGender}></button>
+                    <div>
+                        <span>
+                            Filtro aplicado: <strong>{genderSelected}</strong>
+                            <button type="button" className="btn shadow-none red-freeflix" onClick={handleUnsetGender}>
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </span>
                     </div>
                 }
             </div>

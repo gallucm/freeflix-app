@@ -1,6 +1,12 @@
 import { storage, database } from "../firebase/firebase-config";
 
+
+import { FireSQL } from 'firesql';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 const fileName = new Date().getTime();
+const fireSQL = new FireSQL(firebase.firestore(), { includeId: true});
 
 export const uploadImageMovie = async (image) => {
     const name = image.name.split('.');
@@ -56,6 +62,28 @@ export const getMovies = async () => {
     return movies;
 }
 
+export const getMoviesByTitle = async (title) => {
+
+    const query = "SELECT * FROM movies WHERE title LIKE '" + capitalize(title) + "%'";
+
+    const moviesPromise = await fireSQL.query(query);
+
+    const movies = [];
+
+    moviesPromise.forEach(doc => {
+        const { __name__, ...docNew } = doc;
+
+        const movie = {
+            id: doc.__name__,
+            ...docNew
+        }
+
+        movies.push(movie);
+    });
+
+    return movies;
+}
+
 export const getMoviesByGender = async (gender) => {
     const ref = await database.collection('movies').where("gender", "==", gender).get();
 
@@ -89,4 +117,9 @@ export const deleteMovieById = async (id) => {
     } catch (e){
         return false;
     }
+}
+
+const capitalize = (word) => {
+    const lower = word.toLowerCase();
+    return word.charAt(0).toUpperCase() + lower.slice(1);
 }

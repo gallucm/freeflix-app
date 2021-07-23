@@ -48,6 +48,10 @@ main{
     cursor: pointer;
 }
 
+.red-freeflix{
+    color: #E50914;
+}
+
 .footer{
     background-color: transparent !important;
     bottom: 0;

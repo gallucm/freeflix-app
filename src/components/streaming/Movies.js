@@ -15,6 +15,8 @@ export const Movies = () => {
     useEffect(() => {
         dispatch(startGetting());
     }, [dispatch]);
+
+    // getMovieByTitle('c');
     
     return (
         <>

@@ -14,14 +14,16 @@ export const types = {
 
     movieStartLoading: '[movie] start loading',
     movieFinishLoading: '[movie] finish loading',
-    movieStartGetting: '[movie] start getting',
-    movieRemove: '[movie] remove',
+    moviesSet: '[movie] start getting',
+    moviesRemove: '[movie] remove',
     movieSetSelected: '[movie] set selected',
     movieUnsetSelected: '[movie] unset selected',
     movieNotFound: '[movie] not found',
     movieUnsetNotFound: '[movie] unset not found',
     movieSetGender: '[movie] set gender',
     movieUnsetGender: '[movie] unset gender',
+    movieSetSearchValue: '[movie] set search value',
+    movieUnsetSearchValue: '[movie] unset search value',
 
     authLogin: '[Auth] login',
     authLogout: '[Auth] logout',
