@@ -38,13 +38,13 @@ export const startUpload = (movie, image, video) => {
 
 export const startGetting = () => {
     return async (dispatch) => {
-        dispatch(movieStartLoading());
+        dispatch(startLoading());
 
         const movies = await getMovies();
 
         if (movies){
             dispatch(setMovies(movies));
-            dispatch(movieFinishLoading());
+            dispatch(finishLoading());
             dispatch(startUnsetMovieSelected());
             dispatch(unsetMovieNotFound());
         }
@@ -73,11 +73,11 @@ export const startDeleteMovie = (id) => {
 
 export const startGetMoviesByGender = (gender) => {
     return async (dispatch) => {
-        dispatch(movieStartLoading());
+        dispatch(startLoading());
 
         const movies = await getMoviesByGender(gender);
         
-        dispatch(movieFinishLoading());
+        dispatch(finishLoading());
 
         if (movies){
             dispatch(setMovies(movies));
@@ -92,11 +92,11 @@ export const startGetMoviesByTitle = (title) => {
     return async (dispatch) => {
         dispatch(setSearchValue(title));
 
-        dispatch(movieStartLoading());
+        dispatch(startLoading());
 
         const movies = await getMoviesByTitle(title);
 
-        dispatch(movieFinishLoading());
+        dispatch(finishLoading());
 
         if (movies){
             dispatch(setMovies(movies));
@@ -108,7 +108,7 @@ export const startGetMoviesByTitle = (title) => {
 
 export const startUnsetGenderFilter = () => {
     return async (dispatch) => {
-        dispatch(movieStartLoading());
+        dispatch(startLoading());
 
         dispatch(unsetGender());
 
@@ -153,26 +153,18 @@ const startUnsetMovieSelected = () => {
 }
 
 const setSearchValue = (payload) => ({
-    type: types.movieSetSearchValue,
+    type: types.moviesSetSearchValue,
     payload
 });
 
 const unsetSearchValue = () => ({
-    type: types.movieUnsetSearchValue
+    type: types.moviesUnsetSearchValue
 });
 
 const setMovies = (payload) => ({
     type: types.moviesSet,
     payload
 });
-
-const movieStartLoading = () => ({
-    type: types.movieStartLoading
-});
-
-const movieFinishLoading = () => ({
-    type: types.movieFinishLoading
-})
 
 const startLoading = () => ({
     type: types.uiStartLoading
@@ -195,12 +187,12 @@ const uploadCompleted = () => ({
 });
 
 const setGender = (payload) => ({
-    type: types.movieSetGender,
+    type: types.moviesSetGenderSearched,
     payload
 });
 
 const unsetGender = () => ({
-    type: types.movieUnsetGender
+    type: types.moviesUnsetGender
 });
 
 export const removeUploadCompleted = () => ({
@@ -208,7 +200,7 @@ export const removeUploadCompleted = () => ({
 })
 
 const setMovieSelected = (movie) => ({
-    type: types.movieSetSelected,
+    type: types.moviesSetSelected,
     payload: movie
 });
 
@@ -217,13 +209,13 @@ export const removeMovies = () => ({
 })
 
 const unsetMovieSelected = () => ({
-    type: types.movieUnsetSelected
+    type: types.moviesUnsetSelected
 });
 
 export const setMovieNotFound = () => ({
-    type: types.movieNotFound
+    type: types.moviesNotFound
 });
 
 const unsetMovieNotFound = () => ({
-    type: types.movieUnsetNotFound
+    type: types.moviesUnsetNotFound
 });

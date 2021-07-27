@@ -10,14 +10,13 @@ export const Movies = () => {
 
     const dispatch = useDispatch();
 
-    const { loading, movies } = useSelector(state => state.movies);
+    const { movies } = useSelector(state => state.movies);
+    const { loading } = useSelector(state => state.ui);
 
     useEffect(() => {
         dispatch(startGetting());
     }, [dispatch]);
 
-    // getMovieByTitle('c');
-    
     return (
         <>
             {(loading) && 

@@ -1,7 +1,6 @@
 import { types } from '../types/types';
 
-const initialState = {
-    loading: false,    
+const initialState = {   
     movies: [],
     movieSelected: null,
     movieNotFound: false,
@@ -10,18 +9,6 @@ const initialState = {
 }
 export const movieReducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.movieStartLoading:
-            return {
-                ...state,
-                loading: true
-            }
-        
-        case types.movieFinishLoading:
-            return {
-                ...state,
-                loading: false
-            }
-
         case types.moviesSet:
             return {
                 ...state,
@@ -34,49 +21,49 @@ export const movieReducer = (state = initialState, action) => {
                 movies: null
             }
 
-        case types.movieSetSelected:
+        case types.moviesSetSelected:
             return {
                 ...state,
                 movieSelected: action.payload
             }
 
-        case types.movieUnsetSelected:
+        case types.moviesUnsetSelected:
             return {
                 ...state,
                 movieSelected: null
             }
         
-        case types.movieNotFound:
+        case types.moviesNotFound:
             return {
                 ...state,
                 movieNotFound: true
             }
         
-        case types.movieUnsetNotFound:
+        case types.moviesUnsetNotFound:
             return {
                 ...state,
                 movieNotFound: false
             }
 
-        case types.movieSetGender:
+        case types.moviesSetGender:
             return {
                 ...state,
                 genderSelected: action.payload
             }
 
-        case types.movieUnsetGender:
+        case types.moviesUnsetGender:
             return {
                 ...state,
                 genderSelected: null
             }
 
-        case types.movieSetSearchValue:
+        case types.moviesSetSearchValue:
             return {
                 ...state,
                 searchValue: action.payload
             }
 
-        case types.movieUnsetSearchValue:
+        case types.moviesUnsetSearchValue:
             return {
                 ...state,
                 searchValue: null
