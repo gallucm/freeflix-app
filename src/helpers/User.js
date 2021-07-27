@@ -81,7 +81,7 @@ export const deleteUserById = async (id) => {
 
 export const makeOrNotAdmin = async (id, role) => { 
 
-    const newRole = (role === types.roleAdmin) ? types.roleUser : types.roleAdmin;
+    const newRole = (role === types.roleAdmin) ? types.roleUser : role;
 
     try{
         await database.collection('users').doc(id).update({role: newRole});

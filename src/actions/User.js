@@ -52,9 +52,9 @@ export const makeAdmin = (id, role) => {
     }
 }
         
-const setUser = (users) => ({
+const setUser = (payload) => ({
     type: types.userSet,
-    payload: users
+    payload
 });
 
 const removeUsers = () => ({

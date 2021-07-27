@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
 import { startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
-import { useForm } from '../../hooks/useForm';
 
 import { Logo } from './Logo';
 
@@ -12,21 +11,18 @@ export const Navbar = () => {
     
     const dispatch = useDispatch();
 
-    const [formValues, handleInputChange] = useForm({
-        searchValue: ''
-    });
+    const [search, setSearch] = useState('');
 
     //TODO: Pensar de usar useMemo para cuando las peliculas no cambian.
 
-    const { searchValue } = formValues;
-
-
-    const handleSearching = (e) => {
+    const handleInputChange = (e) => {
         e.preventDefault();
-        
-        if (searchValue)
-            dispatch(startGetMoviesByTitle(searchValue));
-        else
+
+        setSearch(e.target.value);
+
+        if (e.target.value)
+            dispatch(startGetMoviesByTitle(e.target.value));
+        else 
             dispatch(startUnsetSearchValue());
     }
 
@@ -42,7 +38,7 @@ export const Navbar = () => {
                     <span className="navbar-brand">
                         <Logo/>
                     </span>
-                    <input type="text" className="form-control w-25 me-5 shadow-none focus-none text-center" name="searchValue" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearching} placeholder="Busca un título..."/>  
+                    <input type="text" className="form-control w-25 me-5 shadow-none focus-none text-center" name="searchValue" value={search} onChange={handleInputChange} placeholder="Busca un título..."/>  
                     <div className="d-flex">    
                         <span className="navbar-brand">{userName}</span>                     
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>

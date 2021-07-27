@@ -40,11 +40,7 @@ export const LoginContent = () => {
 
                                 <button type="submit" className="btn shadow-none btn-wide-freeflix">
                                     {(!loading) && <span>Ingresar</span>}
-                                    {(loading) && <Loading/>
-                                        // <div className="spinner-border" role="status">
-                                        //     <span className="visually-hidden">Loading...</span>
-                                        // </div>
-                                    }
+                                    {(loading) && <Loading />}
                                 </button>
                             </div>
                             <NotAccountLink />
