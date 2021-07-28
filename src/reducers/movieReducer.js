@@ -45,7 +45,7 @@ export const movieReducer = (state = initialState, action) => {
                 movieNotFound: false
             }
 
-        case types.moviesSetGender:
+        case types.moviesSetGenderSearched:
             return {
                 ...state,
                 genderSelected: action.payload
