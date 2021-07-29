@@ -1,52 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUploadCompleted, startUpload } from '../../actions/Movie';
+import { genders } from '../../helpers/genders';
 
 import { useForm } from '../../hooks/useForm';
 import { Alert } from '../ui/Alert';
-import { LoadingRed } from '../ui/LoadingRed';
+import { Loading } from '../ui/Loading';
 
 export const Upload = () => {
 
     const dispatch = useDispatch();
 
-    
     const { completed } = useSelector(state => state.upload);
-    const { loading } = useSelector(state => state.ui);
-    
+    const { loading, message } = useSelector(state => state.ui);
+
     const [image, setImage] = useState(null);
-    const [imageSelected, setImageSelected] = useState(false);
-    
     const [video, setVideo] = useState(null);
-    const [videoSelected, setVideoSelected] = useState(false);
-    
+
     const [formValues, handleInputChange, reset] = useForm({
         title: '',
         year: '',
         gender: '',
         synopsis: ''
     });
-    
+
     useEffect(() => {
-        if (completed){
+        if (completed) {
             reset();
-            setImageSelected(false);
-            setVideoSelected(false);
+            setImage(null);
+            setVideo(null);
             dispatch(removeUploadCompleted());
         }
     }, [completed, reset, dispatch]);
 
     const { title, year, gender, synopsis } = formValues;
-    
+
     const handleImageChange = () => {
         const image = document.getElementById('file-image').files[0];
-        setImageSelected(true);
         setImage(image);
     }
-    
+
     const handleVideoChange = () => {
         const video = document.getElementById('file-video').files[0];
-        setVideoSelected(true);
         setVideo(video);
     }
 
@@ -56,7 +51,7 @@ export const Upload = () => {
         const movie = JSON.stringify(formValues);
         dispatch(startUpload(movie, image, video));
     }
-    
+
     return (
         <>
             <div className="text-center mt-5">
@@ -67,13 +62,13 @@ export const Upload = () => {
                                 <div className="form-group upload-input">
                                     <input type="text" className="form-control shadow-none upload-input-title" name="title" value={title} onChange={handleInputChange} placeholder="Título" maxLength="30" autoComplete="off" required />
                                     <input type="number" className="form-control shadow-none upload-input-year" name="year" value={year} onChange={handleInputChange} placeholder="Año" autoComplete="off" required />
+                                    
                                     <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
-                                        <option defaultValue>Acción</option>
-                                        <option value="Comedia">Comedia</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Ciencia Ficción">Ciencia Ficción</option>
-                                        <option value="Terror">Terror</option>
+                                        {genders.map(gender => ( 
+                                            <option value={gender}>{gender}</option>
+                                        ))}
                                     </select>
+
                                     <textarea className="form-control upload-input-sinopsis" name="synopsis" value={synopsis} onChange={handleInputChange} placeholder="Sinópsis" maxLength="500" required />
 
                                     <div className="d-flex justify-content-center">
@@ -83,11 +78,11 @@ export const Upload = () => {
                                                 <label htmlFor="file-image">
                                                     <i className="fas fa-image fa-3x upload-image-icon"></i>
                                                     {
-                                                        (imageSelected) &&
+                                                        (image) &&
                                                         <i className="fas fa-check fa-2x" style={{ marginLeft: '10px', color: 'green' }}></i>
                                                     }
                                                     {
-                                                        (!imageSelected) &&
+                                                        (!image) &&
                                                         <i className="fas fa-times fa-2x" style={{ marginLeft: '10px', color: 'red' }}></i>
                                                     }
                                                 </label>
@@ -100,11 +95,11 @@ export const Upload = () => {
                                                 <label htmlFor="file-video">
                                                     <i className="fas fa-film fa-3x upload-video-icon"></i>
                                                     {
-                                                        (videoSelected) &&
+                                                        (video) &&
                                                         <i className="fas fa-check fa-2x" style={{ marginLeft: '10px', color: 'green' }}></i>
                                                     }
                                                     {
-                                                        (!videoSelected) &&
+                                                        (!video) &&
                                                         <i className="fas fa-times fa-2x" style={{ marginLeft: '10px', color: 'red' }}></i>
                                                     }
                                                 </label>
@@ -112,13 +107,16 @@ export const Upload = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    { (loading) && <LoadingRed/> }
 
-                                    <Alert/>
-                                    
-                                    { (!loading && !completed) &&
-                                        <button type="submit" className="btn shadow-none upload-button">Subir</button>
+                                    <Alert />
+
+                                    {!message &&
+                                        <button type="submit" className="btn shadow-none upload-button" disabled={loading}>
+                                            {(!loading) && <span>Subir</span>}
+                                            {(loading) && <Loading />}
+                                        </button>
                                     }
+
                                 </div>
                             </form>
                         </div>

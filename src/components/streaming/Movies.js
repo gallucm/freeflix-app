@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { MovieGrid } from './MovieGrid';
 
-import { startGetting } from '../../actions/Movie';
+import { startGetMovies } from '../../actions/Movie';
 import { LoadingRed } from '../ui/LoadingRed';
 
 export const Movies = () => {
@@ -14,21 +14,27 @@ export const Movies = () => {
     const { loading } = useSelector(state => state.ui);
 
     useEffect(() => {
-        dispatch(startGetting());
+        dispatch(startGetMovies());
     }, [dispatch]);
 
     return (
         <>
-            {(loading) && 
+            {(loading) &&
                 <LoadingRed />}
 
             {(!loading && movies) &&
                 <div className="movies-container mt-4">
                     {
                         movies.map(movie => (
-                            <MovieGrid key={movie.id} movie={movie}/>
+                            <MovieGrid key={movie.id} movie={movie} />
                         ))
                     }
+                </div>
+            }
+
+            {(!loading && movies.length === 0) &&
+                <div className="mt-4 text-center">
+                    <h4> En este momento no hay títulos disponibles. </h4>
                 </div>
             }
         </>

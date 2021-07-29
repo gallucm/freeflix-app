@@ -18,7 +18,7 @@ export const CodeGrid = ({ code }) => {
                 {   
                     (!loading) &&
                     <h3 className={(code.used ? 'text-danger' : 'text-success')}>{code.code}
-                        <button type="button" className="btn  btn-freeflix shadow-none ms-4" onClick={() => {handleDeleteCode(code.id)}}>
+                        <button type="button" className="btn btn-freeflix shadow-none ms-4" onClick={() => {handleDeleteCode(code.id)}} title="Eliminar">
                             <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
                         </button>
                     </h3> 

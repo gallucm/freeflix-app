@@ -47,7 +47,7 @@ export const GenerateCode = () => {
                                         Generar
                                     </button>
                                 </div>
-                                <button type="submit" className="btn shadow-none btn-wide-freeflix" disabled={!code}>
+                                <button type="submit" className="btn shadow-none btn-wide-freeflix" disabled={!code || loading}>
                                     {loading && <Loading />}
 
                                     {!loading &&

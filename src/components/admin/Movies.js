@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startDeleteMovie, startGetting } from '../../actions/Movie';
+import { startDeleteMovie, startGetMovies } from '../../actions/Movie';
 import { Alert } from '../ui/Alert';
 import { LoadingRed } from '../ui/LoadingRed';
 
@@ -8,10 +8,11 @@ export const Movies = () => {
 
     const dispatch = useDispatch();
 
-    const { loading, movies } = useSelector(state => state.movies);
+    const { movies } = useSelector(state => state.movies);
+    const { loading } = useSelector(state => state.ui);
 
     useEffect(() => {
-        dispatch(startGetting());
+        dispatch(startGetMovies());
     }, [dispatch]);
 
     const handleDeleteMovie = (id) => {

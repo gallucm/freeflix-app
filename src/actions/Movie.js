@@ -36,18 +36,21 @@ export const startUpload = (movie, image, video) => {
     }
 }
 
-export const startGetting = () => {
-    return async (dispatch) => {
+export const startGetMovies = () => {
+    return async (dispatch) => {        
+        dispatch(unsetSearchValue());
+        dispatch(unsetMovieNotFound());
+        dispatch(startUnsetMovieSelected());
+        
         dispatch(startLoading());
 
         const movies = await getMovies();
 
         if (movies){
             dispatch(setMovies(movies));
-            dispatch(finishLoading());
-            dispatch(startUnsetMovieSelected());
-            dispatch(unsetMovieNotFound());
         }
+
+        dispatch(finishLoading());
     }
 }
 
@@ -61,7 +64,7 @@ export const startDeleteMovie = (id) => {
 
         if (isDeleted){
             dispatch(removeMovies());
-            dispatch(startGetting());
+            dispatch(startGetMovies());
             return;
         }
         else{
@@ -112,7 +115,7 @@ export const startUnsetGenderFilter = () => {
 
         dispatch(unsetGender());
 
-        dispatch(startGetting());
+        dispatch(startGetMovies());
     }
 }
 
@@ -141,7 +144,7 @@ export const startUnsetSearchValue = () => {
     return (dispatch) => {
         dispatch(unsetSearchValue());
 
-        dispatch(startGetting());
+        dispatch(startGetMovies());
     }
 }
 

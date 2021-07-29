@@ -18,7 +18,7 @@ export const movieReducer = (state = initialState, action) => {
         case types.moviesRemove:
             return {
                 ...state,
-                movies: null
+                movies: []
             }
 
         case types.moviesSetSelected:
