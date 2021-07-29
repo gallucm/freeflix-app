@@ -41,6 +41,7 @@ export const Navbar = ({showSearch = true}) => {
                     {showSearch &&
                         <input type="text" className="form-control w-25 me-5 shadow-none focus-none text-center" name="searchValue" value={search} onChange={handleInputChange} placeholder="Busca un título..."/>  
                     }
+                   
                     <div className="d-flex">    
                         <span className="navbar-brand">{userName}</span>                     
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>

@@ -63,9 +63,9 @@ export const Upload = () => {
                                     <input type="text" className="form-control shadow-none upload-input-title" name="title" value={title} onChange={handleInputChange} placeholder="Título" maxLength="30" autoComplete="off" required />
                                     <input type="number" className="form-control shadow-none upload-input-year" name="year" value={year} onChange={handleInputChange} placeholder="Año" autoComplete="off" required />
                                     
-                                    <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
-                                        {genders.map(gender => ( 
-                                            <option value={gender}>{gender}</option>
+                                    <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" autoComplete="off" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
+                                        {genders.map(gend => ( 
+                                            <option value={gend}>{gend}</option>
                                         ))}
                                     </select>
 
