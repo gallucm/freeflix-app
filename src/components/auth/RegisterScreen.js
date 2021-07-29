@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import { AlertError } from '../ui/AlertError';
-import { AlertUserCreated } from '../ui/AlertUserCreated';
+import { Alert } from '../ui/Alert';
 import { Loading } from '../ui/Loading';
 import { LoginLink } from '../ui/LoginLink';
 import { LogoNavbarAlone } from '../ui/LogoNavbarAlone';
 
 export const RegisterScreen = () => {
 
-    const { loading, error } = useSelector(state => state.ui);
+    const { loading, error, message } = useSelector(state => state.ui);
 
     const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ export const RegisterScreen = () => {
 
                                     {(error) && <AlertError />}
 
-                                    <AlertUserCreated />
+                                    {message && <Alert />}
 
                                     <button className="btn shadow-none btn-wide-freeflix" type="submit">
                                         { (!loading) && <span>Registrarse</span>}

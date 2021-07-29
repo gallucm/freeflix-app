@@ -1,4 +1,4 @@
-import { finishLoading, setError, startLoading } from './ui';
+import { finishLoading, setError, setMessage, startLoading } from './ui';
 import { createUser, isEmailTaken, searchByEmail } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
@@ -37,8 +37,10 @@ export const registerUser = (user) => {
 
         const isCreated = await createUser(userNew, user.code);
 
-        if (isCreated)
+        if (isCreated){
             dispatch(userCreated());
+            dispatch(setMessage('Usuario creado correctamente. Ya puede iniciar sesión'));
+        }
         else 
             dispatch(setError('Ha ocurrido un error al crear el usuario.'));
 

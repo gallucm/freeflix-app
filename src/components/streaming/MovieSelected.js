@@ -39,7 +39,7 @@ export const MovieSelected = () => {
     
     return (
         <>
-            <Navbar />
+            <Navbar showSearch={false} />
             {(movieSelected == null) && <Loading/>}
 
             {(movieSelected) && 

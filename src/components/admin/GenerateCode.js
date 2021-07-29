@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { startGenerateCode } from '../../actions/Code';
+import { startSaveCode } from '../../actions/Code';
 import { randomeCode } from '../../helpers/Code';
-import { AlertCodeGenerated } from '../ui/AlertCodeCreated';
+import { Alert } from '../ui/Alert';
 import { Loading } from '../ui/Loading';
 
 export const GenerateCode = () => {
 
-    const { loading } = useSelector(state => state.ui);
+    const { loading, message } = useSelector(state => state.ui);
     const { codeGenerated } = useSelector(state => state.code);
 
     const [code, setCode] = useState('');
@@ -27,7 +27,7 @@ export const GenerateCode = () => {
 
     const handleSave = (e) => {
         e.preventDefault();
-        dispatch(startGenerateCode(code));
+        dispatch(startSaveCode(code));
     }
 
     return (
@@ -40,7 +40,7 @@ export const GenerateCode = () => {
                                 <div className="form-group codes-input">
                                     <input type="text" className="form-control shadow-none codes-input-code" name="code" value={code} disabled />
 
-                                    <AlertCodeGenerated />
+                                    {message && <Alert/>}
 
                                     <button type="button" className="btn shadow-none btn-wide-freeflix" onClick={handleGenerate}>
                                         <i className="fas fa-random me-2"></i>

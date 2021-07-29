@@ -28,13 +28,13 @@ export const Codes = () => {
                                 <div className="codes-list">
                                     {
                                         codes.map(code => (
-                                            <CodeGrid code={code} key={code.id}/>
-                                            ))
+                                            <CodeGrid code={code} key={code.id} />
+                                        ))
                                     }
                                 </div>
                             }
 
-                            {(codes.length === 0 && !loading) &&
+                            {(!loading && codes.length === 0) &&
                                 <div className="mt-4">
                                     <h4> No existen códigos de invitación </h4>
                                 </div>
