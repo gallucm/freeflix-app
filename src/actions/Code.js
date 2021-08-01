@@ -41,7 +41,7 @@ export const startDeleteCode = (id) => {
         const isDeleted = await deleteCodeById(id);
 
         if (isDeleted){
-            dispatch(removeCodes());
+            dispatch(removeCodes()); // TODO: Verificar si hace falta esta función
             dispatch(startGetCodes());
             return;
         }

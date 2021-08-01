@@ -1,21 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { MovieGrid } from './MovieGrid';
-
-import { startGetMovies } from '../../actions/Movie';
 import { LoadingRed } from '../ui/LoadingRed';
+import { useMovies } from '../../hooks/useMovies';
 
 export const Movies = () => {
 
-    const dispatch = useDispatch();
+    useMovies();
 
     const { movies } = useSelector(state => state.movies);
     const { loading } = useSelector(state => state.ui);
-
-    useEffect(() => {
-        dispatch(startGetMovies());
-    }, [dispatch]);
 
     return (
         <>
@@ -31,6 +26,8 @@ export const Movies = () => {
                     }
                 </div>
             }
+
+            
 
             {(!loading && movies.length === 0) &&
                 <div className="mt-4 text-center">

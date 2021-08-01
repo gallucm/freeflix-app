@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
-import { startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
+import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
 
 import { Logo } from './Logo';
 
-export const Navbar = ({showSearch = true}) => {
+import { genders } from '../../helpers/genders';
+
+export const Navbar = ({ showSearch = true }) => {
 
     const { userName } = useSelector(state => state.auth);
-    
+
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [search, setSearch] = useState('');
-
-    //TODO: Pensar de usar useMemo para cuando las peliculas no cambian.
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -22,8 +24,15 @@ export const Navbar = ({showSearch = true}) => {
 
         if (e.target.value)
             dispatch(startGetMoviesByTitle(e.target.value));
-        else 
+        else
             dispatch(startUnsetSearchValue());
+    }
+
+    const handleGetMoviesByGender = (e) => {
+        e.preventDefault();
+
+        const gender = e.target.innerHTML;
+        dispatch(startGetMoviesByGender(gender));
     }
 
     const handleLogout = (e) => {
@@ -31,19 +40,47 @@ export const Navbar = ({showSearch = true}) => {
         dispatch(startLogout());
     }
 
+    const handleHome = () => {
+        history.push('/');
+    }
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark">
-                <div className="container-fluid">            
-                    <span className="navbar-brand">
-                        <Logo/>
-                    </span>
-                    {showSearch &&
+                <div className="container-fluid">
+
+
+                    <div className="d-flex">
+                        <span className="navbar-brand">
+                            <Logo />
+                        </span>
+
+                        <span className="navbar-menu-option" onClick={handleHome}>Inicio</span>
+
+
+                        <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                            <ul className="navbar-nav">
+                                <li className="nav-item dropdown">
+                                    <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <strong>Peliculas</strong>
+                                    </span>
+                                    <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                        {genders.map(gend => (
+                                            <li className="m-2 pointer" key={gend} onClick={handleGetMoviesByGender}>{gend}</li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <span className="navbar-menu-option">Mi lista</span>
+                    </div>
+                    {/* {showSearch &&
                         <input type="text" className="form-control w-25 me-5 shadow-none focus-none text-center" name="searchValue" value={search} onChange={handleInputChange} placeholder="Busca un título..."/>  
-                    }
-                   
-                    <div className="d-flex">    
-                        <span className="navbar-brand">{userName}</span>                     
+                    } */}
+
+                    <div className="d-flex">
+                        <span className="navbar-brand">{userName}</span>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>
                         </button>

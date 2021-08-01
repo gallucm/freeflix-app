@@ -29,10 +29,11 @@ export const startUpload = (movie, image, video) => {
         const movieAdded = await uploadMovie(movieObject);
 
         if (movieAdded){
-            dispatch(finishLoading());
             dispatch(setMessage('Pelicula cargada correctamente.'));
             dispatch(uploadCompleted());
         }
+
+        dispatch(finishLoading());
     }
 }
 
@@ -202,9 +203,9 @@ export const removeUploadCompleted = () => ({
     type: types.uploadRemoveCompleted
 })
 
-const setMovieSelected = (movie) => ({
+const setMovieSelected = (payload) => ({
     type: types.moviesSetSelected,
-    payload: movie
+    payload
 });
 
 export const removeMovies = () => ({

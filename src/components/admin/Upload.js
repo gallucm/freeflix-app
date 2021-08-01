@@ -64,8 +64,8 @@ export const Upload = () => {
                                     <input type="number" className="form-control shadow-none upload-input-year" name="year" value={year} onChange={handleInputChange} placeholder="Año" autoComplete="off" required />
                                     
                                     <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" autoComplete="off" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
-                                        {genders.map(gend => ( 
-                                            <option value={gend}>{gend}</option>
+                                        {genders.map(gender => ( 
+                                            <option value={gender}>{gender}</option>
                                         ))}
                                     </select>
 
@@ -77,14 +77,7 @@ export const Upload = () => {
                                             <div className="upload-image">
                                                 <label htmlFor="file-image">
                                                     <i className="fas fa-image fa-3x upload-image-icon"></i>
-                                                    {
-                                                        (image) &&
-                                                        <i className="fas fa-check fa-2x" style={{ marginLeft: '10px', color: 'green' }}></i>
-                                                    }
-                                                    {
-                                                        (!image) &&
-                                                        <i className="fas fa-times fa-2x" style={{ marginLeft: '10px', color: 'red' }}></i>
-                                                    }
+                                                    <i className={image ? "fas fa-check fa-2x" : "fas fa-times fa-2x"} style={{ marginLeft: '10px', color: (image ? 'green' : 'red') }}></i>
                                                 </label>
                                                 <input id="file-image" type="file" accept=".png, .jpg, .jpeg" name="image" onChange={handleImageChange} required />
                                             </div>
@@ -94,14 +87,7 @@ export const Upload = () => {
                                             <div className="upload-video">
                                                 <label htmlFor="file-video">
                                                     <i className="fas fa-film fa-3x upload-video-icon"></i>
-                                                    {
-                                                        (video) &&
-                                                        <i className="fas fa-check fa-2x" style={{ marginLeft: '10px', color: 'green' }}></i>
-                                                    }
-                                                    {
-                                                        (!video) &&
-                                                        <i className="fas fa-times fa-2x" style={{ marginLeft: '10px', color: 'red' }}></i>
-                                                    }
+                                                    <i className={video ? "fas fa-check fa-2x" : "fas fa-times fa-2x"} style={{ marginLeft: '10px', color: (video ? 'green' : 'red')}}></i>
                                                 </label>
                                                 <input id="file-video" type="file" accept="video/*" name="video" onChange={handleVideoChange} required />
                                             </div>

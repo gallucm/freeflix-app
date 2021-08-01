@@ -26,7 +26,7 @@ input::-webkit-inner-spin-button {
     margin: 0px;
 }
 
-html, body{
+body{
     height: 100%;
     width: 100%;    
 }
@@ -55,7 +55,6 @@ main{
 .footer{
     background-color: transparent !important;
     bottom: 0;
-    box-shadow: 2px -4px 5px -0px  #E50914;
     height: 40px;
     left: 0;
     line-height: 10px;
@@ -64,9 +63,9 @@ main{
     position: fixed;
     text-align: center;
     width: 100%; 
-
-    -webkit-box-shadow: 2px -4px 5px 0px  #E50914;
-    -moz-box-shadow: 2px -4px 5px 0px  #E50914;
+    
+    /* border-top: 1px solid red; */
+    box-shadow: 2px -4px 5px -0px  #E50914;
 }
 
 @font-face {
@@ -169,6 +168,7 @@ main{
 
 .navbar-logo h3 {
     margin: 10px;
+    margin-left: 30px !important;
     font-family: BebasNeue-Regular;
     color: #E50914 !important;
     font-size: 50px;
@@ -177,6 +177,12 @@ main{
 }
 
 .navbar-logo:hover{
+    cursor: pointer;
+}
+
+.navbar-menu-option{
+    margin-top: 2em;
+    margin-right: 1em;
     cursor: pointer;
 }
 
@@ -258,6 +264,10 @@ main{
 }
 
 /* HomeScreen */
+.home-container{
+    margin-top: 2em !important;
+}
+
 .box{
     display: flex;
     flex: auto;
@@ -277,7 +287,6 @@ main{
     width: 400px;
     height: 300px;
     margin-left: 30px !important;
-    margin-bottom: 25px;
     color: white;
     font-size: 3em;
 }
