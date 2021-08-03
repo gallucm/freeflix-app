@@ -1,4 +1,5 @@
 import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { addMovieToFavorites } from '../helpers/User';
 
 import { types } from '../types/types';
 import { setError, setMessage } from './ui';
@@ -40,6 +41,7 @@ export const startUpload = (movie, image, video) => {
 export const startGetMovies = () => {
     return async (dispatch) => {        
         dispatch(unsetSearchValue());
+        dispatch(unsetGender());
         dispatch(unsetMovieNotFound());
         dispatch(startUnsetMovieSelected());
         
@@ -148,6 +150,28 @@ export const startUnsetSearchValue = () => {
         dispatch(startGetMovies());
     }
 }
+
+export const startAddMovieToFavorites = (userId, movie) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const movieAdded = await addMovieToFavorites(userId, movie);
+
+        if (movieAdded){
+            //dispatch(addMovieToFavorite(movie)); // TODO: verificar si hace falta cargarlo en el storage 
+        }
+        else{
+            dispatch(setError('Ha ocurrido un error al añadir la pelicula a favoritos.'));
+        }
+
+        dispatch(finishLoading());
+    }
+}
+
+const addMovieToFavorite = (payload) => ({
+    type: types.moviesAddToFavoritesList,
+    payload
+});
 
 const startUnsetMovieSelected = () => {
     return (dispatch) => {

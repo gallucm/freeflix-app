@@ -33,9 +33,9 @@ export const registerUser = (user) => {
             return;
         }
 
-        const { password2, code, ...userNew } = user;
+        const { password2, code, ...userClean } = user;
 
-        const isCreated = await createUser(userNew, user.code);
+        const isCreated = await createUser(userClean, user.code);
 
         if (isCreated){
             dispatch(userCreated());

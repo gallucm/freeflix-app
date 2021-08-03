@@ -20,7 +20,8 @@ export const RegisterScreen = () => {
         email: '',
         password: '',
         password2: '',
-        code: ''
+        code: '',
+        favoritesList: []
     });
 
     const { userName, email, password, password2, code } = formValues;

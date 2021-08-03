@@ -23,7 +23,7 @@ export const HomeScreen = () => {
             <Navbar />
             <div className="container home-container">
                 {genderSelected &&
-                    <div className="text-lg-start ms-4">
+                    <div className="text-center">
                         <span>
                             Peliculas de: <strong>{genderSelected}</strong>
                             <button type="button" className="btn shadow-none red-freeflix" onClick={handleUnsetGender}>

@@ -2,6 +2,7 @@ import { types } from '../types/types';
 
 const initialState = {   
     movies: [],
+    favoritesList: [],
     movieSelected: null,
     movieNotFound: false,
     genderSelected: null,
@@ -67,6 +68,24 @@ export const movieReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchValue: null
+            }
+
+        case types.moviesAddToFavoritesList:
+            return {
+                ...state,
+                favoritesList: [...state.favoritesList, action.payload]
+            }
+
+        case types.moviesRemoveFromFavoritesList:
+            return {
+                ...state,
+                favoritesList: state.favoritesList.filter(movie => movie.id !== action.payload)
+            }
+
+        case types.moviesResetFavoritesList:
+            return {
+                ...state,
+                favoritesList: []
             }
             
         default:

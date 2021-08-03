@@ -55,14 +55,14 @@ export const getUsers = async () => {
         return users;
 
     query.forEach(doc => {
-        if (doc.data().userName !== loggedUser || doc.data().userName !== "admin1"){
+        if (doc.data().userName !== loggedUser || doc.data().userName !== "admin1") {
             const user = {
                 ...doc.data(),
                 id: doc.id
             }
 
-            const {password, ...userWithoutPass} = user;
-            
+            const { password, ...userWithoutPass } = user;
+
             users.push(userWithoutPass);
         }
     });
@@ -71,22 +71,44 @@ export const getUsers = async () => {
 }
 
 export const deleteUserById = async (id) => {
-    try{
+    try {
         await database.collection('users').doc(id).delete();
         return true;
-    } catch (e){
+    } catch (e) {
         return false;
     }
 }
 
-export const makeOrNotAdmin = async (id, role) => { 
+export const addMovieToFavorites = async (userId, movie) => {
+
+    try {
+        let user = await database.collection('users').doc(userId).get();
+        
+        let list = user.data().favoritesList;
+        list.push(movie);
+        
+        
+        let newUser = user.data();
+        newUser.favoritesList = list;
+
+        await database.collection('users').doc(userId).set(newUser);
+
+        return true;
+    } catch (e) {
+        console.log(e);
+    }
+
+    return false;
+}
+
+export const makeOrNotAdmin = async (id, role) => {
 
     const newRole = (role === types.roleAdmin) ? types.roleUser : role;
 
-    try{
-        await database.collection('users').doc(id).update({role: newRole});
+    try {
+        await database.collection('users').doc(id).update({ role: newRole });
         return true;
-    } catch (e){
+    } catch (e) {
         return false;
     }
 }
