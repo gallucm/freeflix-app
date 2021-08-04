@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { startSaveCode } from '../../actions/Code';
@@ -9,25 +7,18 @@ import { Loading } from '../ui/Loading';
 
 export const GenerateCode = () => {
 
-    const { loading, message } = useSelector(state => state.ui);
+    const { loading } = useSelector(state => state.ui);
     const { codeGenerated } = useSelector(state => state.code);
 
-    const [code, setCode] = useState('');
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (codeGenerated && !loading)
-            setCode('');
-    }, [codeGenerated, loading])
-
-    const handleGenerate = () => {
-        setCode(randomeCode());
-    }
-
-    const handleSave = (e) => {
+    const handleGenerate = (e) => {
         e.preventDefault();
-        dispatch(startSaveCode(code));
+
+        const generated = randomeCode();
+
+        dispatch(startSaveCode(generated));
     }
 
     return (
@@ -36,27 +27,20 @@ export const GenerateCode = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="section-content">
-                            <form onSubmit={handleSave}>
+                            <form onSubmit={handleGenerate}>
                                 <div className="form-group codes-input">
-                                    <input type="text" className="form-control shadow-none codes-input-code" name="code" value={code} disabled />
+                                    {(codeGenerated && !loading) && <Alert />}
 
-                                    {message && <Alert/>}
+                                    <button type="submit" className="btn shadow-none btn-wide-freeflix">
+                                        {loading ? <Loading /> : 
+                                            <>
+                                                <i className="fas fa-random me-2"></i>
+                                                Generar
+                                            </>
+                                        }
 
-                                    <button type="button" className="btn shadow-none btn-wide-freeflix" onClick={handleGenerate}>
-                                        <i className="fas fa-random me-2"></i>
-                                        Generar
                                     </button>
                                 </div>
-                                <button type="submit" className="btn shadow-none btn-wide-freeflix" disabled={!code || loading}>
-                                    {loading && <Loading />}
-
-                                    {!loading &&
-                                        <div>
-                                            <i className="fas fa-save me-2"></i>
-                                            Guardar
-                                        </div>
-                                    }
-                                </button>
                             </form>
                         </div>
                     </div>

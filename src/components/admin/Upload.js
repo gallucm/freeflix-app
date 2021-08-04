@@ -65,7 +65,7 @@ export const Upload = () => {
                                     
                                     <select className="form-select shadow-none upload-select-gender" aria-label="Default select example" name="gender" autoComplete="off" value={gender} onChange={handleInputChange} placeholder="Seleccione un genero" required>
                                         {genders.map(gender => ( 
-                                            <option value={gender}>{gender}</option>
+                                            <option key={gender} value={gender}>{gender}</option>
                                         ))}
                                     </select>
 

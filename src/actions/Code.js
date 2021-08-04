@@ -1,20 +1,21 @@
-import { deleteCodeById, getCodes, saveCode } from '../helpers/Code';
+import { deleteCodeById, getCodes, randomeCode, saveCode } from '../helpers/Code';
 import { types } from '../types/types';
 import { finishLoading, setError, setMessage, startLoading } from './ui';
 
 export const startSaveCode = (code) => {
     return async (dispatch) => {
         dispatch(startLoading());
+
         const isSaved = await saveCode(code);
         
-        dispatch(finishLoading());
-
         if (isSaved){
             dispatch(setCodeCreated());
-            dispatch(setMessage('Código generado correctamente. Ya puede ser utilizado.'));
+            dispatch(setMessage('Código de invitación: ' + code + ' generado correctamente.'));
         } else {
             dispatch(setError('Error al generar código de invitación.'));
         }
+
+        dispatch(finishLoading());
     }
 }
 
@@ -36,19 +37,13 @@ export const startGetCodes = () => {
 
 export const startDeleteCode = (id) => {
     return async (dispatch) => {
-        dispatch(startLoading());
-
         const isDeleted = await deleteCodeById(id);
 
         if (isDeleted){
-            dispatch(removeCodes()); // TODO: Verificar si hace falta esta función
             dispatch(startGetCodes());
-            return;
-        }
-        else{
+        } else{
             dispatch(setError('Ha ocurrido un error al eliminar el código.'));
             dispatch(finishLoading());
-            return;
         }
     }  
 }

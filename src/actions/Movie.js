@@ -153,18 +153,10 @@ export const startUnsetSearchValue = () => {
 
 export const startAddMovieToFavorites = (userId, movie) => {
     return async (dispatch) => {
-        dispatch(startLoading());
-
         const movieAdded = await addMovieToFavorites(userId, movie);
 
-        if (movieAdded){
-            //dispatch(addMovieToFavorite(movie)); // TODO: verificar si hace falta cargarlo en el storage 
-        }
-        else{
+        if (!movieAdded)
             dispatch(setError('Ha ocurrido un error al añadir la pelicula a favoritos.'));
-        }
-
-        dispatch(finishLoading());
     }
 }
 

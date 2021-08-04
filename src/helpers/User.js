@@ -81,6 +81,7 @@ export const deleteUserById = async (id) => {
 
 export const addMovieToFavorites = async (userId, movie) => {
 
+    // TODO: chequear de mejorar este metodo
     try {
         let user = await database.collection('users').doc(userId).get();
         
