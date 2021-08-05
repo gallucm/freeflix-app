@@ -1,6 +1,6 @@
-import { deleteCodeById, getCodes, randomeCode, saveCode } from '../helpers/Code';
+import { deleteCodeById, getCodes, saveCode } from '../helpers/Code';
 import { types } from '../types/types';
-import { finishLoading, setError, setMessage, startLoading } from './ui';
+import { finishLoading, setError, startLoading } from './ui';
 
 export const startSaveCode = (code) => {
     return async (dispatch) => {
@@ -10,7 +10,7 @@ export const startSaveCode = (code) => {
         
         if (isSaved){
             dispatch(setCodeCreated());
-            dispatch(setMessage('Código de invitación: ' + code + ' generado correctamente.'));
+            dispatch(startGetCodes());
         } else {
             dispatch(setError('Error al generar código de invitación.'));
         }
@@ -25,12 +25,11 @@ export const startGetCodes = () => {
         
         const codes = await getCodes();
 
-        if (codes){
+        if (codes)
             dispatch(setCodes(codes));
-        } else {
+        else 
             dispatch(setError('Error al obtener los códigos'));
-        }
-        
+                
         dispatch(finishLoading());
     }
 }

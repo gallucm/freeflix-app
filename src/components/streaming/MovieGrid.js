@@ -26,7 +26,7 @@ export const MovieGrid = ({movie}) => {
         <div className="movie-grid text-center animate__animated animate__zoomIn">
             <h2>{movie.title}</h2>
             <img src={movie.image} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected}/>
-            <button className="btn btn-danger" onClick={() => handleAddToFavorites(movie)}>+</button>
+            {/* <button className="btn btn-danger" onClick={() => handleAddToFavorites(movie)}>+</button> */}
         
         </div>
     )
