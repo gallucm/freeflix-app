@@ -30,6 +30,12 @@ export const codeReducer = (state = initialState, action) => {
                 ...state,
                 codes: []
             }
+
+        case types.codeRemoveByCode:
+            return {
+                ...state,
+                codes: state.codes.filter(code => code.code !== action.payload)
+            }
     
         default:
             return state;

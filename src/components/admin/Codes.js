@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { startGetCodes, startSaveCode } from '../../actions/Code';
+import { startSaveCode } from '../../actions/Code';
 import { randomeCode } from '../../helpers/Code';
+
 import { useCodes } from '../../hooks/useCodes';
+
 import { Loading } from '../ui/Loading';
 import { LoadingRed } from '../ui/LoadingRed';
 import { CodeGrid } from './CodeGrid';
@@ -35,29 +35,21 @@ export const Codes = () => {
 
                             {!loading &&
                                 <button type="button" className="btn shadow-none btn-freeflix mt-4" onClick={handleGenerate}>
-                                    {loading ? <Loading /> :
-                                        <>
-                                            <i className="fas fa-random me-2"></i>
-                                            Generar
-                                        </>
-                                    }
-
+                                    <>
+                                        <i className="fas fa-random me-2"></i>
+                                        Generar
+                                    </>
                                 </button>
                             }
-
                             {(!loading && codes) &&
-                                <div className="codes-list">
-                                    {
-                                        codes.map(code => (
-                                            <CodeGrid code={code} key={code.id} />
-                                        ))
-                                    }
-                                </div>
-                            }
-
-                            {(!loading && codes.length === 0) &&
-                                <div className="mt-4">
-                                    <h4> No existen códigos de invitación </h4>
+                                <div>
+                                    <div className="codes-list mt-4">
+                                        {
+                                            codes.map(code => (
+                                                <CodeGrid code={code} key={code.id} />
+                                            ))
+                                        }
+                                    </div>
                                 </div>
                             }
                         </div>

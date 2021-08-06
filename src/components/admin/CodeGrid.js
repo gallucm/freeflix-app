@@ -8,22 +8,30 @@ export const CodeGrid = ({ code }) => {
 
     const dispatch = useDispatch();
 
-    const handleDeleteCode = (id) => {
-        dispatch(startDeleteCode(id));
+    const handleDeleteCode = (code) => {
+        dispatch(startDeleteCode(code));
     }
 
     return (
-        <div key={code.code}>
-            <>
-                {   
-                    (!loading) &&
-                    <h3 className={(code.used ? 'text-danger' : 'text-success')}>{code.code}
-                        <button type="button" className="btn btn-freeflix shadow-none ms-4" onClick={() => {handleDeleteCode(code.id)}} title="Eliminar">
-                            <i className="far fa-trash-alt"  style={{fontSize: '15px'}}></i>
+        <div key={code.code} className="mt-2">
+
+            {
+                (!loading) &&
+                <div className="row items-center">
+                    <div className="col-1">
+                        <span className={(code.used ? 'text-danger' : 'text-success col-10')} style={{ fontWeight: 'bold' }}>{code.code}
+                        </span>
+
+                    </div>
+                    <div className="col-1 ms-2">
+                        <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleDeleteCode(code) }} title="Eliminar">
+                            <i className="far fa-trash-alt" style={{ fontSize: '15px' }}></i>
                         </button>
-                    </h3> 
-                }
-            </>
+
+                    </div>
+                </div>
+            }
+
         </div>
     )
 }

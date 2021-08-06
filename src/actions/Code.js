@@ -34,16 +34,18 @@ export const startGetCodes = () => {
     }
 }
 
-export const startDeleteCode = (id) => {
+export const startDeleteCode = (code) => {
     return async (dispatch) => {
-        const isDeleted = await deleteCodeById(id);
+        dispatch(startLoading());
 
-        if (isDeleted){
-            dispatch(startGetCodes());
-        } else{
+        const isDeleted = await deleteCodeById(code.id);
+
+        if (isDeleted)
+            dispatch(removeCodeByCode(code.code));
+        else
             dispatch(setError('Ha ocurrido un error al eliminar el código.'));
-            dispatch(finishLoading());
-        }
+        
+        dispatch(finishLoading());
     }  
 }
 
@@ -62,4 +64,9 @@ const setCodes = (payload) => ({
 
 const removeCodes = () => ({
     type: types.codeRemove
-})
+});
+
+const removeCodeByCode = (payload) => ({
+    type: types.codeRemoveByCode,
+    payload
+});
