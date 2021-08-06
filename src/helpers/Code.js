@@ -26,17 +26,15 @@ export const saveCode = async (code) => {
 }
 
 export const getCodes = async () => {
-    const docsRef = await database.collection('codes').orderBy('used').get();
-
     const codes = [];
+
+    const docsRef = await database.collection('codes').orderBy('used').get();
     
     docsRef.forEach(doc => {
-        const code = {
+        codes.push({
             id: doc.id,
             ...doc.data()
-        }
-
-        codes.push(code);
+        });
     });
 
     return codes;
