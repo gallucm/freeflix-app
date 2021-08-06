@@ -16,10 +16,13 @@ export const saveCode = async (code) => {
 
     const codeSaved = await database.collection('codes').add(codeObject);
 
-    if (!codeSaved)
-        return;
+    if (!codeSaved.id)
+        return null;
 
-    return true;
+    return {
+        ...codeObject,
+        id: codeSaved.id,
+    };
 }
 
 export const getCodes = async () => {

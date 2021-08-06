@@ -6,15 +6,13 @@ export const startSaveCode = (code) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const isSaved = await saveCode(code);
-        
-        if (isSaved){
-            dispatch(setCodeCreated());
-            dispatch(startGetCodes());
-        } else {
-            dispatch(setError('Error al generar código de invitación.'));
-        }
+        const codeObject = await saveCode(code);
 
+        if (codeObject)
+            dispatch(addCode(codeObject));
+        else 
+            dispatch(setError('Error al generar código de invitación.'));
+        
         dispatch(finishLoading());
     }
 }
@@ -41,17 +39,13 @@ export const startDeleteCode = (code) => {
         const isDeleted = await deleteCodeById(code.id);
 
         if (isDeleted)
-            dispatch(removeCodeByCode(code.code));
+            dispatch(removeCode(code.code));
         else
             dispatch(setError('Ha ocurrido un error al eliminar el código.'));
         
         dispatch(finishLoading());
     }  
 }
-
-const setCodeCreated = () => ({
-    type: types.codeCreated
-});
 
 export const removeCodeCreated = () => ({
     type: types.codeRemoveCreated
@@ -62,11 +56,12 @@ const setCodes = (payload) => ({
     payload
 });
 
-const removeCodes = () => ({
-    type: types.codeRemove
+const removeCode = (payload) => ({
+    type: types.codeRemove,
+    payload
 });
 
-const removeCodeByCode = (payload) => ({
-    type: types.codeRemoveByCode,
+const addCode = (payload) => ({
+    type: types.codeAdd,
     payload
 });

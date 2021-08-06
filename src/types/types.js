@@ -47,8 +47,9 @@ export const types = {
     codeCreated: '[Code] created',
     codeRemoveCreated: '[Code] remove created',
     codeSetList: '[Code] set list',
+    codeRemoveAll: '[Code] remove all',
     codeRemove: '[Code] remove',
-    codeRemoveByCode: '[Code] remove by code',
+    codeAdd: '[Code] add',
 
     userSet: '[User] set',
     userRemove: '[User] remove'

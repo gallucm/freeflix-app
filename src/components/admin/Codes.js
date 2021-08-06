@@ -31,16 +31,16 @@ export const Codes = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="section-content">
-                            {loading && <LoadingRed />}
-
-                            {!loading &&
-                                <button type="button" className="btn shadow-none btn-freeflix mt-4" onClick={handleGenerate}>
+                            <button type="button" className="btn shadow-none btn-freeflix mt-4" onClick={handleGenerate} disabled={loading}>
+                                {loading && <Loading />}
+                                {!loading &&
                                     <>
                                         <i className="fas fa-random me-2"></i>
                                         Generar
                                     </>
-                                </button>
-                            }
+                                }
+                            </button>
+
                             {(!loading && codes) &&
                                 <div>
                                     <div className="codes-list mt-4">
