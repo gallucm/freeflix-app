@@ -5,7 +5,6 @@ import { randomeCode } from '../../helpers/Code';
 import { useCodes } from '../../hooks/useCodes';
 
 import { Loading } from '../ui/Loading';
-import { LoadingRed } from '../ui/LoadingRed';
 import { CodeGrid } from './CodeGrid';
 
 export const Codes = () => {

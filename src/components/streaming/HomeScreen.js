@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startUnsetGenderFilter } from '../../actions/Movie';
 
 import { Navbar } from '../ui/Navbar';
-import { CategoryFilters } from './CategoryFilters';
+// import { CategoryFilters } from './CategoryFilters';
 import { Movies } from './Movies';
 
 export const HomeScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { genderSelected } = useSelector(state => state.movies);
+    const { genderSelected, searchValue } = useSelector(state => state.movies);
 
     const handleUnsetGender = (e) => {
         e.preventDefault();
@@ -29,6 +29,14 @@ export const HomeScreen = () => {
                             <button type="button" className="btn shadow-none red-freeflix" onClick={handleUnsetGender}>
                                 <i className="fas fa-times"></i>
                             </button>
+                        </span>
+                    </div>
+                }
+
+                {(searchValue) &&
+                    <div className="text-center">
+                        <span>
+                            Título buscado: <strong>{searchValue}</strong>
                         </span>
                     </div>
                 }

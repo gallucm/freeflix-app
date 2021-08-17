@@ -41,14 +41,13 @@ export const makeAdmin = (id, role) => {
         dispatch(startLoading());
 
         const updated = await makeOrNotAdmin(id, role);
-
-        dispatch(finishLoading());
-
+        
         if (updated) {
             dispatch(getAllUsers());
         } else {
             dispatch(setError('Error al modificar el rol.'));
         }
+        dispatch(finishLoading());
     }
 }
         

@@ -1,35 +1,46 @@
-import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
-import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
+import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetGenderFilter, startUnsetSearchValue } from '../../actions/Movie';
 
 import { Logo } from './Logo';
 
 import { genders } from '../../helpers/genders';
+import { useEffect, useState } from 'react';
 
-export const Navbar = ({ showSearch = true }) => {
+export const Navbar = () => {
 
     const { userName } = useSelector(state => state.auth);
+    const { genderSelected} = useSelector(state => state.movies);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [search, setSearch] = useState('');
 
+    useEffect(() => {
+        if (genderSelected)
+            setSearch('');
+        
+     }, [genderSelected]);
+
     const handleInputChange = (e) => {
-        e.preventDefault();
+        e.preventDefault();   
 
         setSearch(e.target.value);
 
-        if (e.target.value)
+        if (e.target.value){
+            dispatch(startUnsetGenderFilter());
             dispatch(startGetMoviesByTitle(e.target.value));
-        else
-            dispatch(startUnsetSearchValue());
+        } else {
+           dispatch(startUnsetSearchValue());
+        }
     }
 
     const handleGetMoviesByGender = (e) => {
         e.preventDefault();
+
+        dispatch(startUnsetSearchValue());
 
         const gender = e.target.innerHTML;
         dispatch(startGetMoviesByGender(gender));
@@ -75,11 +86,9 @@ export const Navbar = ({ showSearch = true }) => {
 
                         <span className="navbar-menu-option">Mi lista</span>
                     </div>
-                    {/* {showSearch &&
-                        <input type="text" className="form-control w-25 me-5 shadow-none focus-none text-center" name="searchValue" value={search} onChange={handleInputChange} placeholder="Busca un título..."/>  
-                    } */}
 
                     <div className="d-flex">
+                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete={false}/>
                         <span className="navbar-brand">{userName}</span>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>

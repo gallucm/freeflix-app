@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { startAddMovieToFavorites, startSetMovieSelected } from '../../actions/Movie';
+import { startSetMovieSelected } from '../../actions/Movie';
 
 export const MovieGrid = ({movie}) => {
 
@@ -14,13 +14,13 @@ export const MovieGrid = ({movie}) => {
         history.push('/m/' + movie.id);
     }
 
-    const handleAddToFavorites = (movie) => {
-        const userId = localStorage.getItem('user-id');
+    // const handleAddToFavorites = (movie) => {
+    //     const userId = localStorage.getItem('user-id');
 
-        if (userId) {
-            dispatch(startAddMovieToFavorites(userId, movie));
-        }
-    }
+    //     if (userId) {
+    //         dispatch(startAddMovieToFavorites(userId, movie));
+    //     }
+    // }
     
     return (
         <div className="movie-grid text-center animate__animated animate__zoomIn">

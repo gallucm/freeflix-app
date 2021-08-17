@@ -104,7 +104,11 @@ export const addMovieToFavorites = async (userId, movie) => {
 
 export const makeOrNotAdmin = async (id, role) => {
 
-    const newRole = (role === types.roleAdmin) ? types.roleUser : role;
+    console.log(role);
+
+    const newRole = role === types.roleAdmin ? types.roleUser : types.roleAdmin;
+
+    console.log(newRole);
 
     try {
         await database.collection('users').doc(id).update({ role: newRole });

@@ -43,7 +43,7 @@ export const Users = () => {
                                                     <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleMakeAdmin(user.id, user.role) }}
                                                         title={(user.role !== types.roleAdmin) ? 'Dar permisos de administrador' : 'Quitar permisos de administrador'}
                                                     >
-                                                        <i class={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{ fontSize: '15px' }}></i>
+                                                        <i className={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{ fontSize: '15px' }}></i>
                                                     </button>
                                                 </div>
                                                 <div className="col-1">

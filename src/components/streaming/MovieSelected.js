@@ -40,7 +40,7 @@ export const MovieSelected = () => {
     return (
         <>
             <LogoNavbarAlone />
-            {(movieSelected == null) && <Loading/>}
+            {(!movieSelected) && <Loading/>}
 
             {(movieSelected) && 
                 <div className="container text-center animate__animated animate__fadeIn">

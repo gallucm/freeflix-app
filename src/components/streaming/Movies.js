@@ -9,7 +9,7 @@ export const Movies = () => {
 
     useMovies();
 
-    const { movies } = useSelector(state => state.movies);
+    const { movies, searchValue } = useSelector(state => state.movies);
     const { loading } = useSelector(state => state.ui);
 
     return (
@@ -17,7 +17,7 @@ export const Movies = () => {
             {(loading) &&
                 <LoadingRed />}
 
-            {(!loading && movies) &&
+            {(!loading && movies && movies.length > 0) &&
                 <div className="movies-container mt-4">
                     {
                         movies.map(movie => (
@@ -31,9 +31,16 @@ export const Movies = () => {
 
             {(!loading && movies.length === 0) &&
                 <div className="mt-4 text-center">
-                    <h4> En este momento no hay títulos disponibles. </h4>
+                    {!searchValue &&
+                        <h4> En este momento no hay títulos disponibles. </h4>
+                    }    
+
+                    {searchValue &&
+                        <h4> No se han encontrado títulos.</h4>
+                    }
                 </div>
             }
+            
         </>
     )
 }

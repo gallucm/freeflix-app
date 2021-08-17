@@ -132,14 +132,12 @@ export const startSetMovieSelected = (movie) => {
 export const startGetMovieById = (id) => {
     return async (dispatch) => {
         const movie = await getMovieById(id);
-
-        if (movie){
-            dispatch(setMovies(movie));
-            return;
-        }
-        else{
+        if (movie)
+            dispatch(setMovieSelected(movie));
+        else
             dispatch(setMovieNotFound());
-        }
+
+        dispatch(finishLoading());
     }
 }
 
@@ -160,10 +158,10 @@ export const startAddMovieToFavorites = (userId, movie) => {
     }
 }
 
-const addMovieToFavorite = (payload) => ({
-    type: types.moviesAddToFavoritesList,
-    payload
-});
+// const addMovieToFavorite = (payload) => ({
+//     type: types.moviesAddToFavoritesList,
+//     payload
+// });
 
 const startUnsetMovieSelected = () => {
     return (dispatch) => {
