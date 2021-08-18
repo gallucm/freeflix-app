@@ -96,19 +96,20 @@ export const startGetMoviesByGender = (gender) => {
 
 export const startGetMoviesByTitle = (title) => {
     return async (dispatch) => {
-        dispatch(setSearchValue(title));
-
         dispatch(startLoading());
+
+        dispatch(unsetGender());
+
+        dispatch(setSearchValue(title));
 
         const movies = await getMoviesByTitle(title);
 
-        dispatch(finishLoading());
-
-        if (movies){
+        if (movies)
             dispatch(setMovies(movies));
-        } else {
+        else 
             dispatch(setError('Ha ocurrido un error al obtener las peliculas.'));
-        }
+        
+        dispatch(finishLoading());
     }
 }
 
@@ -143,9 +144,11 @@ export const startGetMovieById = (id) => {
 
 export const startUnsetSearchValue = () => {
     return (dispatch) => {
-        dispatch(unsetSearchValue());
-
+        dispatch(startLoading());
+        
         dispatch(startGetMovies());
+
+        dispatch(unsetSearchValue());
     }
 }
 
@@ -209,7 +212,7 @@ const setGender = (payload) => ({
     payload
 });
 
-const unsetGender = () => ({
+export const unsetGender = () => ({
     type: types.moviesUnsetGender
 });
 

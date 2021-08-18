@@ -55,7 +55,10 @@ export const getUsers = async () => {
         return users;
 
     query.forEach(doc => {
-        if (doc.data().userName !== loggedUser || doc.data().userName !== "admin1") {
+
+        const userDoc = doc.data().userName;
+
+        if (userDoc !== loggedUser && userDoc !== "admin1"){
             const user = {
                 ...doc.data(),
                 id: doc.id

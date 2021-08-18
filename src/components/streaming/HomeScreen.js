@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startUnsetGenderFilter } from '../../actions/Movie';
 
 import { Navbar } from '../ui/Navbar';
-// import { CategoryFilters } from './CategoryFilters';
 import { Movies } from './Movies';
 
 export const HomeScreen = () => {

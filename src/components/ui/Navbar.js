@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
-import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetGenderFilter, startUnsetSearchValue } from '../../actions/Movie';
+import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
 
 import { Logo } from './Logo';
 
@@ -29,8 +29,7 @@ export const Navbar = () => {
 
         setSearch(e.target.value);
 
-        if (e.target.value){
-            dispatch(startUnsetGenderFilter());
+        if (e.target.value){            
             dispatch(startGetMoviesByTitle(e.target.value));
         } else {
            dispatch(startUnsetSearchValue());
@@ -88,7 +87,7 @@ export const Navbar = () => {
                     </div>
 
                     <div className="d-flex">
-                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete={false}/>
+                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off"/>
                         <span className="navbar-brand">{userName}</span>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>
