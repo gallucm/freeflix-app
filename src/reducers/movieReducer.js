@@ -70,6 +70,12 @@ export const movieReducer = (state = initialState, action) => {
                 searchValue: null
             }
 
+        case types.moviesSetFavorites:
+            return {
+                ...state,
+                favoritesList: action.payload
+            }
+
         case types.moviesAddToFavoritesList:
             return {
                 ...state,

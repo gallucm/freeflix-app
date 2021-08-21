@@ -1,4 +1,4 @@
-import { database } from "../firebase/firebase-config";
+import { database, firebase } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { hashPassword } from "./bcrypt";
 import { setCodeUsed } from "./Code";
@@ -58,7 +58,7 @@ export const getUsers = async () => {
 
         const userDoc = doc.data().userName;
 
-        if (userDoc !== loggedUser && userDoc !== "admin1"){
+        if (userDoc !== loggedUser && userDoc !== "admin1") {
             const user = {
                 ...doc.data(),
                 id: doc.id
@@ -78,45 +78,56 @@ export const deleteUserById = async (id) => {
         await database.collection('users').doc(id).delete();
         return true;
     } catch (e) {
+        console.log(e);
         return false;
     }
 }
 
 export const addMovieToFavorites = async (userId, movie) => {
-
-    // TODO: chequear de mejorar este metodo
     try {
-        let user = await database.collection('users').doc(userId).get();
-        
-        let list = user.data().favoritesList;
-        list.push(movie);
-        
-        
-        let newUser = user.data();
-        newUser.favoritesList = list;
-
-        await database.collection('users').doc(userId).set(newUser);
-
+        await database.collection('users').doc(userId).update({ favoritesList: firebase.firestore.FieldValue.arrayUnion(movie) });
         return true;
     } catch (e) {
         console.log(e);
+        return false;
     }
+}
 
-    return false;
+export const removieMovieFromFavorites = async (userId, movie) => {
+    try {
+        await database.collection('users').doc(userId).update({ favoritesList: firebase.firestore.FieldValue.arrayRemove(movie) });
+        return true;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }   
+}
+
+export const getFavoritesForUser = async (userId) => {
+    try {
+        const favorites = [];
+
+        const user = await database.collection('users').doc(userId).get();
+
+        user.data().favoritesList.forEach(movie => {
+            favorites.push(movie);
+        });
+
+        return favorites;
+    } catch (e) {
+        console.log(e);
+        return null;
+    }
 }
 
 export const makeOrNotAdmin = async (id, role) => {
-
-    console.log(role);
-
     const newRole = role === types.roleAdmin ? types.roleUser : types.roleAdmin;
-
-    console.log(newRole);
 
     try {
         await database.collection('users').doc(id).update({ role: newRole });
         return true;
     } catch (e) {
+        console.log(e);
         return false;
     }
 }

@@ -1,5 +1,5 @@
 import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
-import { addMovieToFavorites } from '../helpers/User';
+import { addMovieToFavorites, getFavoritesForUser, removieMovieFromFavorites } from '../helpers/User';
 
 import { types } from '../types/types';
 import { setError, setMessage } from './ui';
@@ -40,18 +40,33 @@ export const startUpload = (movie, image, video) => {
 
 export const startGetMovies = () => {
     return async (dispatch) => {        
+        dispatch(startLoading());
+
         dispatch(unsetSearchValue());
         dispatch(unsetGender());
         dispatch(unsetMovieNotFound());
-        dispatch(startUnsetMovieSelected());
-        
-        dispatch(startLoading());
+        dispatch(startUnsetMovieSelected());        
 
         const movies = await getMovies();
 
         if (movies){
             dispatch(setMovies(movies));
         }
+
+        dispatch(finishLoading());
+    }
+}
+
+export const startGetFavorites = (userId) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const favorites = await getFavoritesForUser(userId);
+
+        if (favorites)
+            dispatch(setFavorites(favorites));
+        else
+            dispatch(setError('Ha ocurrido un error al obtener los favoritos.'));
 
         dispatch(finishLoading());
     }
@@ -156,22 +171,46 @@ export const startAddMovieToFavorites = (userId, movie) => {
     return async (dispatch) => {
         const movieAdded = await addMovieToFavorites(userId, movie);
 
-        if (!movieAdded)
+        if (movieAdded)
+            dispatch(addMovieToFavorite(movie));
+        else
             dispatch(setError('Ha ocurrido un error al añadir la pelicula a favoritos.'));
     }
 }
 
-// const addMovieToFavorite = (payload) => ({
-//     type: types.moviesAddToFavoritesList,
-//     payload
-// });
+export const startRemoveMovieFromFavorites = (userId, movie) => {
+    return async (dispatch) => {
+        const movieRemoved = await removieMovieFromFavorites(userId, movie);
+
+        if (movieRemoved)
+            dispatch(removeMovieFromFavorite(movie.id));
+        else
+            dispatch(setError('Ha ocurrido un error al eliminar la pelicula de favoritos.'));
+    }
+}
+
+const setFavorites = (payload) => ({
+    type: types.moviesSetFavorites,
+    payload
+});
+
+const addMovieToFavorite = (payload) => ({
+    type: types.moviesAddToFavoritesList,
+    payload
+});
+
+const removeMovieFromFavorite = (payload) => ({
+    type: types.moviesRemoveFromFavoritesList,
+    payload
+});
+
 
 const startUnsetMovieSelected = () => {
     return (dispatch) => {
         dispatch(unsetMovieSelected());
         localStorage.removeItem('movieSelected');
     }
-}
+};
 
 const setSearchValue = (payload) => ({
     type: types.moviesSetSearchValue,

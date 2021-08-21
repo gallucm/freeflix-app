@@ -12,24 +12,24 @@ export const registerUser = (user) => {
         const samePasswords = (user.password === user.password2);
 
         if (!samePasswords){
-            dispatch(finishLoading());
             dispatch(setError('Las contraseñas ingresadas no coinciden.'));
+            dispatch(finishLoading());
             return;
         }      
-        
+
         const codeValid = await isCodeValid(user.code);
 
         if (!codeValid){
-            dispatch(finishLoading());
             dispatch(setError('El código ingresado no es válido.'));
+            dispatch(finishLoading());
             return;
         }
         
         const emailExists = await isEmailTaken(user.email);
 
         if (emailExists){
-            dispatch(finishLoading());
             dispatch(setError('El email ingresado ya está en uso.'));
+            dispatch(finishLoading());
             return;
         }
 
@@ -55,16 +55,16 @@ export const loginUser = (email, password) => {
         const user = await searchByEmail(email);
 
         if (!user){
-            dispatch(finishLoading());
             dispatch(setError('Usuario o contraseña incorrecta.'));
+            dispatch(finishLoading());
             return;
         }
 
         const passwordCorrect = comparePassword(password, user.password);
 
         if (!passwordCorrect){
-            dispatch(finishLoading());
             dispatch(setError('Usuario o contraseña incorrecta.'));
+            dispatch(finishLoading());
             return;
         }
 

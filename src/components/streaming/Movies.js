@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import { MovieGrid } from './MovieGrid';
 import { LoadingRed } from '../ui/LoadingRed';
 import { useMovies } from '../../hooks/useMovies';
+import { useFavorites } from '../../hooks/useFavorites';
 
 export const Movies = () => {
 
     useMovies();
+    useFavorites();
 
     const { movies, searchValue } = useSelector(state => state.movies);
     const { loading } = useSelector(state => state.ui);

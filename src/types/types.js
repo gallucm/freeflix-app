@@ -22,6 +22,7 @@ export const types = {
     moviesUnsetGender: '[movies] unset gender selected',
     moviesSetSearchValue: '[movies] set search value',
     moviesUnsetSearchValue: '[movies] unset search value',
+    moviesSetFavorites: '[movies] set favorites',
     moviesAddToFavoritesList: '[movies] add to favorites list',
     moviesRemoveFromFavoritesList: '[movies] remove from favoritesList',
     moviesResetFavoritesList: '[movies] reset favoritesList',
