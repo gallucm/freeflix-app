@@ -7,11 +7,12 @@ import { Logo } from './Logo';
 
 import { genders } from '../../helpers/genders';
 import { useEffect, useState } from 'react';
+import { getLoggedUser } from '../../helpers/User';
 
 export const Navbar = () => {
 
-    const { userName } = useSelector(state => state.auth);
-    const { genderSelected} = useSelector(state => state.movies);
+    const { genderSelected } = useSelector(state => state.movies);
+    const loggedUser = getLoggedUser();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -21,18 +22,18 @@ export const Navbar = () => {
     useEffect(() => {
         if (genderSelected)
             setSearch('');
-        
-     }, [genderSelected]);
+
+    }, [genderSelected]);
 
     const handleInputChange = (e) => {
-        e.preventDefault();   
+        e.preventDefault();
 
         setSearch(e.target.value);
 
-        if (e.target.value){            
+        if (e.target.value) {
             dispatch(startGetMoviesByTitle(e.target.value));
         } else {
-           dispatch(startUnsetSearchValue());
+            dispatch(startUnsetSearchValue());
         }
     }
 
@@ -87,8 +88,8 @@ export const Navbar = () => {
                     </div>
 
                     <div className="d-flex">
-                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off"/>
-                        <span className="navbar-brand">{userName}</span>
+                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
+                        <span className="navbar-brand">{loggedUser.userName}</span>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>
                         </button>

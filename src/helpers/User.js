@@ -83,9 +83,16 @@ export const deleteUserById = async (id) => {
     }
 }
 
-export const addMovieToFavorites = async (userId, movie) => {
+export const addOrRemoveFavorite = async (movie, action) => {
+
+    const userId = getLoggedUser().id;
+
     try {
-        await database.collection('users').doc(userId).update({ favoritesList: firebase.firestore.FieldValue.arrayUnion(movie) });
+        if (action === "ADD")
+            await database.collection('users').doc(userId).update({ favoritesList: firebase.firestore.FieldValue.arrayUnion(movie) });
+        else if (action === "REMOVE")
+            await database.collection('users').doc(userId).update({ favoritesList: firebase.firestore.FieldValue.arrayRemove(movie) });
+
         return true;
     } catch (e) {
         console.log(e);
@@ -130,4 +137,8 @@ export const makeOrNotAdmin = async (id, role) => {
         console.log(e);
         return false;
     }
+}
+
+export const getLoggedUser = () => {
+    return JSON.parse(localStorage.getItem('loggedUser'));
 }

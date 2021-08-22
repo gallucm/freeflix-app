@@ -8,12 +8,21 @@ export const useFavorites = () => {
     const dispatch = useDispatch();
 
     const getUserId = () => {
-        const userId = localStorage.getItem("user-id");
-        return userId;
+        const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+        if(user)
+            return user.id;
+        
+        return null;
     }
     
     useEffect(() => {
-        dispatch(startGetFavorites(getUserId()));
+
+        const userId = getUserId();
+
+        if (userId) {
+            dispatch(startGetFavorites(userId));
+        }
     }, [dispatch]);
     
 }

@@ -47,6 +47,7 @@ export const isCodeValid = async (code) => {
 }
 
 export const setCodeUsed = async (code) => {
+    //TODO: intentar optimizar el metodo
     const query = await database.collection('codes').where("code", "==", Number(code)).get();
 
     const id = query.docs[0].id;

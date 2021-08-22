@@ -19,7 +19,8 @@ import { types } from '../types/types';
 
 export const AppRouter = () => {
 
-    const { checking, id, role } = useSelector(state => state.auth);
+    const { checking, loggedUser } = useSelector(state => state.auth);
+
 
     const dispatch = useDispatch();
 
@@ -35,13 +36,13 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <PublicRoute exact path="/login" isAuthenticated={ !!id} component={LoginScreen}></PublicRoute>
-                    <PublicRoute exact path="/register" isAuthenticated={ !!id} component={RegisterScreen}></PublicRoute>
+                    <PublicRoute exact path="/login" isAuthenticated={ loggedUser != null ? true : false} component={LoginScreen}></PublicRoute>
+                    <PublicRoute exact path="/register" isAuthenticated={ loggedUser != null ? true : false} component={RegisterScreen}></PublicRoute>
 
-                    <AdminRoute exact path="/admin" isAdmin={ (role === types.roleAdmin) ? true : false } component={AdminScreen}></AdminRoute> 
+                    <AdminRoute exact path="/admin" isAdmin={ loggedUser != null && loggedUser.role === types.roleAdmin ? true : false } component={AdminScreen}></AdminRoute> 
 
-                    <PrivateRoute exact path="/m/:id" isAuthenticated={ !!id } component={MovieSelected}></PrivateRoute> 
-                    <PrivateRoute exact path="/" isAuthenticated={ !!id } component={HomeScreen}></PrivateRoute> 
+                    <PrivateRoute exact path="/m/:id" isAuthenticated={loggedUser != null ? true : false} component={MovieSelected}></PrivateRoute> 
+                    <PrivateRoute exact path="/" isAuthenticated={loggedUser != null ? true : false} component={HomeScreen}></PrivateRoute> 
 
                     <Redirect to="/login" />
                 </Switch>

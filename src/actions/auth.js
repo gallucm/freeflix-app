@@ -11,23 +11,23 @@ export const registerUser = (user) => {
 
         const samePasswords = (user.password === user.password2);
 
-        if (!samePasswords){
+        if (!samePasswords) {
             dispatch(setError('Las contraseñas ingresadas no coinciden.'));
             dispatch(finishLoading());
             return;
-        }      
+        }
 
         const codeValid = await isCodeValid(user.code);
 
-        if (!codeValid){
+        if (!codeValid) {
             dispatch(setError('El código ingresado no es válido.'));
             dispatch(finishLoading());
             return;
         }
-        
+
         const emailExists = await isEmailTaken(user.email);
 
-        if (emailExists){
+        if (emailExists) {
             dispatch(setError('El email ingresado ya está en uso.'));
             dispatch(finishLoading());
             return;
@@ -37,11 +37,11 @@ export const registerUser = (user) => {
 
         const isCreated = await createUser(userClean, user.code);
 
-        if (isCreated){
+        if (isCreated) {
             dispatch(userCreated());
             dispatch(setMessage('Usuario creado correctamente. Ya puede iniciar sesión'));
         }
-        else 
+        else
             dispatch(setError('Ha ocurrido un error al crear el usuario.'));
 
         dispatch(finishLoading());
@@ -54,7 +54,7 @@ export const loginUser = (email, password) => {
 
         const user = await searchByEmail(email);
 
-        if (!user){
+        if (!user) {
             dispatch(setError('Usuario o contraseña incorrecta.'));
             dispatch(finishLoading());
             return;
@@ -62,48 +62,45 @@ export const loginUser = (email, password) => {
 
         const passwordCorrect = comparePassword(password, user.password);
 
-        if (!passwordCorrect){
+        if (!passwordCorrect) {
             dispatch(setError('Usuario o contraseña incorrecta.'));
             dispatch(finishLoading());
             return;
         }
+        
 
-        dispatch(login(user.userName, user.id, user.role));
-        setSesionStorage(user.userName, user.id, user.role);
-        dispatch(finishLoading());        
+        const userClean = {
+            userName: user.userName,
+            id: user.id,
+            role: user.role
+        }
+
+        setSesionStorage(userClean);
+        dispatch(login(userClean));
+        dispatch(finishLoading());
     }
 }
 
 export const startChecking = () => {
     return async (dispatch) => {
 
-        const id = localStorage.getItem('user-id');
-        const name = localStorage.getItem('userName');
-        const role = localStorage.getItem('rs');
+        const user = localStorage.getItem('loggedUser');
 
-        if (id && name)
-            dispatch(login(name, id, role));  
-            
-        dispatch(checkingFinish());    
+        if (user)
+            dispatch(login(user));
+
+        dispatch(checkingFinish());
     }
 }
 
-const setSesionStorage = (userName, id, role) => {
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('user-id', id);
-    localStorage.setItem('rs', role);
+const setSesionStorage = (user) => {
+    localStorage.setItem('loggedUser', JSON.stringify(user));
 }
 
-const login = (userName, id, role) => {
-    return {
-        type: types.authLogin,
-        payload: {
-            userName,
-            id,
-            role
-        }
-    }
-}
+const login = (payload) => ({
+    type: types.authLogin,
+    payload
+});
 
 export const startLogout = () => {
     return async (dispatch) => {

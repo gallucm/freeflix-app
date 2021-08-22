@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { startAddMovieToFavorites, startRemoveMovieFromFavorites, startSetMovieSelected } from '../../actions/Movie';
+import { startAddOrRemoveFavorite, startSetMovieSelected } from '../../actions/Movie';
 
 export const MovieGrid = ({ movie }) => {
 
@@ -27,25 +27,15 @@ export const MovieGrid = ({ movie }) => {
         history.push('/m/' + movie.id);
     }
 
-    const handleAddToFavorites = (movie) => {
-        const userId = localStorage.getItem('user-id');
-
-        if (userId) {
-            dispatch(startAddMovieToFavorites(userId, movie));
-            setIsFavorite(true);
-        }
+    const handleAdd = (movie) => {
+       dispatch(startAddOrRemoveFavorite(movie, "ADD"));
+       setIsFavorite(true);
     }
 
-    const handleDeleteFavorite = (movie) => {
-        const userId = localStorage.getItem('user-id');
-
-        if (userId) {
-            dispatch(startRemoveMovieFromFavorites(userId, movie));
-            setIsFavorite(false);
-        }        
-    }
-
-
+    const handleRemove = (movie) => {
+        dispatch(startAddOrRemoveFavorite(movie, "REMOVE"));
+        setIsFavorite(false);
+     }
 
     return (
         <div className="movie-grid text-center animate__animated animate__zoomIn">
@@ -54,7 +44,7 @@ export const MovieGrid = ({ movie }) => {
                 <img src={movie.image} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected} />
                 <div className="overlay"></div>
                 <button type="button" className="btn btn-danger button" onClick={() => { 
-                    isFavorite ? handleDeleteFavorite(movie) : handleAddToFavorites(movie);
+                    isFavorite ? handleRemove(movie) : handleAdd(movie);
                 }}
                     title={isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}>
                     {isFavorite ? <i className="fa fa-check"></i> : <i className="fas fa-star"></i>}
