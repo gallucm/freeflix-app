@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -16,11 +16,11 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { AdminRoute } from './AdminRoute';
 import { useAdmin } from '../hooks/useAdmin';
+import { MyList } from '../components/streaming/MyList';
 
 export const AppRouter = () => {
 
     const { checking, loggedUser } = useSelector(state => state.auth);
-
 
     const dispatch = useDispatch();
     const isAdmin = useAdmin();
@@ -42,6 +42,7 @@ export const AppRouter = () => {
 
                     <AdminRoute exact path="/admin" isAdmin={ isAdmin } component={AdminScreen}></AdminRoute> 
 
+                    <PrivateRoute exact path="/my-list" isAuthenticated={loggedUser != null ? true : false} component={MyList}></PrivateRoute>
                     <PrivateRoute exact path="/m/:id" isAuthenticated={loggedUser != null ? true : false} component={MovieSelected}></PrivateRoute> 
                     <PrivateRoute exact path="/" isAuthenticated={loggedUser != null ? true : false} component={HomeScreen}></PrivateRoute> 
 

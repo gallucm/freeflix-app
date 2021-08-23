@@ -44,6 +44,8 @@ export const Navbar = () => {
 
         const gender = e.target.innerHTML;
         dispatch(startGetMoviesByGender(gender));
+
+        history.push('/');
     }
 
     const handleLogout = (e) => {
@@ -53,6 +55,10 @@ export const Navbar = () => {
 
     const handleHome = () => {
         history.push('/');
+    }
+
+    const handleMyList = () => {
+        history.push('/my-list');
     }
 
     return (
@@ -84,7 +90,7 @@ export const Navbar = () => {
                             </ul>
                         </div>
 
-                        <span className="navbar-menu-option">Mi lista</span>
+                        <span className="navbar-menu-option" onClick={handleMyList}>Mi lista</span>
                     </div>
 
                     <div className="d-flex">

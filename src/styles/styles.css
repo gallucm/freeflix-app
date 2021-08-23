@@ -259,7 +259,8 @@ main {
 
 /* HomeScreen */
 
-.home-container {
+.home-container
+.mylist-container {
     margin-top: 2em !important;
 }
 
