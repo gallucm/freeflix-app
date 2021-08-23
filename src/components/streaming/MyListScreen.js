@@ -1,7 +1,7 @@
 import { Navbar } from '../ui/Navbar';
 import { Favorites } from './Favorites';
 
-export const MyList = () => {
+export const MyListScreen = () => {
     return (
         <>
             <Navbar allowed={false} />

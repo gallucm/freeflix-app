@@ -16,7 +16,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { AdminRoute } from './AdminRoute';
 import { useAdmin } from '../hooks/useAdmin';
-import { MyList } from '../components/streaming/MyList';
+import { MyListScreen } from '../components/streaming/MyListScreen';
 
 export const AppRouter = () => {
 
@@ -42,7 +42,7 @@ export const AppRouter = () => {
 
                     <AdminRoute exact path="/admin" isAdmin={ isAdmin } component={AdminScreen}></AdminRoute> 
 
-                    <PrivateRoute exact path="/my-list" isAuthenticated={loggedUser != null ? true : false} component={MyList}></PrivateRoute>
+                    <PrivateRoute exact path="/my-list" isAuthenticated={loggedUser != null ? true : false} component={MyListScreen}></PrivateRoute>
                     <PrivateRoute exact path="/m/:id" isAuthenticated={loggedUser != null ? true : false} component={MovieSelected}></PrivateRoute> 
                     <PrivateRoute exact path="/" isAuthenticated={loggedUser != null ? true : false} component={HomeScreen}></PrivateRoute> 
 
