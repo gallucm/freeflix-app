@@ -9,7 +9,7 @@ import { genders } from '../../helpers/genders';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from '../../helpers/User';
 
-export const Navbar = () => {
+export const Navbar = ({allowed = true}) => {
 
     const { genderSelected } = useSelector(state => state.movies);
     const loggedUser = getLoggedUser();
@@ -32,6 +32,7 @@ export const Navbar = () => {
 
         if (e.target.value) {
             dispatch(startGetMoviesByTitle(e.target.value));
+            
         } else {
             dispatch(startUnsetSearchValue());
         }
@@ -94,7 +95,9 @@ export const Navbar = () => {
                     </div>
 
                     <div className="d-flex">
-                        <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
+                        { allowed &&
+                          <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
+                        }
                         <span className="navbar-brand">{loggedUser.userName}</span>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>

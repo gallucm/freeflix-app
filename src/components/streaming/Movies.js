@@ -20,7 +20,7 @@ export const Movies = () => {
                 <LoadingRed />}
 
             {(!loading && movies && movies.length > 0) &&
-                <div className="movies-container mt-4">
+                <div className="movies-container">
                     {
                         movies.map(movie => (
                             <MovieGrid key={movie.id} movie={movie} />
