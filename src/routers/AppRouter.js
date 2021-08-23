@@ -15,7 +15,7 @@ import { MovieSelected } from '../components/streaming/MovieSelected';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { AdminRoute } from './AdminRoute';
-import { types } from '../types/types';
+import { useAdmin } from '../hooks/useAdmin';
 
 export const AppRouter = () => {
 
@@ -23,6 +23,7 @@ export const AppRouter = () => {
 
 
     const dispatch = useDispatch();
+    const isAdmin = useAdmin();
 
     useEffect(() => {
         dispatch(startChecking());
@@ -39,7 +40,7 @@ export const AppRouter = () => {
                     <PublicRoute exact path="/login" isAuthenticated={ loggedUser != null ? true : false} component={LoginScreen}></PublicRoute>
                     <PublicRoute exact path="/register" isAuthenticated={ loggedUser != null ? true : false} component={RegisterScreen}></PublicRoute>
 
-                    <AdminRoute exact path="/admin" isAdmin={ loggedUser != null && loggedUser.role === types.roleAdmin ? true : false } component={AdminScreen}></AdminRoute> 
+                    <AdminRoute exact path="/admin" isAdmin={ isAdmin } component={AdminScreen}></AdminRoute> 
 
                     <PrivateRoute exact path="/m/:id" isAuthenticated={loggedUser != null ? true : false} component={MovieSelected}></PrivateRoute> 
                     <PrivateRoute exact path="/" isAuthenticated={loggedUser != null ? true : false} component={HomeScreen}></PrivateRoute> 
