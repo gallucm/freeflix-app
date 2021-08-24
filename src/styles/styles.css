@@ -385,7 +385,9 @@ main {
 .upload-input-title,
 .upload-input-year,
 .upload-input-sinopsis,
-.upload-select-gender {
+.upload-select-gender,
+.profile-input-username,
+.profile-input-email {
     width: 50%;
     height: 40px;
     margin: auto;
@@ -563,4 +565,10 @@ img {
 
 .img-container:hover .button {
     opacity: 1;
+}
+
+/* PROFILE */
+.img-profile{
+    width: 100px;
+    border-radius: 50%;
 }
