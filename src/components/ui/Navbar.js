@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
 import { startGetMoviesByGender, startGetMoviesByTitle, startUnsetSearchValue } from '../../actions/Movie';
@@ -11,7 +11,7 @@ import { getLoggedUser } from '../../helpers/User';
 
 import profileImage from '../profile/profile-mini.jpeg';
 
-export const Navbar = ({allowed = true}) => {
+export const Navbar = ({ allowed = true }) => {
 
     const { genderSelected } = useSelector(state => state.movies);
     const loggedUser = getLoggedUser();
@@ -34,7 +34,7 @@ export const Navbar = ({allowed = true}) => {
 
         if (e.target.value) {
             dispatch(startGetMoviesByTitle(e.target.value));
-            
+
         } else {
             dispatch(startUnsetSearchValue());
         }
@@ -97,14 +97,21 @@ export const Navbar = ({allowed = true}) => {
                     </div>
 
                     <div className="d-flex">
-                        { allowed &&
-                          <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
+                        {allowed &&
+                            <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
                         }
-                        {/* <span className="navbar-brand">{loggedUser.userName}</span> */}
-                        <img src={profileImage} alt="pepe" className="image-profile-mini"/>
-                        <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
-                            <i className="fas fa-sign-out-alt"></i>
-                        </button>
+
+                        <li className="nav-item dropdown dropstart">
+                            <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src={profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
+                            </span>
+                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style={{marginTop: '50px'}}>
+                                <Link to="/profile" className="no-decoration">
+                                    <li className="m-2 pointer">Perfil</li>
+                                </Link>
+                                <li className="m-2 pointer" onClick={handleLogout}>Salir</li>
+                            </ul>
+                        </li>
                     </div>
                 </div>
             </nav>

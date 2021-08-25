@@ -586,3 +586,14 @@ img {
     cursor: pointer;
 }
 
+
+li { list-style-type: none; }
+
+.no-decoration{
+    text-decoration: none !important;
+    color: white;
+}
+
+.no-decoration:hover{
+    color: white;
+}
