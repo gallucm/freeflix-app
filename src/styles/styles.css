@@ -378,7 +378,8 @@ main {
     justify-content: center;
 }
 
-.upload-input {
+.upload-input,
+.profile-input {
     margin-top: 40px;
 }
 
@@ -394,6 +395,8 @@ main {
     margin-top: 20px;
     text-align: center;
 }
+
+
 
 .upload-select-gender {
     text-align-last: center;
@@ -567,8 +570,19 @@ img {
     opacity: 1;
 }
 
-/* PROFILE */
-.img-profile{
-    width: 100px;
+.image-profile {
+    position: relative; /* CENTRALIZA LA IMAGEN */
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
+
+.image-profile-mini {
+    position: relative; /* CENTRALIZA LA IMAGEN */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+

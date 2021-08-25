@@ -9,6 +9,8 @@ import { genders } from '../../helpers/genders';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from '../../helpers/User';
 
+import profileImage from '../profile/profile-mini.jpeg';
+
 export const Navbar = ({allowed = true}) => {
 
     const { genderSelected } = useSelector(state => state.movies);
@@ -98,7 +100,8 @@ export const Navbar = ({allowed = true}) => {
                         { allowed &&
                           <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
                         }
-                        <span className="navbar-brand">{loggedUser.userName}</span>
+                        {/* <span className="navbar-brand">{loggedUser.userName}</span> */}
+                        <img src={profileImage} alt="pepe" className="image-profile-mini"/>
                         <button className="btn shadow-none btn-freeflix" title="Cerrar sesión" onClick={handleLogout}>
                             <i className="fas fa-sign-out-alt"></i>
                         </button>

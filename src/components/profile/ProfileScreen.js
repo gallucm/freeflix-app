@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar } from '../ui/Navbar';
 import { Profile } from './Profile';
 
+
+
 export const ProfileScreen = () => {
     return (
         <>
