@@ -9,12 +9,11 @@ export const getAllUsers = () => {
         
         const users = await getUsers();
 
-        if (users && users.length > 0) {
+        if (users && users.length > 0) 
             dispatch(setUser(users));
-        } else{
+        else
             dispatch(setError('Error al obtener los usuarios.'));
-        }
-
+        
         dispatch(finishLoading());
     }
 }
@@ -42,11 +41,11 @@ export const makeAdmin = (id, role) => {
 
         const updated = await makeOrNotAdmin(id, role);
         
-        if (updated) {
+        if (updated) 
             dispatch(getAllUsers());
-        } else {
+        else
             dispatch(setError('Error al modificar el rol.'));
-        }
+        
         dispatch(finishLoading());
     }
 }

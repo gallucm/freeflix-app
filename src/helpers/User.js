@@ -140,5 +140,15 @@ export const makeOrNotAdmin = async (id, role) => {
 }
 
 export const getLoggedUser = () => {
-    return JSON.parse(localStorage.getItem('loggedUser'));
+    return JSON.parse(localStorage.getItem('loggedUser'));    
+}
+
+export const updateUser = async (user) => {
+    try {
+        await database.collection('users').doc(user.id).update({userName: user.userName, email: user.email});
+        return true;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
 }

@@ -32,12 +32,10 @@ export const Navbar = ({ allowed = true }) => {
 
         setSearch(e.target.value);
 
-        if (e.target.value) {
+        if (e.target.value)
             dispatch(startGetMoviesByTitle(e.target.value));
-
-        } else {
+        else 
             dispatch(startUnsetSearchValue());
-        }
     }
 
     const handleGetMoviesByGender = (e) => {
@@ -92,7 +90,7 @@ export const Navbar = ({ allowed = true }) => {
                                 </li>
                             </ul>
                         </div>
-
+                        
                         <span className="navbar-menu-option" onClick={handleMyList}>Mi lista</span>
                     </div>
 

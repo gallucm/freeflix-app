@@ -1,5 +1,5 @@
 import { finishLoading, setError, setMessage, startLoading } from './ui';
-import { createUser, isEmailTaken, searchByEmail } from '../helpers/User';
+import { createUser, isEmailTaken, searchByEmail, updateUser } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
 import { removeMovies } from './Movie';
@@ -72,11 +72,29 @@ export const loginUser = (email, password) => {
         const userClean = {
             userName: user.userName,
             id: user.id,
-            role: user.role
+            role: user.role,
+            email: user.email
         }
 
         setSesionStorage(userClean);
         dispatch(login(userClean));
+        dispatch(finishLoading());
+    }
+}
+
+export const startUpdateUser = (user) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const userUpdated = await updateUser(user);
+
+        if (userUpdated){ 
+            dispatch(setMessage('Usuario actualizado correctamente.'));
+            setSesionStorage(user);
+        } else{
+            dispatch(setError('Ha ocurrido un error al actualizar el usuario.'));
+        }
+        
         dispatch(finishLoading());
     }
 }

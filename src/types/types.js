@@ -31,6 +31,7 @@ export const types = {
     authLogout: '[Auth] logout',
     authCheckingFinish: '[Auth] finish login',
     authSetUserCreated: '[Auth] set user created',
+    authUserUpdate: '[Auth] user update',
     authRemoveUserCreated: '[Auth] remove user created',
 
     uiStartLoading: '[UI] start Loading',

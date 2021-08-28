@@ -396,6 +396,18 @@ main {
     text-align: center;
 }
 
+.profile-input-username,
+.profile-input-email {
+    width: 15em;
+    height: 40px;
+    color: gray;
+}
+
+.profile-input-username:hover,
+.profile-input-email:hover {
+    color: gray;
+}
+
 
 
 .upload-select-gender {

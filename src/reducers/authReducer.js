@@ -39,6 +39,12 @@ export const authReducer = (state=initialState, action) => {
                 createdUser: false
             }
 
+        case types.authUserUpdate:
+            return {
+                ...state,
+                loggedUser: action.payload
+            }
+
         default:
             return state;            
     }
