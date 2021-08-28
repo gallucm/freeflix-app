@@ -1,5 +1,5 @@
 import profileImage from './profile-mini.jpeg';
-import {getLoggedUser} from '../../helpers/User';
+import { getLoggedUser } from '../../helpers/User';
 import { useForm } from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateUser } from '../../actions/auth';
@@ -13,7 +13,7 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const user = getLoggedUser();
-   
+
     const [formValues, handleInputChange] = useForm(user);
 
     const { userName, email } = formValues;
@@ -21,6 +21,11 @@ export const Profile = () => {
     const handleChangeProfile = (e) => {
         e.preventDefault();
         dispatch(startUpdateUser(formValues));
+    }
+
+    const handleImageChange = (e) => {
+        e.preventDefault();
+        console.log('hizo change');
     }
 
     return (
@@ -31,12 +36,21 @@ export const Profile = () => {
                         <div className="section-content">
                             <form onSubmit={handleChangeProfile}>
                                 <div className="form-group profile-input">
-                                    <img src={profileImage} alt="pepe" className="image-profile"/>
+                                    <div className="container-profilepic card rounded-circle overflow-hidden">
+                                        <img src={profileImage} alt={profileImage} />
+                                        <div className="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center" onClick={()=> document.getElementById('myfile').click()}>
+                                            <div className="text-profilepic" htmlFor="myfile">
+                                                <i className="fas fa-camera"></i>
+                                                <span className="text-profilepic">Cambiar</span>
+                                                <input type="file" id="myfile" style={{display: 'none'}} name="myfile" onChange={handleImageChange}/>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <input type="text" className="form-control shadow-none profile-input-username" name="userName" value={userName} onChange={handleInputChange} placeholder="Usuario" maxLength="15" autoComplete="off" required />
                                     <input type="email" className="form-control shadow-none profile-input-email mb-2" name="email" value={email} onChange={handleInputChange} placeholder="Email" maxLength="40" autoComplete="off" required />
 
-                                    { loading && < Loading/> }
+                                    {loading && < Loading />}
                                     < Alert />
                                     <input type="submit" className="btn btn-success mt-4" value="Actualizar datos" />
                                 </div>

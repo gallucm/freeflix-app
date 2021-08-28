@@ -542,8 +542,6 @@ input::-webkit-input-placeholder {
 .img-container {
     position: relative;
     margin-top: 10px;
-    /* width: 500px;
-    height: 300px; */
 }
 
 .overlay {
@@ -570,7 +568,6 @@ img {
 
 .button {
     position: absolute;
-    /* width: 500px; */
     right: 10px;
     top: 200px;
     text-align: center;
@@ -582,13 +579,6 @@ img {
     opacity: 1;
 }
 
-.image-profile {
-    position: relative; /* CENTRALIZA LA IMAGEN */
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-}
-
 .image-profile-mini {
     position: relative; /* CENTRALIZA LA IMAGEN */
     width: 50px;
@@ -598,6 +588,31 @@ img {
     cursor: pointer;
 }
 
+/* IMAGE PROFILE EXAMPLE */
+.container-profilepic {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+.container-profilepic img {
+    width: 100%;
+    height: 100%;
+}
+
+.text-profilepic{
+    color: white;
+}
+
+.middle-profilepic {
+    background-color: rgba(43, 42, 42, 0.69);
+}
+.container-profilepic:hover .middle-profilepic {
+    display: flex!important;
+    cursor: pointer;
+}
+
+/* END IMAGE PROFILE EXAMPLE */
 
 li { list-style-type: none; }
 
