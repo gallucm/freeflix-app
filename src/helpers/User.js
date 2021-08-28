@@ -1,7 +1,10 @@
-import { database, firebase } from "../firebase/firebase-config";
+import { database, firebase, storage } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { hashPassword } from "./bcrypt";
 import { setCodeUsed } from "./Code";
+
+
+const fileName = new Date().getTime();
 
 export const createUser = async (user, code) => {
 
@@ -141,6 +144,39 @@ export const makeOrNotAdmin = async (id, role) => {
 
 export const getLoggedUser = () => {
     return JSON.parse(localStorage.getItem('loggedUser'));    
+}
+
+export const updateImageProfile = async (userId, newImage) => {
+    //TODO: verificar como eliminar la imagen anterior
+    const urlImage = await uploadImageProfile(newImage);
+    
+    if (urlImage !== ""){
+        try{
+            database.collection('users').doc(userId).update({ imageProfile: urlImage });
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+        
+
+const uploadImageProfile = async (image) => {
+    const name = image.name.split('.');
+
+    const extension = name[1];
+
+    const upload = await storage.ref().child('images/profiles/' + fileName + '.' + extension).put(image);
+
+    const urlDownload = await upload.ref.getDownloadURL();
+
+    if (urlDownload)
+        return urlDownload;
+    
+    return ''; 
 }
 
 export const updateUser = async (user) => {

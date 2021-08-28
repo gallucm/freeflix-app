@@ -9,7 +9,7 @@ import { genders } from '../../helpers/genders';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from '../../helpers/User';
 
-import profileImage from '../profile/profile-mini.jpeg';
+import profileImage from '../../assets/images/not-profile.jpg';
 
 export const Navbar = ({ allowed = true }) => {
 
@@ -101,7 +101,7 @@ export const Navbar = ({ allowed = true }) => {
 
                         <li className="nav-item dropdown dropstart">
                             <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src={profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
+                                <img src={loggedUser.imageProfile ? loggedUser.imageProfile : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
                             </span>
                             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style={{marginTop: '50px'}}>
                                 <Link to="/profile" className="no-decoration">

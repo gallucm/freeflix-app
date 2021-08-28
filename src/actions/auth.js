@@ -67,14 +67,8 @@ export const loginUser = (email, password) => {
             dispatch(finishLoading());
             return;
         }
-        
 
-        const userClean = {
-            userName: user.userName,
-            id: user.id,
-            role: user.role,
-            email: user.email
-        }
+        const { password2, code, ...userClean } = user;
 
         setSesionStorage(userClean);
         dispatch(login(userClean));

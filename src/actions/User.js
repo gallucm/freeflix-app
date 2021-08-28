@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { finishLoading, setError, startLoading } from "./ui";
 
-import { deleteUserById, getUsers, makeOrNotAdmin } from '../helpers/User';
+import { deleteUserById, getUsers, makeOrNotAdmin, updateImageProfile } from '../helpers/User';
 
 export const getAllUsers = () => {
     return async (dispatch) => {
@@ -32,6 +32,21 @@ export const deleteUser = (id) => {
         } else {
            dispatch(setError('Error al eliminar el usuario.'));
         }        
+    }
+}
+
+export const startUpdateImageProfile = (id, image) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        const updated = await updateImageProfile(id, image);
+        
+        if (updated) {
+            //TODO: Verificar como refresco la imagen automaticamente
+        } else {
+        }        
+
+        dispatch(finishLoading());
     }
 }
 

@@ -1,10 +1,12 @@
-import profileImage from './profile-mini.jpeg';
+import profileImage from '../../assets/images/not-profile.jpg';
+
 import { getLoggedUser } from '../../helpers/User';
 import { useForm } from '../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateUser } from '../../actions/auth';
 import { Alert } from '../ui/Alert';
 import { Loading } from '../ui/Loading';
+import { startUpdateImageProfile } from '../../actions/User';
 
 export const Profile = () => {
 
@@ -25,7 +27,10 @@ export const Profile = () => {
 
     const handleImageChange = (e) => {
         e.preventDefault();
-        console.log('hizo change');
+
+        const image = document.getElementById('myfile').files[0];
+
+        dispatch(startUpdateImageProfile(user.id, image));
     }
 
     return (
@@ -37,7 +42,7 @@ export const Profile = () => {
                             <form onSubmit={handleChangeProfile}>
                                 <div className="form-group profile-input">
                                     <div className="container-profilepic card rounded-circle overflow-hidden">
-                                        <img src={profileImage} alt={profileImage} />
+                                        <img src={user.imageProfile ? user.imageProfile : profileImage} alt={profileImage} />
                                         <div className="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center" onClick={()=> document.getElementById('myfile').click()}>
                                             <div className="text-profilepic" htmlFor="myfile">
                                                 <i className="fas fa-camera"></i>
