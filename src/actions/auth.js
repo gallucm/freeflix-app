@@ -1,8 +1,8 @@
 import { finishLoading, setError, setMessage, startLoading } from './ui';
-import { createUser, isEmailTaken, searchByEmail, updateUser } from '../helpers/User';
+import { cleanUser, createUser, isEmailTaken, searchByEmail, updateUser } from '../helpers/User';
 import { comparePassword } from '../helpers/bcrypt';
 import { types } from '../types/types';
-import { removeMovies } from './Movie';
+import { removeFavorites, removeMovies } from './Movie';
 import { isCodeValid } from '../helpers/Code';
 
 export const registerUser = (user) => {
@@ -68,10 +68,8 @@ export const loginUser = (email, password) => {
             return;
         }
 
-        const { password2, code, ...userClean } = user;
-
-        setSesionStorage(userClean);
-        dispatch(login(userClean));
+        setSesionStorage(cleanUser(user));
+        dispatch(login(cleanUser(user)));
         dispatch(finishLoading());
     }
 }
@@ -83,8 +81,9 @@ export const startUpdateUser = (user) => {
         const userUpdated = await updateUser(user);
 
         if (userUpdated){ 
-            dispatch(setMessage('Usuario actualizado correctamente.'));
             setSesionStorage(user);
+            dispatch(userUpdate(user));
+            dispatch(setMessage('Usuario actualizado correctamente.'));
         } else{
             dispatch(setError('Ha ocurrido un error al actualizar el usuario.'));
         }
@@ -99,7 +98,7 @@ export const startChecking = () => {
         const user = localStorage.getItem('loggedUser');
 
         if (user)
-            dispatch(login(user));
+            dispatch(login(JSON.parse(user)));
 
         dispatch(checkingFinish());
     }
@@ -119,6 +118,7 @@ export const startLogout = () => {
         localStorage.clear();
         dispatch(logout());
         dispatch(removeMovies());
+        dispatch(removeFavorites());
     }
 }
 
@@ -132,6 +132,11 @@ const checkingFinish = () => ({
 
 const userCreated = () => ({
     type: types.authSetUserCreated
+});
+
+const userUpdate = (payload) => ({
+    type: types.authUserUpdate,
+    payload
 });
 
 export const removeUserCreated = () => ({

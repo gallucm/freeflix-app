@@ -123,3 +123,23 @@ const capitalize = (word) => {
     const lower = word.toLowerCase();
     return word.charAt(0).toUpperCase() + lower.slice(1);
 }
+
+export const removeFavorite = (id) => {
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+
+    const favoritesList = user.favoritesList;
+
+    const favorites = favoritesList.filter(fav => fav.id !== id);
+
+    localStorage.setItem('loggedUser', JSON.stringify({ ...user, favoritesList: favorites }));    
+}
+
+export const addFavorite = async (movie) => {
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+
+    const favoritesList = user.favoritesList;
+
+    const favorites = [...favoritesList, movie];
+
+    localStorage.setItem('loggedUser', JSON.stringify({ ...user, favoritesList: favorites }));
+}

@@ -110,7 +110,7 @@ export const removieMovieFromFavorites = async (userId, movie) => {
     } catch (e) {
         console.log(e);
         return false;
-    }   
+    }
 }
 
 export const getFavoritesForUser = async (userId) => {
@@ -143,26 +143,35 @@ export const makeOrNotAdmin = async (id, role) => {
 }
 
 export const getLoggedUser = () => {
-    return JSON.parse(localStorage.getItem('loggedUser'));    
+    return JSON.parse(localStorage.getItem('loggedUser'));
+}
+
+export const updateImageLoggedUser = (url) => {
+    let user = localStorage.getItem('loggedUser');
+
+    user = user ? JSON.parse(user) : {};
+    user['imageProfile'] = url;
+    
+    localStorage.setItem('loggedUser', JSON.stringify(user));
 }
 
 export const updateImageProfile = async (userId, newImage) => {
     //TODO: verificar como eliminar la imagen anterior
     const urlImage = await uploadImageProfile(newImage);
-    
-    if (urlImage !== ""){
-        try{
+
+    if (urlImage !== "") {
+        try {
             database.collection('users').doc(userId).update({ imageProfile: urlImage });
-            return true;
+            return urlImage;
         } catch (e) {
-            return false;
+            return "";
         }
     }
 
-    return false;
+    return "";
 }
 
-        
+
 
 const uploadImageProfile = async (image) => {
     const name = image.name.split('.');
@@ -175,13 +184,19 @@ const uploadImageProfile = async (image) => {
 
     if (urlDownload)
         return urlDownload;
-    
-    return ''; 
+
+    return '';
+}
+
+export const cleanUser = (user) => {
+    const { password, password2, code, ...userWithoutPass } = user;
+
+    return userWithoutPass;
 }
 
 export const updateUser = async (user) => {
     try {
-        await database.collection('users').doc(user.id).update({userName: user.userName, email: user.email});
+        await database.collection('users').doc(user.id).update({ username: user.username, email: user.email });
         return true;
     } catch (e) {
         console.log(e);

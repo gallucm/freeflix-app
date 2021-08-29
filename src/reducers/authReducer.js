@@ -44,6 +44,16 @@ export const authReducer = (state=initialState, action) => {
                 ...state,
                 loggedUser: action.payload
             }
+        
+        case types.authUpdateImageProfile:
+            return {
+                ...state,
+                loggedUser: {
+                    ...state.loggedUser,
+                    imageProfile: action.payload
+                }
+            }
+
 
         default:
             return state;            

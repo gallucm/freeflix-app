@@ -1,4 +1,4 @@
-import { deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { addFavorite, deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, removeFavorite, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 import { addOrRemoveFavorite, getFavoritesForUser } from '../helpers/User';
 
 import { types } from '../types/types';
@@ -173,10 +173,14 @@ export const startAddOrRemoveFavorite = (movie, action) => {
             const work = await addOrRemoveFavorite(movie, action);
 
             if (work){
-                if (action === "ADD")
+                if (action === "ADD"){
                     dispatch(addMovieToFavorite(movie));
-                else if (action === "REMOVE")
+                    addFavorite(movie);
+                }
+                else if (action === "REMOVE"){
                     dispatch(removeMovieFromFavorite(movie.id));
+                    removeFavorite(movie.id);
+                }
             }
         } catch(e){
             console.log(e);
@@ -184,17 +188,6 @@ export const startAddOrRemoveFavorite = (movie, action) => {
         }   
     }
 }
-
-// export const startRemoveMovieFromFavorites = (userId, movie) => {
-//     return async (dispatch) => {
-//         const movieRemoved = await removieMovieFromFavorites(userId, movie);
-
-//         if (movieRemoved)
-//             dispatch(removeMovieFromFavorite(movie.id));
-//         else
-//             dispatch(setError('Ha ocurrido un error al eliminar la pelicula de favoritos.'));
-//     }
-// }
 
 const setFavorites = (payload) => ({
     type: types.moviesSetFavorites,
@@ -257,6 +250,10 @@ const setGender = (payload) => ({
     type: types.moviesSetGenderSearched,
     payload
 });
+
+export const removeFavorites = () => ({
+    type: types.moviesResetFavoritesList
+})
 
 export const unsetGender = () => ({
     type: types.moviesUnsetGender

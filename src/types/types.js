@@ -33,6 +33,7 @@ export const types = {
     authSetUserCreated: '[Auth] set user created',
     authUserUpdate: '[Auth] user update',
     authRemoveUserCreated: '[Auth] remove user created',
+    authUpdateImageProfile: '[Auth] update image profile',
 
     uiStartLoading: '[UI] start Loading',
     uiFinishLoading: '[UI] finish Loading',
@@ -54,5 +55,5 @@ export const types = {
     codeAdd: '[Code] add',
 
     userSet: '[User] set',
-    userRemove: '[User] remove'
+    userRemove: '[User] remove',
 }

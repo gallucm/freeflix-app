@@ -7,14 +7,13 @@ import { Logo } from './Logo';
 
 import { genders } from '../../helpers/genders';
 import { useEffect, useState } from 'react';
-import { getLoggedUser } from '../../helpers/User';
 
 import profileImage from '../../assets/images/not-profile.jpg';
 
 export const Navbar = ({ allowed = true }) => {
 
     const { genderSelected } = useSelector(state => state.movies);
-    const loggedUser = getLoggedUser();
+    const loggedUser = useSelector(state => state.auth.loggedUser);
 
     const dispatch = useDispatch();
     const history = useHistory();

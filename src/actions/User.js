@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { finishLoading, setError, startLoading } from "./ui";
 
-import { deleteUserById, getUsers, makeOrNotAdmin, updateImageProfile } from '../helpers/User';
+import { deleteUserById, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile } from '../helpers/User';
 
 export const getAllUsers = () => {
     return async (dispatch) => {
@@ -39,12 +39,12 @@ export const startUpdateImageProfile = (id, image) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const updated = await updateImageProfile(id, image);
+        const url = await updateImageProfile(id, image);
         
-        if (updated) {
-            //TODO: Verificar como refresco la imagen automaticamente
-        } else {
-        }        
+        if (url) {
+            dispatch(updateImage(url));
+            updateImageLoggedUser(url);
+        }       
 
         dispatch(finishLoading());
     }
@@ -64,6 +64,12 @@ export const makeAdmin = (id, role) => {
         dispatch(finishLoading());
     }
 }
+
+const updateImage = (payload) => ({
+    type: types.authUpdateImageProfile,
+    payload
+});
+
         
 const setUser = (payload) => ({
     type: types.userSet,
