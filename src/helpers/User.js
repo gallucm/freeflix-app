@@ -203,3 +203,14 @@ export const updateUser = async (user) => {
         return false;
     }
 }
+
+export const updatePassword = async (userId, password) => {
+    try {
+        const hashed = hashPassword(password);
+        await database.collection('users').doc(userId).update({ password: hashed });
+        return true;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+}

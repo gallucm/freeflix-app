@@ -1,7 +1,7 @@
 import { types } from "../types/types";
-import { finishLoading, setError, startLoading } from "./ui";
+import { finishLoading, setError, setMessage, startLoading } from "./ui";
 
-import { deleteUserById, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile } from '../helpers/User';
+import { deleteUserById, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
 
 export const getAllUsers = () => {
     return async (dispatch) => {
@@ -60,6 +60,29 @@ export const makeAdmin = (id, role) => {
             dispatch(getAllUsers());
         else
             dispatch(setError('Error al modificar el rol.'));
+        
+        dispatch(finishLoading());
+    }
+}
+
+export const startUpdatePassword = (id, oldPassword, password) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+
+        //TODO: agregar la comparación de si el password viejo es correcto.
+
+        if (oldPassword === password) {
+            dispatch(setError('La nueva contraseña no puede ser igual a la anterior.'));
+            dispatch(finishLoading());
+            return;
+        }
+
+        const updated = await updatePassword(id, password);
+
+        if (updated)
+            dispatch(setMessage('La contraseña se actualizó correctamente.'));
+        else
+            dispatch(setError('Error al modificar la contraseña.'));
         
         dispatch(finishLoading());
     }
