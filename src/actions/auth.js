@@ -74,6 +74,8 @@ export const loginUser = (email, password) => {
     }
 }
 
+
+//TODO: agregar el imageId para la eliminacion de la imagen al cargar una nueva
 export const startUpdateUser = (user) => {
     return async (dispatch) => {
         dispatch(startLoading());

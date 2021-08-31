@@ -1,34 +1,16 @@
-import profileImage from '../../assets/images/not-profile.jpg';
 
-import { useForm } from '../../hooks/useForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { startUpdateUser } from '../../actions/auth';
-import { Alert } from '../ui/Alert';
-import { Loading } from '../ui/Loading';
-import { startUpdateImageProfile } from '../../actions/User';
+
+import { useState } from 'react';
+import { types } from '../../types/types';
+import { PasswordSection } from './PasswordSection';
+import { ProfileSection } from './ProfileSection';
 
 export const Profile = () => {
+    
+    const [option, setOption] = useState(types.optionProfile);
 
-    const { loading } = useSelector(state => state.ui);
-    const user = useSelector(state => state.auth.loggedUser);
-
-    const dispatch = useDispatch();
-
-    const [formValues, handleInputChange] = useForm(user);
-
-    const { username, email } = formValues;
-
-    const handleChangeProfile = (e) => {
-        e.preventDefault();
-        dispatch(startUpdateUser(formValues));
-    }
-
-    const handleImageChange = (e) => {
-        e.preventDefault();
-
-        const image = document.getElementById('myfile').files[0];
-
-        dispatch(startUpdateImageProfile(user.id, image));
+    const handleOption = (option) => {
+        setOption(option);
     }
 
     return (
@@ -37,27 +19,24 @@ export const Profile = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="section-content">
-                            <form onSubmit={handleChangeProfile}>
                                 <div className="form-group profile-input">
-                                    <div className="container-profilepic card rounded-circle overflow-hidden">
-                                        <img src={user.imageProfile ? user.imageProfile : profileImage} alt={profileImage} />
-                                        <div className="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center" onClick={()=> document.getElementById('myfile').click()}>
-                                            <div className="text-profilepic" htmlFor="myfile">
-                                                <i className="fas fa-camera"></i>
-                                                <span className="text-profilepic">Cambiar</span>
-                                                <input type="file" id="myfile" style={{display: 'none'}} name="myfile" onChange={handleImageChange}/>
+                                    <div className="row">
+                                        <div className="form-group profile-input-options">
+                                            <div className="profile-input-options-edit" onClick={() => {handleOption(types.optionProfile)}}>
+                                                <h5>Perfil</h5>
+                                            </div>
+                                            <div className="profile-input-options-pswd" onClick={() => {handleOption(types.optionPassword)}}>
+                                                <h5>Contraseña</h5>
                                             </div>
                                         </div>
+                                        <div className="col">
+                                            {option === types.optionProfile
+                                                ? <ProfileSection />
+                                                : <PasswordSection/>
+                                            } 
+                                        </div>
                                     </div>
-
-                                    <input type="text" className="form-control shadow-none profile-input-username" name="username" value={username} onChange={handleInputChange} placeholder="Usuario" maxLength="15" autoComplete="off" required />
-                                    <input type="email" className="form-control shadow-none profile-input-email mb-2" name="email" value={email} onChange={handleInputChange} placeholder="Email" maxLength="40" autoComplete="off" required />
-
-                                    {loading && < Loading />}
-                                    < Alert />
-                                    <input type="submit" className="btn btn-success mt-4" value="Actualizar datos" />
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

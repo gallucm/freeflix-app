@@ -56,4 +56,7 @@ export const types = {
 
     userSet: '[User] set',
     userRemove: '[User] remove',
+
+    optionProfile: '[OptionProfile]',
+    optionPassword: '[OptionPassword]'
 }

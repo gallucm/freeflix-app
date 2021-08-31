@@ -388,7 +388,8 @@ main {
 .upload-input-sinopsis,
 .upload-select-gender,
 .profile-input-username,
-.profile-input-email {
+.profile-input-email,
+.profile-input-password {
     width: 50%;
     height: 40px;
     margin: auto;
@@ -614,6 +615,32 @@ img {
 
 /* END IMAGE PROFILE EXAMPLE */
 
+
+/* Profile */
+
+.profile-input-options{
+    border: none;
+    box-shadow: 8px 0 5px -3px rgba(229, 9, 20, 0.55);
+    width: 28% !important;
+    min-height: 500px;
+    height: auto;
+}
+
+.profile-input-options-edit,
+.profile-input-options-pswd{
+    margin-top: 1em;
+    height: 3em;
+}
+
+.profile-input-options-edit:hover,
+.profile-input-options-pswd:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+
+
+/* Profile */
 li { list-style-type: none; }
 
 .no-decoration{
