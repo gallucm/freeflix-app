@@ -29,7 +29,7 @@ export const Profile = () => {
                                                 <h5>Contraseña</h5>
                                             </div>
                                         </div>
-                                        <div className="col">
+                                        <div className="col profile-input-option-selected">
                                             {option === types.optionProfile
                                                 ? <ProfileSection />
                                                 : <PasswordSection/>

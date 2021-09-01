@@ -19,7 +19,7 @@ export const AdminScreen = () => {
     }
 
     return (
-        <>
+        <div style={{paddingBottom: '40px'}}>
             <NavbarAdmin />
             <div className="container">
                 <div className="d-flex justify-content-center">
@@ -28,7 +28,7 @@ export const AdminScreen = () => {
                     <button className="btn shadow-none admin-button" id={types.adminCodes} onClick={handleOptionChange}>Códigos</button>
                     <button className="btn shadow-none admin-button" id={types.adminUsers} onClick={handleOptionChange}>Usuarios</button>
                 </div>
-                <div>
+                <>
                     {(option === types.adminUpload) && <Upload />}
 
                     {(option === types.adminMovies) && <Movies />}
@@ -36,8 +36,8 @@ export const AdminScreen = () => {
                     {(option === types.adminCodes) && <Codes />}
 
                     {(option === types.adminUsers) && <Users />}
-                </div>
+                </>
             </div>
-        </>
+        </div>
     )
 }

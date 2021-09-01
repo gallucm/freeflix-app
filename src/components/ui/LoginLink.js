@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const LoginLink = () => {
     return (
-        <div className="link-register-account">
+        <div className="freeflix-span-generic">
             <span>Tienes cuenta? 
                 <Link to="/login">
                     <span> inicia sesión</span>

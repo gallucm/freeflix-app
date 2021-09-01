@@ -30,8 +30,8 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 body {
@@ -45,6 +45,14 @@ body {
 
 main {
     width: 100%;
+}
+
+.main-container{
+    height: auto;
+    width: auto;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    margin-bottom: 20px;
 }
 
 .pointer {
@@ -81,9 +89,8 @@ main {
     text-decoration: none;
 }
 
-.btn-wide-freeflix {
-    /* margin-top: 30px; */
-    width: 300px !important;
+.freeflix-btn-acces{
+    width: 18em;
     height: 50px !important;
     background: #E50914;
     color: white;
@@ -91,7 +98,7 @@ main {
     transition: all 2.s ease;
 }
 
-.btn-wide-freeflix:hover {
+.freeflix-btn-acces:hover{
     color: white;
     font-weight: 600;
 }
@@ -101,18 +108,13 @@ main {
 
 .login-content,
 .register-content {
-    width: 450px;
-    padding: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    height: auto;
-    /* min-height: 650px; */
+    width: 25em;
+    padding: 0px 5px 0px 5px;
     border-radius: 5px;
-    margin: 0;
-    position: absolute;
     box-shadow: 0px 0px 40px 5px rgba(229, 9, 20, 0.55);
     -webkit-box-shadow: 0px 0px 40px 5px rgba(229, 9, 20, 0.55);
     -moz-box-shadow: 0px 0px 40px 5px rgba(229, 9, 20, 0.55);
+    text-align: center;
 }
 
 .login-label,
@@ -127,17 +129,15 @@ main {
     margin-top: 10%;
 }
 
-.login-input-email,
-.login-input-password,
-.register-input-user,
-.register-input-email,
-.register-input-password {
-    width: 300px;
+.freeflix-input-generic{
+    width: 18em;
     height: 50px;
     margin: auto;
     margin-bottom: 20px;
     text-align: center;
+    box-shadow: none;
 }
+
 
 .codes-input-code {
     background: rgb(189, 189, 189) !important;
@@ -160,12 +160,10 @@ main {
 }
 
 .navbar-logo h3 {
-    margin: 10px;
-    margin-left: 30px !important;
+    margin-left: 20px;
     font-family: BebasNeue-Regular;
     color: #E50914 !important;
     font-size: 50px;
-    text-decoration: none;
 }
 
 .navbar-logo:hover {
@@ -178,12 +176,12 @@ main {
     cursor: pointer;
 }
 
-.link-register-account {
-    margin-top: 30px;
-    margin-bottom: 30px;
+.freeflix-span-generic {
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
-.link-register-account span a {
+.freeflix-span-generic span a {
     text-decoration: none;
     color: white;
     font-size: bold;
@@ -362,7 +360,7 @@ main {
 .section-content {
     width: 650px;
     height: auto;
-    min-height: 570px;
+    min-height: 400px;
     border-radius: 5px;
     margin-right: 15px !important;
     margin: 0;
@@ -380,7 +378,8 @@ main {
 
 .upload-input,
 .profile-input {
-    margin-top: 40px;
+    margin-top: 20px;
+    height: 23em;  
 }
 
 .upload-input-title,
@@ -619,11 +618,10 @@ img {
 /* Profile */
 
 .profile-input-options{
-    border: none;
-    box-shadow: 8px 0 5px -3px rgba(229, 9, 20, 0.55);
+     box-shadow: 8px 0 5px -5px rgba(229, 9, 20, 0.55); 
     width: 28% !important;
-    min-height: 500px;
-    height: auto;
+    height: 100%;
+    margin-bottom: 25px;
 }
 
 .profile-input-options-edit,
@@ -637,7 +635,6 @@ img {
     cursor: pointer;
     color: rgb(255, 255, 255);
 }
-
 
 
 /* Profile */

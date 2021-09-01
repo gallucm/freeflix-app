@@ -49,7 +49,7 @@ export const ProfileSection = () => {
 
                 {loading && < Loading />}
                 < Alert />
-                <button type="submit" className="btn btn-danger mt-4 shadow-none" title="Guardar cambios">
+                <button type="submit" className="btn btn-danger mt-4 mb-4 shadow-none" title="Guardar cambios">
                     <i className="fas fa-save" style={{ fontSize: '30px' }}></i>
                 </button>
             </form>
