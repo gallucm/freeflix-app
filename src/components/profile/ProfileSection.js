@@ -32,7 +32,7 @@ export const ProfileSection = () => {
     return (
         <>
             <form onSubmit={handleChangeProfile}>
-                <div className="container-profilepic card rounded-circle overflow-hidden">
+                <div className="container-profilepic card rounded-circle overflow-hidden mt-2">
                     <img src={user.imageProfile ? user.imageProfile : profileImage} alt={profileImage} />
                     <div className="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center" onClick={() => document.getElementById('myfile').click()}>
                         <div className="text-profilepic" htmlFor="myfile">

@@ -25,48 +25,40 @@ export const Users = () => {
 
     return (
         <>
-            <div className="text-center mt-5">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="section-content">
-                            {(loading) && <LoadingRed />}
+            {(loading) && <LoadingRed />}
 
-                            {(!loading && users.length > 0) &&
-                                <div className="mt-4">
-                                    {
-                                        users.map(user => (
-                                            <div key={user.id} className="row row-cols-auto justify-content-center mt-2">
-                                                <div className="col-2 text-justify">
-                                                    <span style={{ fontSize: '25px' }}>{user.userName}</span>
-                                                </div>
-                                                <div className="col-1">
-                                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleMakeAdmin(user.id, user.role) }}
-                                                        title={(user.role !== types.roleAdmin) ? 'Dar permisos de administrador' : 'Quitar permisos de administrador'}
-                                                    >
-                                                        <i className={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{ fontSize: '15px' }}></i>
-                                                    </button>
-                                                </div>
-                                                <div className="col-1">
-                                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleDeleteUser(user.id) }} title="Eliminar">
-                                                        <i className="far fa-trash-alt" style={{ fontSize: '15px' }}></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
+            {(!loading && users.length > 0) &&
+                <div className="mt-4">
+                    {
+                        users.map(user => (
+                            <div key={user.id} className="row row-cols-auto justify-content-center mt-2">
+                                <div className="col-2 text-justify">
+                                    <span style={{ fontSize: '25px' }}>{user.userName}</span>
                                 </div>
-                            }
-
-                            {
-                                (!loading && users.length === 0) &&
-                                <div className="mt-4">
-                                    <h4>Actualmente no hay usuarios para mostrar</h4>
+                                <div className="col-1">
+                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleMakeAdmin(user.id, user.role) }}
+                                        title={(user.role !== types.roleAdmin) ? 'Dar permisos de administrador' : 'Quitar permisos de administrador'}
+                                    >
+                                        <i className={(user.role !== types.roleAdmin) ? "fas fa-user-shield" : "fas fa-user"} style={{ fontSize: '15px' }}></i>
+                                    </button>
                                 </div>
-                            }
-                        </div>
-                    </div>
+                                <div className="col-1">
+                                    <button type="button" className="btn btn-freeflix shadow-none" onClick={() => { handleDeleteUser(user.id) }} title="Eliminar">
+                                        <i className="far fa-trash-alt" style={{ fontSize: '15px' }}></i>
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-            </div>
+            }
+
+            {
+                (!loading && users.length === 0) &&
+                <div className="mt-4">
+                    <h4>Actualmente no hay usuarios para mostrar</h4>
+                </div>
+            }
         </>
     )
 }

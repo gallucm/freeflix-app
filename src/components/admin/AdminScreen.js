@@ -1,43 +1,60 @@
-import React from 'react';
 import { useState } from 'react';
 
 import { Upload } from './Upload';
 import { Users } from './Users';
 import { types } from '../../types/types';
 
-import { NavbarAdmin } from './NavbarAdmin';
 import { Movies } from './Movies';
 import { Codes } from './Codes';
+import { Navbar } from '../ui/Navbar';
 
 
 export const AdminScreen = () => {
 
     const [option, setOption] = useState(types.adminUpload);
 
-    const handleOptionChange = (value) => {
-        setOption(value.target.id);
+    const handleOption = (option) => {
+        setOption(option);
     }
 
     return (
-        <div style={{paddingBottom: '40px'}}>
-            <NavbarAdmin />
-            <div className="container">
-                <div className="d-flex justify-content-center">
-                    <button className="btn shadow-none admin-button" id={types.adminUpload} onClick={handleOptionChange}>Nueva pelicula</button>
-                    <button className="btn shadow-none admin-button" id={types.adminMovies} onClick={handleOptionChange}>Peliculas</button>
-                    <button className="btn shadow-none admin-button" id={types.adminCodes} onClick={handleOptionChange}>Códigos</button>
-                    <button className="btn shadow-none admin-button" id={types.adminUsers} onClick={handleOptionChange}>Usuarios</button>
+        <>
+            {<Navbar searchAllowed={false} optionsAllowed={false} />}
+            <div className="main-container">
+                <div className="container">
+                    <div className="row justify-content-center text-center">
+                        <div className="section-content">
+                            <div className="form-group profile-input">
+                                <div className="row">
+                                    <div className="form-group profile-input-options">
+                                        <div className="profile-input-options-edit" onClick={() => { handleOption(types.adminUpload) }}>
+                                            <h5>Nueva pelicula</h5>
+                                        </div>
+                                        <div className="profile-input-options-edit" onClick={() => { handleOption(types.adminMovies) }}>
+                                            <h5>Peliculas</h5>
+                                        </div>
+                                        <div className="profile-input-options-edit" onClick={() => { handleOption(types.adminCodes) }}>
+                                            <h5>Códigos</h5>
+                                        </div>
+                                        <div className="profile-input-options-edit" onClick={() => { handleOption(types.adminUsers) }}>
+                                            <h5>Usuarios</h5>
+                                        </div>
+                                    </div>
+                                    <div className="col profile-input-option-selected">
+                                        {(option === types.adminUpload) && <Upload />}
+
+                                        {(option === types.adminMovies) && <Movies />}
+
+                                        {(option === types.adminCodes) && <Codes />}
+
+                                        {(option === types.adminUsers) && <Users />}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <>
-                    {(option === types.adminUpload) && <Upload />}
-
-                    {(option === types.adminMovies) && <Movies />}
-
-                    {(option === types.adminCodes) && <Codes />}
-
-                    {(option === types.adminUsers) && <Users />}
-                </>
             </div>
-        </div>
+        </>
     )
 }

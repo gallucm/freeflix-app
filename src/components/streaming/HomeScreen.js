@@ -20,26 +20,28 @@ export const HomeScreen = () => {
     return (
         <>
             <Navbar />
-            <div className="container home-container">
-                {genderSelected &&
-                    <div className="text-center">
-                        <span>
-                            Peliculas de: <strong>{genderSelected}</strong>
-                            <button type="button" className="btn shadow-none red-freeflix" onClick={handleUnsetGender}>
-                                <i className="fas fa-times"></i>
-                            </button>
-                        </span>
-                    </div>
-                }
+            <div className="main-container">
+                <div className="container home-container">
+                    {genderSelected &&
+                        <div className="text-center">
+                            <span>
+                                Peliculas de: <strong>{genderSelected}</strong>
+                                <button type="button" className="btn shadow-none red-freeflix" onClick={handleUnsetGender}>
+                                    <i className="fas fa-times"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
 
-                {(searchValue) &&
-                    <div className="text-center">
-                        <span>
-                            Título buscado: <strong>{searchValue}</strong>
-                        </span>
-                    </div>
-                }
-                <Movies />
+                    {(searchValue) &&
+                        <div className="text-center">
+                            <span>
+                                Título buscado: <strong>{searchValue}</strong>
+                            </span>
+                        </div>
+                    }
+                    <Movies />
+                </div>
             </div>
         </>
     )

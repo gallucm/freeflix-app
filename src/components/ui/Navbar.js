@@ -75,7 +75,7 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
                                 <span className="navbar-menu-option" onClick={handleHome}>Inicio</span>
                                 <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
                                     <ul className="navbar-nav">
-                                        <li className="nav-item dropdown">
+                                        <li className="nav-item dropdown mt-2">
                                             <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <strong>Peliculas</strong>
                                             </span>
