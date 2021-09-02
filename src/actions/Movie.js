@@ -9,9 +9,9 @@ export const startUpload = (movie, image, video) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const imageURL = await uploadImageMovie(image);
+        const imageComp = await uploadImageMovie(image);
 
-        if (imageURL)
+        if (imageComp)
             dispatch(imageCompleted());
 
         const movieURL = await uploadVideoMovie(video);
@@ -23,8 +23,14 @@ export const startUpload = (movie, image, video) => {
 
         const movieObject = {
             ...movieJSON,
-            image: imageURL,
-            video: movieURL
+            image: {
+                id: imageComp.split('z-')[0],
+                url: imageComp.split('z-')[1]
+            },
+            video: {
+                id: movieURL.split('z-')[0],
+                url: movieURL.split('z-')[1]
+            }
         }
 
         const movieAdded = await uploadMovie(movieObject);

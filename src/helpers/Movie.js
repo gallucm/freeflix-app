@@ -17,7 +17,7 @@ export const uploadImageMovie = async (image) => {
     const urlDownload = await upload.ref.getDownloadURL();
 
     if (urlDownload)
-        return urlDownload;
+        return fileName + 'z-' + urlDownload;
     
     return '';    
 }
@@ -31,7 +31,7 @@ export const uploadVideoMovie = async (video) => {
     const urlDownload = await upload.ref.getDownloadURL();
 
     if (urlDownload)
-        return urlDownload;
+        return fileName + 'z-' + urlDownload;
 
     return '';    
 }

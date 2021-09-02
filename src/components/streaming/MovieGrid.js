@@ -41,7 +41,7 @@ export const MovieGrid = ({ movie }) => {
         <div className="movie-grid text-center animate__animated animate__zoomIn">
             <h2>{movie.title}</h2>
             <div className="img-container">
-                <img src={movie.image} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected} />
+                <img src={movie.image.url} alt={movie.title} key={movie.id} className="img-movie" onClick={handleSelected} />
                 <div className="overlay"></div>
                 <button type="button" className="btn btn-danger button" onClick={() => { 
                     isFavorite ? handleRemove(movie) : handleAdd(movie);

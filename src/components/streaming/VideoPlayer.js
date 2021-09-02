@@ -9,7 +9,7 @@ export const VideoPlayer = () => {
     return (
         <div className="react-player">
             <ReactPlayer
-                url={movieSelected.video}
+                url={movieSelected.video.url}
                 controls
                 height={'100%'}
                 width={'100%'}
