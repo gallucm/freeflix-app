@@ -7,7 +7,7 @@ import { AlertError } from '../ui/AlertError';
 import { Alert } from '../ui/Alert';
 import { Loading } from '../ui/Loading';
 import { LoginLink } from '../ui/LoginLink';
-import { LogoNavbarAlone } from '../ui/LogoNavbarAlone';
+import { Navbar } from '../ui/Navbar';
 
 export const RegisterScreen = () => {
 
@@ -32,8 +32,9 @@ export const RegisterScreen = () => {
     }
 
     return (
-        <div className="main-container">
-            <LogoNavbarAlone />
+        <>
+            <Navbar searchAllowed={false} optionsAllowed={false} profileAllowed={false} />
+            <div className="main-container">
 
                 <div className="container">
                     <div className="row justify-content-center">
@@ -52,8 +53,8 @@ export const RegisterScreen = () => {
                                     {message && <Alert />}
 
                                     <button className="btn shadow-none freeflix-btn-acces" type="submit">
-                                        { (!loading) && <span>Registrarse</span>}
-                                        { loading && <Loading /> }
+                                        {(!loading) && <span>Registrarse</span>}
+                                        {loading && <Loading />}
                                     </button>
                                 </div>
                             </form>
@@ -62,5 +63,6 @@ export const RegisterScreen = () => {
                     </div>
                 </div>
             </div>
+        </>
     )
 }

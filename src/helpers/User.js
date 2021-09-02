@@ -174,8 +174,10 @@ export const updateImageProfile = async (userId, newImage) => {
 export const getOldPassword = async (userId) => {
     const user = await database.collection('users').doc(userId).get();
 
-    if (user)
-        return user.data().password;
+    const { password } = user.data();
+
+    if (password)
+        return password;
         
     return '';
 }

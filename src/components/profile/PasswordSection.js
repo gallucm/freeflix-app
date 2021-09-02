@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { resetCompleted } from "../../actions/ui";
 import { startUpdatePassword } from "../../actions/User";
 import { useForm } from "../../hooks/useForm";
+import { AlertError } from "../ui/AlertError";
 import { Alert } from "../ui/Alert";
 import { Loading } from "../ui/Loading";
 
@@ -9,7 +11,7 @@ export const PasswordSection = () => {
 
     const dispatch = useDispatch();
 
-    const { loading, message } = useSelector(state => state.ui);
+    const { loading, completed, message } = useSelector(state => state.ui);
     const { id } = useSelector(state => state.auth.loggedUser);
 
     
@@ -17,12 +19,13 @@ export const PasswordSection = () => {
         password: "",
         password2: ""
     });
-    
+
     useEffect(() => {
-        if (!loading && message){
+        if (completed){
             reset();
+            dispatch(resetCompleted());
         }
-    }, [loading, message, reset]);
+    }, [completed, dispatch, reset]);
 
     const {password, password2} = formValues;
 
@@ -33,13 +36,14 @@ export const PasswordSection = () => {
 
     return (
         <form onSubmit={handlePasswordChange}>
-            <input type="password" className="form-control shadow-none profile-input-password" name="password" value={password}  onChange={handleInputChange} placeholder="Contraseña actual" maxLength="15" autoComplete="off" required />
-            <input type="password" className="form-control shadow-none profile-input-password" name="password2" value={password2} onChange={handleInputChange} placeholder="Contraseña nueva" maxLength="15" autoComplete="off" required />
+            <input type="password" className="form-control shadow-none freeflix-input-generic mt-4" name="password" value={password}  onChange={handleInputChange} placeholder="Contraseña actual" maxLength="15" autoComplete="off" required />
+            <input type="password" className="form-control shadow-none freeflix-input-generic" name="password2" value={password2} onChange={handleInputChange} placeholder="Contraseña nueva" maxLength="15" autoComplete="off" required />
 
-            {loading && < Loading />}
-            < Alert />
-            <button type="submit" className="btn btn-danger mt-4 shadow-none" title="Cambiar contraseña" disabled={!password || !password2}>
-                <i className="fas fa-save" style={{ fontSize: '30px' }}></i>
+            <AlertError />
+            {(message) && <Alert/>}
+            <button type="submit" className="btn btn-danger shadow-none" title="Cambiar contraseña" disabled={!password || !password2}>
+                {(!loading) && <i className="fas fa-save" style={{ fontSize: '30px' }}></i>}
+                {(loading) && <Loading />}
             </button>
         </form>
     )

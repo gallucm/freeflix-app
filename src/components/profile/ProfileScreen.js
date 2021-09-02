@@ -5,7 +5,7 @@ import { Profile } from './Profile';
 export const ProfileScreen = () => {
     return (
         <>
-            <Navbar allowed={false} />
+            <Navbar searchAllowed={false} optionsAllowed={false} />
             <div className="container">
                 <div className="d-flex justify-content-center">
                     <Profile/>

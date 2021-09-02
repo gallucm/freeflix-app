@@ -30,8 +30,8 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 body {
@@ -188,10 +188,9 @@ main {
 }
 
 .alert-freeflix {
-    width: 300px;
+    width: 18em;
     margin: auto;
     margin-bottom: 20px;
-    font-size: 15px;
 }
 
 
@@ -618,9 +617,9 @@ img {
 /* Profile */
 
 .profile-input-options{
-     box-shadow: 8px 0 5px -5px rgba(229, 9, 20, 0.55); 
+    box-shadow: 8px 0 5px -5px rgba(229, 9, 20, 0.55); 
     width: 28% !important;
-    height: 100%;
+    height: 23em;
     margin-bottom: 25px;
 }
 

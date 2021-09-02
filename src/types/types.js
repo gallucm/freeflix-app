@@ -44,6 +44,9 @@ export const types = {
     uiSetError: '[UI] set error',
     uiRemoveError: '[UI] remove error',
 
+    uiSetCompleted: '[UI] set completed',
+    uiResetCompleted: '[UI] reset completed',
+
     roleAdmin: 'd04c3ff2-9f30-451b-a7d9-e310b0cf10e8',
     roleUser: '81a599ea-0480-460c-92bb-911fc4ff3631',
 

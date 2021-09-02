@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 
 import profileImage from '../../assets/images/not-profile.jpg';
 
-export const Navbar = ({ allowed = true }) => {
+export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAllowed = true }) => {
 
     const { genderSelected } = useSelector(state => state.movies);
     const loggedUser = useSelector(state => state.auth.loggedUser);
@@ -33,7 +33,7 @@ export const Navbar = ({ allowed = true }) => {
 
         if (e.target.value)
             dispatch(startGetMoviesByTitle(e.target.value));
-        else 
+        else
             dispatch(startUnsetSearchValue());
     }
 
@@ -63,52 +63,53 @@ export const Navbar = ({ allowed = true }) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark" style={{marginBottom: '-1em'}}>
                 <div className="container-fluid">
-
-
                     <div className="d-flex">
                         <span className="navbar-brand">
                             <Logo />
                         </span>
 
-                        <span className="navbar-menu-option" onClick={handleHome}>Inicio</span>
-
-
-                        <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                            <ul className="navbar-nav">
-                                <li className="nav-item dropdown">
-                                    <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <strong>Peliculas</strong>
-                                    </span>
-                                    <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        {genders.map(gend => (
-                                            <li className="m-2 pointer" key={gend} onClick={handleGetMoviesByGender}>{gend}</li>
-                                        ))}
+                        {optionsAllowed &&
+                            <>
+                                <span className="navbar-menu-option" onClick={handleHome}>Inicio</span>
+                                <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                    <ul className="navbar-nav">
+                                        <li className="nav-item dropdown">
+                                            <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <strong>Peliculas</strong>
+                                            </span>
+                                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                                {genders.map(gend => (
+                                                    <li className="m-2 pointer" key={gend} onClick={handleGetMoviesByGender}>{gend}</li>
+                                                ))}
+                                            </ul>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <span className="navbar-menu-option" onClick={handleMyList}>Mi lista</span>
+                                </div>
+                                <span className="navbar-menu-option" onClick={handleMyList}>Mi lista</span>
+                            </>
+                        }
+
                     </div>
 
                     <div className="d-flex">
-                        {allowed &&
+                        {searchAllowed &&
                             <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
                         }
-
-                        <li className="nav-item dropdown dropstart">
-                            <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src={loggedUser.imageProfile ? loggedUser.imageProfile : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
-                            </span>
-                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style={{marginTop: '50px'}}>
-                                <Link to="/profile" className="no-decoration">
-                                    <li className="m-2 pointer">Perfil</li>
-                                </Link>
-                                <li className="m-2 pointer" onClick={handleLogout}>Salir</li>
-                            </ul>
-                        </li>
+                        {profileAllowed &&
+                            <li className="nav-item dropdown dropstart">
+                                <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src={loggedUser.imageProfile ? loggedUser.imageProfile : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
+                                </span>
+                                <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style={{ marginTop: '50px' }}>
+                                    <Link to="/profile" className="no-decoration">
+                                        <li className="m-2 pointer">Perfil</li>
+                                    </Link>
+                                    <li className="m-2 pointer" onClick={handleLogout}>Salir</li>
+                                </ul>
+                            </li>
+                        }
                     </div>
                 </div>
             </nav>

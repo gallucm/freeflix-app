@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { finishLoading, setError, setMessage, startLoading } from "./ui";
+import { finishLoading, setCompleted, setError, setMessage, startLoading } from "./ui";
 
 import { deleteUserById, getOldPassword, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
 import { comparePassword } from "../helpers/bcrypt";
@@ -66,17 +66,9 @@ export const makeAdmin = (id, role) => {
     }
 }
 
-export const startUpdatePassword = (id, oldPassword, password) => {
+export const startUpdatePassword = (userId, oldPassword, password) => {
     return async (dispatch) => {
         dispatch(startLoading());
-
-        const equals = comparePassword(oldPassword, getOldPassword(id));
-
-        if (!equals){
-            dispatch(setError('La contraseña anterior no es correcta.'));
-            dispatch(finishLoading());
-            return;
-        }
 
         if (oldPassword === password) {
             dispatch(setError('La nueva contraseña no puede ser igual a la anterior.'));
@@ -84,11 +76,22 @@ export const startUpdatePassword = (id, oldPassword, password) => {
             return;
         }
 
-        const updated = await updatePassword(id, password);
+        const oldPasswordHash = await getOldPassword(userId);
+        
+        const equals = comparePassword(oldPassword, oldPasswordHash);
 
-        if (updated)
+        if (!equals){
+            dispatch(setError('La contraseña anterior no es correcta.'));
+            dispatch(finishLoading());
+            return;
+        }
+        
+        const updated = await updatePassword(userId, password);
+
+        if (updated){
             dispatch(setMessage('La contraseña se actualizó correctamente.'));
-        else
+            dispatch(setCompleted());
+        } else
             dispatch(setError('Error al modificar la contraseña.'));
         
         dispatch(finishLoading());

@@ -25,3 +25,11 @@ export const setMessage = (msg) => ({
 export const resetMessage = () => ({
     type: types.uiResetMessage
 });
+
+export const setCompleted = () => ({
+    type: types.uiSetCompleted
+});
+
+export const resetCompleted = () => ({
+    type: types.uiResetCompleted
+});

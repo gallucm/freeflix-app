@@ -3,7 +3,6 @@ import { startUpdateUser } from "../../actions/auth";
 import { startUpdateImageProfile } from "../../actions/User";
 import profileImage from '../../assets/images/not-profile.jpg';
 import { useForm } from "../../hooks/useForm";
-import { Alert } from "../ui/Alert";
 import { Loading } from "../ui/Loading";
 
 export const ProfileSection = () => {
@@ -47,10 +46,9 @@ export const ProfileSection = () => {
                 <input type="text" className="form-control shadow-none profile-input-username" name="username" value={username} onChange={handleInputChange} placeholder="Usuario" maxLength="15" autoComplete="off" required />
                 <input type="email" className="form-control shadow-none profile-input-email mb-2" name="email" value={email} onChange={handleInputChange} placeholder="Email" maxLength="40" autoComplete="off" required />
 
-                {loading && < Loading />}
-                < Alert />
                 <button type="submit" className="btn btn-danger mt-4 mb-4 shadow-none" title="Guardar cambios">
-                    <i className="fas fa-save" style={{ fontSize: '30px' }}></i>
+                        {(!loading) && <i className="fas fa-save" style={{ fontSize: '30px' }}></i>}
+                        {(loading) && <Loading />}
                 </button>
             </form>
         </>

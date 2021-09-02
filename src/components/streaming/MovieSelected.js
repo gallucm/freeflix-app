@@ -3,8 +3,8 @@ import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { LogoNavbarAlone } from '../ui/LogoNavbarAlone';
 import { Loading } from '../ui/Loading';
+import { Navbar } from '../ui/Navbar';
 
 import { VideoPlayer } from './VideoPlayer';
 
@@ -39,7 +39,7 @@ export const MovieSelected = () => {
     
     return (
         <>
-            <LogoNavbarAlone />
+            <Navbar searchAllowed={false} optionsAllowed={false} profileAllowed={false} />
             {(!movieSelected) && <Loading/>}
 
             {(movieSelected) && 

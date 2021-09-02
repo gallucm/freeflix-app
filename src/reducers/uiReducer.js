@@ -3,8 +3,8 @@ import { types } from '../types/types';
 const initialState = {
     loading: false,
     error: null,
-    message: null
-    // agregar un 'completed' para diferentes acciones y manipularlas
+    message: null,
+    completed: false,
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -44,6 +44,18 @@ export const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 message: null
+            }
+
+        case types.uiSetCompleted:
+            return {
+                ...state,
+                completed: true
+            }
+
+        case types.uiResetCompleted:
+            return {
+                ...state,
+                completed: false
             }
     
         default:
