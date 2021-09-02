@@ -24,7 +24,7 @@ export const createUser = async (user, code) => {
     return false;
 }
 
-export const isEmailTaken = async (email) => {
+export const isEmailTaken = async (email) => { //TODO: CAMBIAR POR checkEmail
     const query = await database.collection('users').where("email", "==", email).get();
 
     return (query.size > 0);
@@ -169,6 +169,15 @@ export const updateImageProfile = async (userId, newImage) => {
     }
 
     return "";
+}
+
+export const getOldPassword = async (userId) => {
+    const user = await database.collection('users').doc(userId).get();
+
+    if (user)
+        return user.data().password;
+        
+    return '';
 }
 
 

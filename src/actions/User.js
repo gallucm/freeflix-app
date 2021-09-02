@@ -1,7 +1,8 @@
 import { types } from "../types/types";
 import { finishLoading, setError, setMessage, startLoading } from "./ui";
 
-import { deleteUserById, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
+import { deleteUserById, getOldPassword, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
+import { comparePassword } from "../helpers/bcrypt";
 
 export const getAllUsers = () => {
     return async (dispatch) => {
@@ -69,7 +70,13 @@ export const startUpdatePassword = (id, oldPassword, password) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        //TODO: agregar la comparación de si el password viejo es correcto.
+        const equals = comparePassword(oldPassword, getOldPassword(id));
+
+        if (!equals){
+            dispatch(setError('La contraseña anterior no es correcta.'));
+            dispatch(finishLoading());
+            return;
+        }
 
         if (oldPassword === password) {
             dispatch(setError('La nueva contraseña no puede ser igual a la anterior.'));
