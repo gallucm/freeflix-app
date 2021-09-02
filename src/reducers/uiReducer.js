@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     error: null,
     message: null
+    // agregar un 'completed' para diferentes acciones y manipularlas
 }
 
 export const uiReducer = (state = initialState, action) => {
