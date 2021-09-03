@@ -1,4 +1,4 @@
-import { addFavorite, deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, removeFavorite, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
+import { addFavorite, deleteFileImage, deleteFileMovie, deleteMovieById, getMovieById, getMovies, getMoviesByGender, getMoviesByTitle, removeFavorite, uploadImageMovie, uploadMovie, uploadVideoMovie } from '../helpers/Movie';
 import { addOrRemoveFavorite, getFavoritesForUser } from '../helpers/User';
 
 import { types } from '../types/types';
@@ -78,15 +78,18 @@ export const startGetFavorites = (userId) => {
     }
 }
 
-export const startDeleteMovie = (id) => {
+export const startDeleteMovie = (movieId, videoId, imageId) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const isDeleted = await deleteMovieById(id);
+        const isDeleted = await deleteMovieById(movieId);
 
         dispatch(finishLoading());
 
         if (isDeleted){
+            //TODO: Agregar funcionalidad para eliminar de favoritos de cada usuario
+            deleteFileMovie(videoId);
+            deleteFileImage(imageId);
             dispatch(removeMovies());
             dispatch(startGetMovies());
             return;

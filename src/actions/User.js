@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { finishLoading, setCompleted, setError, setMessage, startLoading } from "./ui";
 
-import { deleteUserById, getOldPassword, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
+import { deleteImageFile, deleteUserById, getOldPassword, getUsers, makeOrNotAdmin, updateImageLoggedUser, updateImageProfile, updatePassword } from '../helpers/User';
 import { comparePassword } from "../helpers/bcrypt";
 
 export const getAllUsers = () => {
@@ -36,15 +36,22 @@ export const deleteUser = (id) => {
     }
 }
 
-export const startUpdateImageProfile = (id, image) => {
+export const startUpdateImageProfile = (id, image, imageIdDelete) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const url = await updateImageProfile(id, image);
+        const imageUrl = await updateImageProfile(id, image);
         
-        if (url) {
-            dispatch(updateImage(url));
-            updateImageLoggedUser(url);
+        if (imageUrl) {
+            deleteImageFile(imageIdDelete);
+            
+            const objectImage = {
+                id: imageUrl.split('z-')[0],
+                url: imageUrl.split('z-')[1]
+            }
+
+            dispatch(updateImage(objectImage));
+            updateImageLoggedUser(objectImage);
         }       
 
         dispatch(finishLoading());

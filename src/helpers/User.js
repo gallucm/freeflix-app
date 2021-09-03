@@ -146,23 +146,23 @@ export const getLoggedUser = () => {
     return JSON.parse(localStorage.getItem('loggedUser'));
 }
 
-export const updateImageLoggedUser = (url) => {
+export const updateImageLoggedUser = (image) => {
     let user = localStorage.getItem('loggedUser');
 
     user = user ? JSON.parse(user) : {};
-    user['imageProfile'] = url;
+    user['imageProfile'] = image;
     
     localStorage.setItem('loggedUser', JSON.stringify(user));
 }
 
-export const updateImageProfile = async (userId, newImage) => {
+export const updateImageProfile = async (userId, image) => {
     //TODO: verificar como eliminar la imagen anterior
-    const urlImage = await uploadImageProfile(newImage);
+    const imageString = await uploadImageProfile(image);
 
-    if (urlImage !== "") {
+    if (imageString !== "") {
         try {
-            database.collection('users').doc(userId).update({ imageProfile: urlImage });
-            return urlImage;
+            database.collection('users').doc(userId).update({ imageProfile: imageString.split('z-')[1]});
+            return imageString;
         } catch (e) {
             return "";
         }
@@ -194,9 +194,19 @@ const uploadImageProfile = async (image) => {
     const urlDownload = await upload.ref.getDownloadURL();
 
     if (urlDownload)
-        return urlDownload;
+        return fileName + 'z-' + urlDownload;
 
     return '';
+}
+
+export const deleteImageFile = async (imageId) => {
+    try{
+        await storage.ref().child('images/profiles/' + imageId + '.jpeg').delete();
+        return true;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
 }
 
 export const cleanUser = (user) => {
@@ -207,7 +217,7 @@ export const cleanUser = (user) => {
 
 export const updateUser = async (user) => {
     try {
-        await database.collection('users').doc(user.id).update({ username: user.username, email: user.email });
+        await database.collection('users').doc(user.id).update({ userName: user.userName, email: user.email });
         return true;
     } catch (e) {
         console.log(e);

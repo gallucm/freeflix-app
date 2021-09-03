@@ -119,6 +119,27 @@ export const deleteMovieById = async (id) => {
     }
 }
 
+export const deleteFileMovie = async (id) => {
+    try{
+        await storage.ref().child('movies/' + id + '.mp4').delete();
+        return true;
+    } catch (e){
+        console.log(e);
+        return false;
+    }
+}
+
+export const deleteFileImage = async (id) => {
+    try{
+        await storage.ref().child('images/' + id + '.jpeg').delete();
+        return true;
+    } catch (e){
+        console.log(e);
+        return false;
+    }
+}
+
+
 const capitalize = (word) => {
     const lower = word.toLowerCase();
     return word.charAt(0).toUpperCase() + lower.slice(1);

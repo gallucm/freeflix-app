@@ -15,8 +15,8 @@ export const Movies = () => {
         dispatch(startGetMovies());
     }, [dispatch]);
 
-    const handleDeleteMovie = (id) => {
-        dispatch(startDeleteMovie(id));
+    const handleDeleteMovie = (movieId, videoId, imageId) => {
+        dispatch(startDeleteMovie(movieId, videoId, imageId));
     }
 
     return (
@@ -29,7 +29,7 @@ export const Movies = () => {
                         movies.map(movie => (
                             <div style={{ textAlign: 'center' }} key={movie.id}>
                                 <span style={{ fontSize: '25px' }}>{movie.title}</span>
-                                <button type="button" className="btn  btn-freeflix shadow-none ms-4" onClick={() => { handleDeleteMovie(movie.id) }} title="Eliminar">
+                                <button type="button" className="btn  btn-freeflix shadow-none ms-4" onClick={() => { handleDeleteMovie(movie.id, movie.video.id, movie.image.id) }} title="Eliminar">
                                     <i className="far fa-trash-alt" style={{ fontSize: '15px' }}></i>
                                 </button>
                             </div>

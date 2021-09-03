@@ -14,7 +14,7 @@ export const ProfileSection = () => {
 
     const [formValues, handleInputChange] = useForm(user);
 
-    const { username, email } = formValues;
+    const { userName, email } = formValues;
 
     const handleChangeProfile = (e) => {
         e.preventDefault();
@@ -26,14 +26,14 @@ export const ProfileSection = () => {
 
         const image = document.getElementById('myfile').files[0];
 
-        dispatch(startUpdateImageProfile(user.id, image));
+        dispatch(startUpdateImageProfile(user.id, image, user.imageProfile.id));
     }
 
     return (
         <>
             <form onSubmit={handleChangeProfile}>
                 <div className="container-profilepic card rounded-circle overflow-hidden mt-2">
-                    <img src={user.imageProfile ? user.imageProfile : profileImage} alt={profileImage} />
+                    <img src={user.imageProfile ? user.imageProfile.url : profileImage} alt={profileImage} />
                     <div className="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center" onClick={() => document.getElementById('myfile').click()}>
                         <div className="text-profilepic" htmlFor="myfile">
                             <i className="fas fa-camera"></i>
@@ -43,7 +43,7 @@ export const ProfileSection = () => {
                     </div>
                 </div>
 
-                <input type="text" className="form-control shadow-none profile-input-username" name="username" value={username} onChange={handleInputChange} placeholder="Usuario" maxLength="15" autoComplete="off" required />
+                <input type="text" className="form-control shadow-none profile-input-username" name="userName" value={userName} onChange={handleInputChange} placeholder="Usuario" maxLength="15" autoComplete="off" required />
                 <input type="email" className="form-control shadow-none profile-input-email mb-2" name="email" value={email} onChange={handleInputChange} placeholder="Email" maxLength="40" autoComplete="off" required />
 
                 <button type="submit" className="btn btn-danger mt-4 mb-4 shadow-none" title="Guardar cambios">

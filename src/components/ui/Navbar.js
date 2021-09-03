@@ -63,7 +63,7 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark" style={{marginBottom: '-1em'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark mt-2" style={{marginBottom: '-1em'}}>
                 <div className="container-fluid">
                     <div className="d-flex">
                         <span className="navbar-brand">
@@ -100,7 +100,7 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
                         {profileAllowed &&
                             <li className="nav-item dropdown dropstart">
                                 <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src={loggedUser.imageProfile ? loggedUser.imageProfile : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
+                                    <img src={loggedUser.imageProfile ? loggedUser.imageProfile.url : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
                                 </span>
                                 <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style={{ marginTop: '50px' }}>
                                     <Link to="/profile" className="no-decoration">
