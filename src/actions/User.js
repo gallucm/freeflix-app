@@ -36,11 +36,11 @@ export const deleteUser = (id) => {
     }
 }
 
-export const startUpdateImageProfile = (id, image, imageIdDelete) => {
+export const startUpdateImageProfile = (userId, image, imageIdDelete) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
-        const imageUrl = await updateImageProfile(id, image);
+        const imageUrl = await updateImageProfile(userId, image);
         
         if (imageUrl) {
             deleteImageFile(imageIdDelete);

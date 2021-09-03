@@ -161,7 +161,7 @@ export const updateImageProfile = async (userId, image) => {
 
     if (imageString !== "") {
         try {
-            database.collection('users').doc(userId).update({ imageProfile: imageString.split('z-')[1]});
+            database.collection('users').doc(userId).update({ imageProfile: {id: imageString.split('z-')[0], url: imageString.split('z-')[1]}});
             return imageString;
         } catch (e) {
             return "";
