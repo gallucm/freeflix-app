@@ -63,7 +63,7 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark mt-2" style={{marginBottom: '-1em'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark mt-2" >
                 <div className="container-fluid">
                     <div className="d-flex">
                         <span className="navbar-brand">
@@ -71,7 +71,7 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
                         </span>
 
                         {optionsAllowed &&
-                            <>
+                            <section id="navbar-options">
                                 <span className="navbar-menu-option" onClick={handleHome}>Inicio</span>
                                 <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
                                     <ul className="navbar-nav">
@@ -88,17 +88,17 @@ export const Navbar = ({ searchAllowed = true, optionsAllowed = true, profileAll
                                     </ul>
                                 </div>
                                 <span className="navbar-menu-option" onClick={handleMyList}>Mi lista</span>
-                            </>
+                            </section>
                         }
 
                     </div>
 
                     <div className="d-flex">
                         {searchAllowed &&
-                            <input type="search" className="me-3" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
+                            <input type="search" className="me-3" id="input-search" name="searchValue" value={search} onChange={handleInputChange} autoComplete="off" />
                         }
                         {profileAllowed &&
-                            <li className="nav-item dropdown dropstart">
+                            <li className="nav-item dropdown dropstart mb-2 ms-auto" >
                                 <span className="navbar-menu-option" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src={loggedUser.imageProfile ? loggedUser.imageProfile.url : profileImage} alt="pepe" className="image-profile-mini" title={loggedUser.userName} />
                                 </span>
