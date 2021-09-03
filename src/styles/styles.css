@@ -648,3 +648,15 @@ li { list-style-type: none; }
     max-height: 150px;
     overflow-y: auto;
 }
+
+/* Responsive media queries */
+@media (max-width: 414px) {
+    /* Login */ 
+    .login-content,
+    .register-content {
+        width: 100%;        
+    }
+    
+    
+}
+/* End responsive media queries */
