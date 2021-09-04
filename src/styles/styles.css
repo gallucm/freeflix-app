@@ -703,6 +703,25 @@ li { list-style-type: none; }
         margin-right: 10px;
     }
 
+    /* Profile Screen */
+    .section-content{
+        margin-top: -1em;
+        width: 100%;
+        position: absolute;
+    }
+
+    .profile-input-options{
+        width: 100% !important;
+        margin-bottom: 0px;
+    }
+
+    .btn-save{
+        margin-bottom: 1.5em;
+    }
+    
+    
+
+
     
     
 }
