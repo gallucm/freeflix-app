@@ -41,7 +41,7 @@ export const PasswordSection = () => {
 
             <AlertError />
             {(message) && <Alert/>}
-            <button type="submit" className="btn btn-danger shadow-none" title="Cambiar contraseña" disabled={!password || !password2 || loading}>
+            <button type="submit" className="btn btn-danger shadow-none btn-save" title="Cambiar contraseña" disabled={!password || !password2 || loading}>
                 {(!loading) && <i className="fas fa-save" style={{ fontSize: '30px' }}></i>}
                 {(loading) && <Loading />}
             </button>
