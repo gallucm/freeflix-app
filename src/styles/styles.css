@@ -263,7 +263,7 @@ main {
     display: flex;
     flex-wrap: row;
     flex-flow: wrap row;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     padding: 0px;
     margin: 0px;
     margin-top: 40px !important;
@@ -272,9 +272,9 @@ main {
 .movie-grid {
     width: 400px;
     height: 300px;
-    margin-left: 30px !important;
     color: white;
     font-size: 3em;
+    margin-bottom: 20px;
 }
 
 .movie-grid h2 {
@@ -523,7 +523,7 @@ input::-webkit-input-placeholder {
 
 
 /* Button image movie */
-
+ 
 .img-container {
     position: relative;
     margin-top: 10px;
@@ -659,6 +659,8 @@ li { list-style-type: none; }
 }
 
 /* Responsive media queries */
+
+
 @media (max-width: 414px) {
     /* Login and Register*/
     .login-content,
@@ -694,7 +696,6 @@ li { list-style-type: none; }
         margin-right: 10px;
     }
 
-    /* Profile Screen */
     .section-content{
         margin-top: -1em;
         width: 100%;
@@ -711,4 +712,13 @@ li { list-style-type: none; }
     }
     
 }
+
+@media (max-width: 991px) {
+    .movie-grid {
+        width: 340px;
+    }
+
+}
+
+
 /* End responsive media queries */
