@@ -12,7 +12,7 @@ export const getAllUsers = () => {
 
         if (users && users.length > 0) 
             dispatch(setUser(users));
-        else
+        else if (!users)
             dispatch(setError('Error al obtener los usuarios.'));
         
         dispatch(finishLoading());
