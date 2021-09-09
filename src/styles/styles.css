@@ -1,5 +1,4 @@
-/* General */
-
+/* GENERAL  */
 ::-webkit-input-placeholder {
     text-align: center;
 }
@@ -105,8 +104,58 @@ main {
 }
 
 
-/* LoginScreen */
+.freeflix-input-generic{
+    width: 18em;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: none;
+}
 
+.freeflix-span-generic {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.freeflix-span-generic span a {
+    text-decoration: none;
+    color: white;
+    font-size: bold;
+}
+
+.alert-freeflix {
+    width: 18em;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.btn-freeflix {
+    width: auto;
+    background: #E50914;
+    border-radius: 5px;
+    color: white;
+    transition: color 2.s ease;
+}
+
+.btn-freeflix:hover {
+    color: wheat;
+    font-style: italic;
+}
+
+.btn:disabled {
+    cursor: not-allowed !important;
+}
+
+.btn-login:disabled {
+    cursor: not-allowed !important;
+}
+
+.background-custom-primary {
+    background-color: rgb(48, 46, 51) !important;
+}
+
+/* LOGIN */
 .login-content,
 .register-content {
     width: 25em;
@@ -130,16 +179,6 @@ main {
     margin-top: 10%;
 }
 
-.freeflix-input-generic{
-    width: 18em;
-    height: 50px;
-    margin: auto;
-    margin-bottom: 20px;
-    text-align: center;
-    box-shadow: none;
-}
-
-
 .codes-input-code {
     background: rgb(189, 189, 189) !important;
     color: black;
@@ -152,13 +191,27 @@ main {
     text-align: center;
 }
 
-.btn:disabled {
-    cursor: not-allowed !important;
+/* Navbar */
+.navbar {
+    height: 5em;
+    background-color: transparent white !important;
 }
 
-.btn-login:disabled {
-    cursor: not-allowed !important;
+.btn-logout-navbar {
+    width: auto;
+    background: #E50914;
+    border-radius: 5px;
+    color: white;
+    transition: color 2.s ease;
 }
+
+
+.btn-logout-navbar:hover {
+    color: wheat;
+    font-style: italic;
+}
+
+
 
 .navbar-logo h3 {
     margin-left: 20px;
@@ -177,61 +230,6 @@ main {
     cursor: pointer;
 }
 
-.freeflix-span-generic {
-    margin-top: 1em;
-    margin-bottom: 2em;
-}
-
-.freeflix-span-generic span a {
-    text-decoration: none;
-    color: white;
-    font-size: bold;
-}
-
-.alert-freeflix {
-    width: 18em;
-    margin: auto;
-    margin-bottom: 20px;
-}
-
-
-/* Navbar */
-
-.navbar {
-    height: 5em;
-    background-color: transparent white !important;
-}
-
-.btn-logout-navbar {
-    width: auto;
-    background: #E50914;
-    border-radius: 5px;
-    color: white;
-    transition: color 2.s ease;
-}
-
-.btn-freeflix {
-    width: auto;
-    background: #E50914;
-    border-radius: 5px;
-    color: white;
-    transition: color 2.s ease;
-}
-
-.btn-freeflix:hover {
-    color: wheat;
-    font-style: italic;
-}
-
-.btn-logout-navbar:hover {
-    color: wheat;
-    font-style: italic;
-}
-
-.background-custom-primary {
-    background-color: rgb(48, 46, 51) !important;
-}
-
 .btn-custom-primary {
     border-radius: 2px;
     background-color: rgb(92, 92, 90);
@@ -246,13 +244,7 @@ main {
     font-style: italic;
 }
 
-.focus-none {
-    transition: all .2s ease;
-}
 
-.focus-none:focus {
-    border: 0px;
-}
 
 
 /* HomeScreen */
@@ -354,9 +346,7 @@ main {
     color: wheat;
 }
 
-
 /* Upload */
-
 .section-content {
     width: 650px;
     box-shadow: 0px 0px 40px 5px rgba(229, 9, 20, 0.55);
@@ -504,8 +494,9 @@ input::-webkit-search-cancel-button {
 input[type=search] {
     background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
     border: solid 1px #ccc;
-    padding: 9px 10px 9px 32px;
-    width: 30px;
+    padding-left: 2em;
+    width: 50px;
+    height: 50px;
     -webkit-border-radius: 10em;
     -moz-border-radius: 10em;
     border-radius: 10em;
@@ -576,7 +567,7 @@ img {
 .image-profile-mini {
     position: relative; /* CENTRALIZA LA IMAGEN */
     width: 50px;
-    height: 50px;
+    height: 52px;
     border-radius: 50%;
     margin-right: 10px;
     cursor: pointer;
@@ -718,11 +709,6 @@ li { list-style-type: none; }
     .btn-save{
         margin-bottom: 1.5em;
     }
-    
-    
-
-
-    
     
 }
 /* End responsive media queries */
