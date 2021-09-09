@@ -714,11 +714,14 @@ li { list-style-type: none; }
 }
 
 @media (max-width: 991px) {
-    .movie-grid {
+
+    .movie-grid{
         width: 340px;
     }
 
+    .movies-container {
+        justify-content: space-between;
+    }
 }
-
 
 /* End responsive media queries */
